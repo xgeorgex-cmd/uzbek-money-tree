@@ -24,14 +24,14 @@ const Welcome = () => {
         🌟
       </motion.div>
       <motion.div
-        className="absolute bottom-40 left-12 text-4xl"
+        className="absolute bottom-60 left-12 text-4xl"
         animate={{ y: [0, -12, 0] }}
         transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut', delay: 1 }}
       >
         🎯
       </motion.div>
       <motion.div
-        className="absolute bottom-52 right-8 text-5xl"
+        className="absolute bottom-72 right-8 text-5xl"
         animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
         transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut', delay: 0.3 }}
       >
@@ -74,17 +74,31 @@ const Welcome = () => {
         {t('welcomeDescription')}
       </motion.p>
 
-      <motion.button
+      {/* Two CTA buttons */}
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9 }}
-        whileTap={{ scale: 0.95 }}
-        whileHover={{ scale: 1.05 }}
-        onClick={() => navigate('/login')}
-        className="bg-card text-foreground font-bold text-lg px-10 py-4 rounded-2xl shadow-button"
+        className="w-full max-w-xs space-y-3"
       >
-        {t('welcomeStart')}
-      </motion.button>
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          onClick={() => navigate('/login')}
+          className="w-full bg-card text-foreground font-bold text-lg px-10 py-4 rounded-2xl shadow-button"
+        >
+          {t('welcomeHaveCard')}
+        </motion.button>
+
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          onClick={() => navigate('/order-card')}
+          className="w-full bg-primary-foreground/20 backdrop-blur-sm text-primary-foreground font-bold text-lg px-10 py-4 rounded-2xl border border-primary-foreground/30"
+        >
+          {t('welcomeOrderCard')}
+        </motion.button>
+      </motion.div>
     </div>
   );
 };

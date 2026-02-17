@@ -128,4 +128,11 @@
   .text-balance-large {
     @apply text-4xl font-black tracking-tight;
   }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

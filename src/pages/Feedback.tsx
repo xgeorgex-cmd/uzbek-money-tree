@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, Phone } from 'lucide-react';
 
 const Feedback = () => {
   const { t } = useLanguage();
@@ -30,6 +30,18 @@ const Feedback = () => {
     <div className="min-h-screen bg-background pb-24">
       <div className="px-5 pt-12">
         <h1 className="text-2xl font-black mb-6">{t('feedbackTitle')}</h1>
+
+        {/* Support phone number */}
+        <a
+          href={`tel:${t('feedbackSupportNumber')}`}
+          className="flex items-center gap-3 bg-primary/10 rounded-2xl p-4 mb-6"
+        >
+          <Phone size={20} className="text-primary" />
+          <div>
+            <p className="text-sm font-bold">{t('feedbackCallSupport')}</p>
+            <p className="text-xs text-muted-foreground font-semibold">{t('feedbackSupportNumber')}</p>
+          </div>
+        </a>
 
         <AnimatePresence mode="wait">
           {sent ? (
