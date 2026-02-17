@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
 import { Language } from '@/data/translations';
-import { MessageSquare, LogOut, Globe } from 'lucide-react';
+import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown } from 'lucide-react';
 import { avatars } from '@/data/mockData';
 
 const Settings = () => {
@@ -12,6 +13,7 @@ const Settings = () => {
   const { userName, avatarId, logout } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const languages: { code: Language; label: string; flag: string }[] = [
     { code: 'ru', label: 'Русский', flag: '🇷🇺' },
@@ -23,6 +25,13 @@ const Settings = () => {
     logout();
     navigate('/');
   };
+
+  const tutorialFeatures = [
+    t('settingsFeatureBalance'),
+    t('settingsFeatureGoals'),
+    t('settingsFeatureHistory'),
+    t('settingsFeatureFeedback'),
+  ];
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -39,6 +48,47 @@ const Settings = () => {
             <p className="text-sm text-muted-foreground font-semibold">{avatar?.name}</p>
           </div>
         </div>
+
+        {/* Tutorial block */}
+        <motion.div className="bg-card rounded-2xl shadow-card mb-4 overflow-hidden">
+          <button
+            onClick={() => setShowTutorial(!showTutorial)}
+            className="w-full p-5 flex items-center gap-3 text-left"
+          >
+            <BookOpen size={18} className="text-primary" />
+            <div className="flex-1">
+              <h3 className="font-bold">{t('settingsTutorial')}</h3>
+              <p className="text-xs text-muted-foreground">{t('settingsTutorialDesc')}</p>
+            </div>
+            <motion.div animate={{ rotate: showTutorial ? 180 : 0 }}>
+              <ChevronDown size={18} className="text-muted-foreground" />
+            </motion.div>
+          </button>
+          <AnimatePresence>
+            {showTutorial && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="px-5 pb-5 space-y-3">
+                  {tutorialFeatures.map((feature, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="bg-secondary rounded-xl p-3 text-sm font-semibold"
+                    >
+                      {feature}
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
         {/* Language */}
         <div className="bg-card rounded-2xl p-5 shadow-card mb-4">
