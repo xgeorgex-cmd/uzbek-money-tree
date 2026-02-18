@@ -26,6 +26,11 @@ type TranslationKeys = {
   loginBiometricDesc: string;
   loginByPhone: string;
   loginByCard: string;
+  loginBiometricTitle: string;
+  loginBiometricAllow: string;
+  loginBiometricSkip: string;
+  loginBiometricFaceId: string;
+  loginBiometricFingerprint: string;
   // Onboarding
   onboardChooseAvatar: string;
   onboardAvatarSubtitle: string;
@@ -55,6 +60,39 @@ type TranslationKeys = {
   homeAskParentTopUp: string;
   homeCardSettings: string;
   homeStories: string;
+  homeChangeAvatar: string;
+  // Transfer
+  transferTitle: string;
+  transferFrom: string;
+  transferToSelf: string;
+  transferToOther: string;
+  transferChooseGoal: string;
+  transferPhoneOrCard: string;
+  transferAmount: string;
+  transferSend: string;
+  transferSuccess: string;
+  transferSuccessDesc: string;
+  transferDone: string;
+  // Card Settings
+  cardSettingsTitle: string;
+  cardDetails: string;
+  cardBlock: string;
+  cardReissue: string;
+  cardFraud: string;
+  cardNumber: string;
+  cardExpiry: string;
+  cardBlockConfirm: string;
+  cardBlocked: string;
+  cardReissueConfirm: string;
+  cardReissued: string;
+  cardFraudConfirm: string;
+  cardFraudSent: string;
+  cardCancel: string;
+  // Request money
+  requestMoneyTitle: string;
+  requestMoneyDesc: string;
+  requestMoneySend: string;
+  requestMoneySent: string;
   // History
   historyTitle: string;
   historyEmpty: string;
@@ -75,6 +113,16 @@ type TranslationKeys = {
   historyCustom: string;
   historyCategories: string;
   historyTotalOps: string;
+  historyFilterType: string;
+  historyFilterPeriod: string;
+  historyFilterAmount: string;
+  historyMinAmount: string;
+  historyMaxAmount: string;
+  historyTxDetail: string;
+  historyTxDate: string;
+  historyTxType: string;
+  historyTxSource: string;
+  historyTxAmount: string;
   // Goals
   goalsTitle: string;
   goalsCreate: string;
@@ -109,6 +157,9 @@ type TranslationKeys = {
   goalsCalcResult1y: string;
   goalsCalcOpenPiggy: string;
   goalsAskParentsAdd: string;
+  goalsDeadline: string;
+  goalsDaysLeft: string;
+  goalsFieldProgress: string;
   // Feedback
   feedbackTitle: string;
   feedbackLike: string;
@@ -130,6 +181,12 @@ type TranslationKeys = {
   settingsFeatureGoals: string;
   settingsFeatureHistory: string;
   settingsFeatureFeedback: string;
+  settingsTheme: string;
+  settingsThemeDesc: string;
+  settingsAchievements: string;
+  settingsAchievementsDesc: string;
+  settingsAchievementLocked: string;
+  settingsAchievementProgress: string;
   // Nav
   navHome: string;
   navHistory: string;
@@ -142,6 +199,19 @@ type TranslationKeys = {
   // Order card
   orderCardTitle: string;
   orderCardDesc: string;
+  // Quiz
+  quizTitle: string;
+  quizIntro: string;
+  quizReward: string;
+  quizStart: string;
+  quizCorrect: string;
+  quizWrong: string;
+  quizNext: string;
+  quizFinishTitle: string;
+  quizFinishDesc: string;
+  quizLastTime: string;
+  quizComeBack: string;
+  quizDone: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -167,8 +237,13 @@ export const translations: Record<Language, TranslationKeys> = {
     loginPinSubtitle: 'Для быстрого входа',
     loginBiometric: 'Быстрый вход',
     loginBiometricDesc: 'Использовать Face ID / отпечаток пальца при следующем входе',
-    loginByPhone: 'По номеру телефона',
-    loginByCard: 'По номеру карты',
+    loginByPhone: 'По телефону',
+    loginByCard: 'По карте',
+    loginBiometricTitle: 'Быстрый вход',
+    loginBiometricAllow: 'Разрешить',
+    loginBiometricSkip: 'Пропустить',
+    loginBiometricFaceId: 'Входи по лицу — быстро и безопасно',
+    loginBiometricFingerprint: 'Или используй отпечаток пальца',
     onboardChooseAvatar: 'Выбери персонажа!',
     onboardAvatarSubtitle: 'Он будет с тобой в приложении',
     onboardUploadPhoto: 'Загрузить фото',
@@ -196,6 +271,36 @@ export const translations: Record<Language, TranslationKeys> = {
     homeAskParentTopUp: 'Попросить пополнить',
     homeCardSettings: 'Настройки карты',
     homeStories: 'Для тебя',
+    homeChangeAvatar: 'Сменить аватарку',
+    transferTitle: 'Перевод',
+    transferFrom: 'Списать с карты',
+    transferToSelf: 'Себе',
+    transferToOther: 'Другому',
+    transferChooseGoal: 'Выбери копилку',
+    transferPhoneOrCard: 'Номер телефона или карты',
+    transferAmount: 'Сумма перевода',
+    transferSend: 'Перевести',
+    transferSuccess: 'Перевод выполнен! ✅',
+    transferSuccessDesc: 'Деньги отправлены',
+    transferDone: 'Готово',
+    cardSettingsTitle: 'Настройки карты',
+    cardDetails: 'Реквизиты карты',
+    cardBlock: 'Заблокировать карту',
+    cardReissue: 'Перевыпустить карту',
+    cardFraud: 'Сообщить о мошенничестве',
+    cardNumber: 'Номер карты',
+    cardExpiry: 'Срок действия',
+    cardBlockConfirm: 'Ты уверен? Карта будет заблокирована',
+    cardBlocked: 'Карта заблокирована. Обратись к родителям для разблокировки.',
+    cardReissueConfirm: 'Запросить перевыпуск карты?',
+    cardReissued: 'Заявка на перевыпуск отправлена! Новая карта будет готова через 5-7 дней.',
+    cardFraudConfirm: 'Сообщить о подозрительной операции?',
+    cardFraudSent: 'Спасибо! Мы проверим и свяжемся с тобой.',
+    cardCancel: 'Отмена',
+    requestMoneyTitle: 'Попросить пополнить',
+    requestMoneyDesc: 'Отправь запрос родителям на пополнение карты',
+    requestMoneySend: 'Отправить запрос',
+    requestMoneySent: 'Запрос отправлен родителям! 💌',
     historyTitle: 'История',
     historyEmpty: 'Пока нет операций',
     historyFrom: 'От',
@@ -215,6 +320,16 @@ export const translations: Record<Language, TranslationKeys> = {
     historyCustom: 'Свой',
     historyCategories: 'Категории',
     historyTotalOps: 'Всего операций',
+    historyFilterType: 'Тип операции',
+    historyFilterPeriod: 'Период',
+    historyFilterAmount: 'Сумма',
+    historyMinAmount: 'От',
+    historyMaxAmount: 'До',
+    historyTxDetail: 'Детали операции',
+    historyTxDate: 'Дата',
+    historyTxType: 'Тип',
+    historyTxSource: 'Источник',
+    historyTxAmount: 'Сумма',
     goalsTitle: 'Мои копилки',
     goalsCreate: 'Новая копилка',
     goalsName: 'На что копишь?',
@@ -248,6 +363,9 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCalcResult1y: 'Через год',
     goalsCalcOpenPiggy: 'Открыть копилку',
     goalsAskParentsAdd: 'Попросить родителей добавить на мечту',
+    goalsDeadline: 'Когда хочешь достигнуть?',
+    goalsDaysLeft: 'дней осталось',
+    goalsFieldProgress: 'Прогресс',
     feedbackTitle: 'Обратная связь',
     feedbackLike: 'Мне нравится 😊',
     feedbackSuggest: 'Хочу предложить 💡',
@@ -258,7 +376,7 @@ export const translations: Record<Language, TranslationKeys> = {
     feedbackThanks: 'Спасибо! За отзывы — бонусы! 🎁',
     feedbackCallSupport: 'Позвонить в поддержку',
     feedbackSupportNumber: '+998 71 200 00 00',
-    settingsTitle: 'Настройки',
+    settingsTitle: 'Ещё',
     settingsLanguage: 'Язык',
     settingsLogout: 'Выйти',
     settingsTutorial: 'Как пользоваться?',
@@ -267,6 +385,12 @@ export const translations: Record<Language, TranslationKeys> = {
     settingsFeatureGoals: '🎯 Копилки — откладывай на мечту',
     settingsFeatureHistory: '📊 История — куда уходят деньги',
     settingsFeatureFeedback: '💬 Обратная связь — напиши нам',
+    settingsTheme: 'Тема оформления',
+    settingsThemeDesc: 'Выбери стиль, который тебе нравится',
+    settingsAchievements: 'Мои достижения',
+    settingsAchievementsDesc: 'Собирай награды за активность!',
+    settingsAchievementLocked: 'Выполни задание, чтобы открыть',
+    settingsAchievementProgress: 'получено',
     navHome: 'Главная',
     navHistory: 'История',
     navGoals: 'Копилки',
@@ -275,6 +399,18 @@ export const translations: Record<Language, TranslationKeys> = {
     storyFinTip: 'Знаешь ли ты? Если откладывать по 1000 сум каждый день, через год у тебя будет 365 000 сум! 🤯',
     orderCardTitle: 'Заказать карту',
     orderCardDesc: 'Попроси родителей оформить тебе детскую карту в ближайшем отделении банка',
+    quizTitle: 'Финансовый квест 🧠',
+    quizIntro: 'Ответь на 5 вопросов по финансовой грамотности и заработай бонусы!',
+    quizReward: 'За каждый верный ответ — 10 сум',
+    quizStart: 'Начать квест',
+    quizCorrect: 'Правильно! 🎉',
+    quizWrong: 'Не совсем...',
+    quizNext: 'Дальше',
+    quizFinishTitle: 'Квест пройден!',
+    quizFinishDesc: 'Ты отлично справился! Продолжай учиться финансовой грамотности.',
+    quizLastTime: 'В прошлый раз',
+    quizComeBack: 'Возвращайся через неделю за новыми вопросами! 📅',
+    quizDone: 'Вернуться',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
@@ -298,8 +434,13 @@ export const translations: Record<Language, TranslationKeys> = {
     loginPinSubtitle: 'Tez kirish uchun',
     loginBiometric: 'Tez kirish',
     loginBiometricDesc: 'Keyingi safar Face ID / barmoq izi bilan kirish',
-    loginByPhone: 'Telefon raqami bilan',
-    loginByCard: 'Karta raqami bilan',
+    loginByPhone: 'Telefon bilan',
+    loginByCard: 'Karta bilan',
+    loginBiometricTitle: 'Tez kirish',
+    loginBiometricAllow: 'Ruxsat berish',
+    loginBiometricSkip: 'O\'tkazib yuborish',
+    loginBiometricFaceId: 'Yuz bilan kir — tez va xavfsiz',
+    loginBiometricFingerprint: 'Yoki barmoq izingdan foydalaning',
     onboardChooseAvatar: 'O\'z qahramoningni tanla!',
     onboardAvatarSubtitle: 'U senga ilovada hamroh bo\'ladi',
     onboardUploadPhoto: 'Rasm yuklash',
@@ -327,6 +468,36 @@ export const translations: Record<Language, TranslationKeys> = {
     homeAskParentTopUp: 'To\'ldirishni so\'rash',
     homeCardSettings: 'Karta sozlamalari',
     homeStories: 'Sen uchun',
+    homeChangeAvatar: 'Avatarni o\'zgartirish',
+    transferTitle: 'O\'tkazma',
+    transferFrom: 'Kartadan yechish',
+    transferToSelf: 'O\'zimga',
+    transferToOther: 'Boshqaga',
+    transferChooseGoal: 'To\'plagichni tanlang',
+    transferPhoneOrCard: 'Telefon yoki karta raqami',
+    transferAmount: 'O\'tkazma summasi',
+    transferSend: 'O\'tkazish',
+    transferSuccess: 'O\'tkazma bajarildi! ✅',
+    transferSuccessDesc: 'Pul yuborildi',
+    transferDone: 'Tayyor',
+    cardSettingsTitle: 'Karta sozlamalari',
+    cardDetails: 'Karta rekvizitlari',
+    cardBlock: 'Kartani bloklash',
+    cardReissue: 'Kartani qayta chiqarish',
+    cardFraud: 'Firibgarlik haqida xabar berish',
+    cardNumber: 'Karta raqami',
+    cardExpiry: 'Amal qilish muddati',
+    cardBlockConfirm: 'Ishonchingiz komilmi? Karta bloklanadi',
+    cardBlocked: 'Karta bloklandi. Ochish uchun ota-onangga murojaat qiling.',
+    cardReissueConfirm: 'Kartani qayta chiqarishni so\'raysizmi?',
+    cardReissued: 'Qayta chiqarish arizasi yuborildi! Yangi karta 5-7 kunda tayyor bo\'ladi.',
+    cardFraudConfirm: 'Shubhali operatsiya haqida xabar berasizmi?',
+    cardFraudSent: 'Rahmat! Tekshirib, siz bilan bog\'lanamiz.',
+    cardCancel: 'Bekor qilish',
+    requestMoneyTitle: 'To\'ldirishni so\'rash',
+    requestMoneyDesc: 'Ota-onangga kartani to\'ldirish so\'rovini yuboring',
+    requestMoneySend: 'So\'rov yuborish',
+    requestMoneySent: 'So\'rov ota-onaga yuborildi! 💌',
     historyTitle: 'Tarix',
     historyEmpty: 'Hali amaliyotlar yo\'q',
     historyFrom: 'dan',
@@ -346,6 +517,16 @@ export const translations: Record<Language, TranslationKeys> = {
     historyCustom: 'Boshqa',
     historyCategories: 'Kategoriyalar',
     historyTotalOps: 'Jami amaliyotlar',
+    historyFilterType: 'Amaliyot turi',
+    historyFilterPeriod: 'Davr',
+    historyFilterAmount: 'Summa',
+    historyMinAmount: 'Dan',
+    historyMaxAmount: 'Gacha',
+    historyTxDetail: 'Amaliyot tafsilotlari',
+    historyTxDate: 'Sana',
+    historyTxType: 'Tur',
+    historyTxSource: 'Manba',
+    historyTxAmount: 'Summa',
     goalsTitle: 'Mening to\'plagichlarim',
     goalsCreate: 'Yangi to\'plagich',
     goalsName: 'Nima uchun yig\'asan?',
@@ -379,6 +560,9 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCalcResult1y: '1 yildan keyin',
     goalsCalcOpenPiggy: 'To\'plagich ochish',
     goalsAskParentsAdd: 'Ota-onadan orzuga qo\'shishni so\'rash',
+    goalsDeadline: 'Qachon erishmoqchisan?',
+    goalsDaysLeft: 'kun qoldi',
+    goalsFieldProgress: 'Taraqqiyot',
     feedbackTitle: 'Fikr-mulohaza',
     feedbackLike: 'Menga yoqadi 😊',
     feedbackSuggest: 'Taklif qilmoqchiman 💡',
@@ -389,7 +573,7 @@ export const translations: Record<Language, TranslationKeys> = {
     feedbackThanks: 'Rahmat! Fikrlar uchun bonuslar! 🎁',
     feedbackCallSupport: 'Qo\'llab-quvvatlashga qo\'ng\'iroq',
     feedbackSupportNumber: '+998 71 200 00 00',
-    settingsTitle: 'Sozlamalar',
+    settingsTitle: 'Yana',
     settingsLanguage: 'Til',
     settingsLogout: 'Chiqish',
     settingsTutorial: 'Qanday foydalanish?',
@@ -398,6 +582,12 @@ export const translations: Record<Language, TranslationKeys> = {
     settingsFeatureGoals: '🎯 To\'plagich — orzuga ajrat',
     settingsFeatureHistory: '📊 Tarix — pul qayerga ketdi',
     settingsFeatureFeedback: '💬 Fikr — bizga yoz',
+    settingsTheme: 'Dizayn mavzusi',
+    settingsThemeDesc: 'O\'zingga yoqqan uslubni tanla',
+    settingsAchievements: 'Mening yutuqlarim',
+    settingsAchievementsDesc: 'Faollik uchun mukofotlar yig\'!',
+    settingsAchievementLocked: 'Ochish uchun vazifani bajaring',
+    settingsAchievementProgress: 'olingan',
     navHome: 'Bosh sahifa',
     navHistory: 'Tarix',
     navGoals: 'To\'plagich',
@@ -406,6 +596,18 @@ export const translations: Record<Language, TranslationKeys> = {
     storyFinTip: 'Bilasanmi? Har kuni 1000 so\'m yig\'sang, bir yilda 365 000 so\'m bo\'ladi! 🤯',
     orderCardTitle: 'Karta buyurtma berish',
     orderCardDesc: 'Ota-onangdan eng yaqin bank bo\'limida bolalar kartasini rasmiylashtirshni so\'ra',
+    quizTitle: 'Moliyaviy kvest 🧠',
+    quizIntro: 'Moliyaviy savodxonlik bo\'yicha 5 ta savolga javob bering va bonuslar ishlang!',
+    quizReward: 'Har bir to\'g\'ri javob uchun — 10 so\'m',
+    quizStart: 'Kvestni boshlash',
+    quizCorrect: 'To\'g\'ri! 🎉',
+    quizWrong: 'Unchalik emas...',
+    quizNext: 'Keyingi',
+    quizFinishTitle: 'Kvest yakunlandi!',
+    quizFinishDesc: 'Ajoyib natija! Moliyaviy savodxonlikni o\'rganishni davom ettiring.',
+    quizLastTime: 'O\'tgan safar',
+    quizComeBack: 'Yangi savollar uchun bir haftadan keyin qaytib keling! 📅',
+    quizDone: 'Qaytish',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
@@ -429,8 +631,13 @@ export const translations: Record<Language, TranslationKeys> = {
     loginPinSubtitle: 'For quick access',
     loginBiometric: 'Quick Login',
     loginBiometricDesc: 'Use Face ID / fingerprint next time',
-    loginByPhone: 'By phone number',
-    loginByCard: 'By card number',
+    loginByPhone: 'By phone',
+    loginByCard: 'By card',
+    loginBiometricTitle: 'Quick Login',
+    loginBiometricAllow: 'Allow',
+    loginBiometricSkip: 'Skip',
+    loginBiometricFaceId: 'Sign in with your face — fast and secure',
+    loginBiometricFingerprint: 'Or use your fingerprint',
     onboardChooseAvatar: 'Choose your character!',
     onboardAvatarSubtitle: 'They\'ll be with you in the app',
     onboardUploadPhoto: 'Upload photo',
@@ -451,13 +658,43 @@ export const translations: Record<Language, TranslationKeys> = {
     homeGoalProgress: 'Goal progress',
     homeGoToDream: 'Chase the dream ✨',
     homeRemaining: 'Remaining',
-    homeTotalSavings: 'Total in piggy banks',
+    homeTotalSavings: 'Total in savings',
     homeClosestGoal: 'Closest goal',
     homeCardDetails: 'Card details',
     homeTransferMoney: 'Transfer money',
     homeAskParentTopUp: 'Ask to top up',
     homeCardSettings: 'Card settings',
     homeStories: 'For you',
+    homeChangeAvatar: 'Change avatar',
+    transferTitle: 'Transfer',
+    transferFrom: 'From card',
+    transferToSelf: 'To myself',
+    transferToOther: 'To someone',
+    transferChooseGoal: 'Choose savings goal',
+    transferPhoneOrCard: 'Phone or card number',
+    transferAmount: 'Transfer amount',
+    transferSend: 'Transfer',
+    transferSuccess: 'Transfer complete! ✅',
+    transferSuccessDesc: 'Money has been sent',
+    transferDone: 'Done',
+    cardSettingsTitle: 'Card Settings',
+    cardDetails: 'Card details',
+    cardBlock: 'Block card',
+    cardReissue: 'Reissue card',
+    cardFraud: 'Report fraud',
+    cardNumber: 'Card number',
+    cardExpiry: 'Expiry date',
+    cardBlockConfirm: 'Are you sure? The card will be blocked',
+    cardBlocked: 'Card blocked. Contact your parents to unblock.',
+    cardReissueConfirm: 'Request card reissue?',
+    cardReissued: 'Reissue request sent! New card will be ready in 5-7 days.',
+    cardFraudConfirm: 'Report a suspicious transaction?',
+    cardFraudSent: 'Thank you! We\'ll check and contact you.',
+    cardCancel: 'Cancel',
+    requestMoneyTitle: 'Request top-up',
+    requestMoneyDesc: 'Send a request to your parents to top up your card',
+    requestMoneySend: 'Send request',
+    requestMoneySent: 'Request sent to parents! 💌',
     historyTitle: 'History',
     historyEmpty: 'No transactions yet',
     historyFrom: 'From',
@@ -477,15 +714,25 @@ export const translations: Record<Language, TranslationKeys> = {
     historyCustom: 'Custom',
     historyCategories: 'Categories',
     historyTotalOps: 'Total operations',
-    goalsTitle: 'My Piggy Banks',
-    goalsCreate: 'New Piggy Bank',
+    historyFilterType: 'Transaction type',
+    historyFilterPeriod: 'Period',
+    historyFilterAmount: 'Amount',
+    historyMinAmount: 'From',
+    historyMaxAmount: 'To',
+    historyTxDetail: 'Transaction details',
+    historyTxDate: 'Date',
+    historyTxType: 'Type',
+    historyTxSource: 'Source',
+    historyTxAmount: 'Amount',
+    goalsTitle: 'My Savings',
+    goalsCreate: 'New Savings Goal',
     goalsName: 'What are you saving for?',
     goalsNamePlaceholder: 'Bicycle, phone...',
     goalsAmount: 'How much do you need?',
     goalsAmountPlaceholder: '500,000',
     goalsReason: 'Why do you want this?',
     goalsReasonPlaceholder: 'To ride with friends!',
-    goalsSave: 'Create Piggy Bank',
+    goalsSave: 'Create Savings Goal',
     goalsSetAside: 'Set aside',
     goalsSetAsideAmount: 'Set aside: {amount} sum',
     goalsConfirm: 'Confirm',
@@ -493,7 +740,7 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsAskParents: 'Ask parents to add',
     goalsEdit: 'Edit',
     goalsUpdate: 'Save changes',
-    goalsTotalBalance: 'Total in piggy banks',
+    goalsTotalBalance: 'Total in savings',
     goalsInterestEarned: 'Interest from bank',
     goalsFinAdvice: '💡 Tip: save regularly, even small amounts grow! The key is the habit.',
     goalsManualAmount: 'Or enter amount:',
@@ -508,8 +755,11 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCalcResult1m: 'In 1 month',
     goalsCalcResult3m: 'In 3 months',
     goalsCalcResult1y: 'In 1 year',
-    goalsCalcOpenPiggy: 'Open Piggy Bank',
+    goalsCalcOpenPiggy: 'Open Savings Goal',
     goalsAskParentsAdd: 'Ask parents to help reach your dream',
+    goalsDeadline: 'When do you want to reach it?',
+    goalsDaysLeft: 'days left',
+    goalsFieldProgress: 'Progress',
     feedbackTitle: 'Feedback',
     feedbackLike: 'I like it 😊',
     feedbackSuggest: 'I want to suggest 💡',
@@ -520,15 +770,21 @@ export const translations: Record<Language, TranslationKeys> = {
     feedbackThanks: 'Thanks! You get bonuses for feedback! 🎁',
     feedbackCallSupport: 'Call support',
     feedbackSupportNumber: '+998 71 200 00 00',
-    settingsTitle: 'Settings',
+    settingsTitle: 'More',
     settingsLanguage: 'Language',
     settingsLogout: 'Log out',
     settingsTutorial: 'How to use?',
     settingsTutorialDesc: 'Reminder about app features',
     settingsFeatureBalance: '💳 Balance — see your card money',
-    settingsFeatureGoals: '🎯 Piggy Banks — save for dreams',
+    settingsFeatureGoals: '🎯 Savings — save for dreams',
     settingsFeatureHistory: '📊 History — where money goes',
     settingsFeatureFeedback: '💬 Feedback — write to us',
+    settingsTheme: 'App Theme',
+    settingsThemeDesc: 'Choose a style you like',
+    settingsAchievements: 'My Achievements',
+    settingsAchievementsDesc: 'Collect rewards for activity!',
+    settingsAchievementLocked: 'Complete the task to unlock',
+    settingsAchievementProgress: 'earned',
     navHome: 'Home',
     navHistory: 'History',
     navGoals: 'Savings',
@@ -537,5 +793,17 @@ export const translations: Record<Language, TranslationKeys> = {
     storyFinTip: 'Did you know? If you save 1,000 sum every day, in a year you\'ll have 365,000 sum! 🤯',
     orderCardTitle: 'Order a card',
     orderCardDesc: 'Ask your parents to get you a kids card at the nearest bank branch',
+    quizTitle: 'Financial Quest 🧠',
+    quizIntro: 'Answer 5 financial literacy questions and earn bonuses!',
+    quizReward: 'For each correct answer — 10 sum',
+    quizStart: 'Start quest',
+    quizCorrect: 'Correct! 🎉',
+    quizWrong: 'Not quite...',
+    quizNext: 'Next',
+    quizFinishTitle: 'Quest complete!',
+    quizFinishDesc: 'Great job! Keep learning about financial literacy.',
+    quizLastTime: 'Last time',
+    quizComeBack: 'Come back in a week for new questions! 📅',
+    quizDone: 'Go back',
   },
 };
