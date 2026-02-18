@@ -1,7 +1,6 @@
 import { useApp } from '@/contexts/AppContext';
 import { Navigate } from 'react-router-dom';
 import Home from './Home';
-import BottomNav from '@/components/BottomNav';
 
 const Index = () => {
   const { isAuthenticated, isOnboarded } = useApp();
@@ -9,12 +8,7 @@ const Index = () => {
   if (!isAuthenticated) return <Navigate to="/welcome" replace />;
   if (!isOnboarded) return <Navigate to="/onboarding" replace />;
 
-  return (
-    <>
-      <Home />
-      <BottomNav />
-    </>
-  );
+  return <Home />;
 };
 
 export default Index;
