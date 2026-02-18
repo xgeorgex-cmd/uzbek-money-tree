@@ -4,14 +4,15 @@ import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { avatars, mockStories, quizQuestions } from '@/data/mockData';
-import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check } from 'lucide-react';
+import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
+import { toast } from 'sonner';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 const Home = () => {
   const { t } = useLanguage();
-  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore } = useApp();
+  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const lastTxs = transactions.slice(0, 3);
@@ -35,7 +36,6 @@ const Home = () => {
   const [transferGoalId, setTransferGoalId] = useState('');
   const [requestSent, setRequestSent] = useState(false);
 
-  // Quiz state
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizStep, setQuizStep] = useState<'intro' | 'question' | 'result' | 'finish'>('intro');
   const [quizQIndex, setQuizQIndex] = useState(0);
@@ -47,7 +47,6 @@ const Home = () => {
 
   const currentStory = mockStories.find(s => s.id === activeStory);
 
-  // Sort stories: unviewed first, viewed last
   const sortedStories = [...mockStories].sort((a, b) => {
     const aViewed = viewedStories.includes(a.id);
     const bViewed = viewedStories.includes(b.id);
@@ -86,7 +85,11 @@ const Home = () => {
       setQuizAnswer(null);
       setQuizStep('question');
     } else {
+      const reward = quizCorrectCount * 10;
       setQuizScore(quizCorrectCount);
+      if (reward > 0) {
+        addQuizReward(reward);
+      }
       setQuizStep('finish');
     }
   };
@@ -100,6 +103,7 @@ const Home = () => {
         setNewCustomPhoto(photo);
         updateAvatar('custom', photo);
         setShowAvatarPicker(false);
+        toast.success(t('homeChangeAvatar') + ' ✅');
       };
       reader.readAsDataURL(file);
     }
@@ -107,10 +111,12 @@ const Home = () => {
 
   const handleTransfer = () => {
     setTransferStep('success');
+    toast.success(t('transferSuccess'));
   };
 
   const handleRequestMoney = () => {
     setRequestSent(true);
+    toast.success(t('requestMoneySent'));
     setTimeout(() => { setRequestSent(false); setShowRequestMoney(false); }, 2000);
   };
 
@@ -146,7 +152,7 @@ const Home = () => {
       </div>
 
       <div className="px-5 mt-6 space-y-4">
-        {/* Stories ribbon - Instagram style */}
+        {/* Stories ribbon */}
         <div>
           <p className="text-xs font-bold text-muted-foreground mb-2">{t('homeStories')}</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
@@ -236,7 +242,7 @@ const Home = () => {
               <div className="grid grid-cols-5 gap-3 mb-4">
                 {avatars.map(av => (
                   <motion.button key={av.id} whileTap={{ scale: 0.9 }}
-                    onClick={() => { updateAvatar(av.id, null); setShowAvatarPicker(false); }}
+                    onClick={() => { updateAvatar(av.id, null); setShowAvatarPicker(false); toast.success('✅'); }}
                     className={`w-14 h-14 text-2xl rounded-2xl flex items-center justify-center mx-auto ${
                       avatarId === av.id && !customPhoto ? 'bg-primary/15 ring-2 ring-primary' : 'bg-secondary'
                     }`}>
@@ -255,7 +261,7 @@ const Home = () => {
         )}
       </AnimatePresence>
 
-      {/* Story fullscreen modal */}
+      {/* Story fullscreen modal with like/dislike */}
       <AnimatePresence>
         {activeStory && currentStory && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -267,7 +273,22 @@ const Home = () => {
               </div>
               <div className="text-6xl text-center mb-4">{currentStory.emoji}</div>
               <h2 className="text-xl font-black text-center mb-3">{currentStory.title}</h2>
-              <p className="text-muted-foreground text-center leading-relaxed">{currentStory.content}</p>
+              <p className="text-muted-foreground text-center leading-relaxed mb-6">{currentStory.content}</p>
+              {/* Like / Dislike */}
+              <div className="flex items-center justify-center gap-6">
+                <motion.button whileTap={{ scale: 0.85 }} onClick={() => { likeStory(currentStory.id); toast.success('👍'); }}
+                  className={`p-4 rounded-2xl flex items-center gap-2 font-bold text-sm ${
+                    likedStories.includes(currentStory.id) ? 'bg-success/20 text-success' : 'bg-secondary text-muted-foreground'
+                  }`}>
+                  <ThumbsUp size={20} /> {likedStories.includes(currentStory.id) ? '✓' : ''}
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.85 }} onClick={() => { dislikeStory(currentStory.id); toast.success('👎'); }}
+                  className={`p-4 rounded-2xl flex items-center gap-2 font-bold text-sm ${
+                    dislikedStories.includes(currentStory.id) ? 'bg-destructive/20 text-destructive' : 'bg-secondary text-muted-foreground'
+                  }`}>
+                  <ThumbsDown size={20} /> {dislikedStories.includes(currentStory.id) ? '✓' : ''}
+                </motion.button>
+              </div>
             </motion.div>
           </motion.div>
         )}
@@ -333,6 +354,7 @@ const Home = () => {
                   <div className="text-6xl mb-4">🏆</div>
                   <h2 className="text-xl font-black mb-2">{t('quizFinishTitle')}</h2>
                   <p className="text-3xl font-black text-primary mb-2">{quizCorrectCount * 10} {t('currencySuffix')}</p>
+                  <p className="text-success font-bold text-sm mb-2">{t('quizRewardCredited')}</p>
                   <p className="text-muted-foreground text-sm mb-1">{t('quizFinishDesc')}</p>
                   {lastQuizScore > 0 && (
                     <p className="text-xs text-muted-foreground mb-2">{t('quizLastTime')}: {lastQuizScore * 10} {t('currencySuffix')}</p>
@@ -356,7 +378,7 @@ const Home = () => {
             className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowCardDetail(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-28">
+              onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[85vh] overflow-y-auto">
               <div className="w-10 h-1 bg-border rounded-full mx-auto mb-6" />
               <h2 className="text-xl font-black mb-6">{t('homeCardDetails')}</h2>
               <div className="gradient-primary rounded-3xl p-5 mb-6">
@@ -399,12 +421,10 @@ const Home = () => {
               {transferStep === 'form' ? (
                 <>
                   <h2 className="text-xl font-black mb-4">{t('transferTitle')}</h2>
-                  {/* From card */}
                   <div className="gradient-primary rounded-2xl p-4 mb-4">
                     <p className="text-primary-foreground/70 text-xs font-semibold">{t('transferFrom')}</p>
                     <p className="text-primary-foreground font-black text-lg">•••• 9012 · {formatSum(balance)} {t('currencySuffix')}</p>
                   </div>
-                  {/* To whom */}
                   <div className="flex gap-2 mb-4 bg-secondary rounded-3xl p-1">
                     <button onClick={() => setTransferTo('self')}
                       className={`flex-1 py-3 rounded-2xl text-sm font-bold ${transferTo === 'self' ? 'gradient-primary text-primary-foreground' : 'text-muted-foreground'}`}>
@@ -533,6 +553,11 @@ const Home = () => {
                   </div>
                   <button onClick={() => setCardSettingsAction(null)} className="w-full bg-secondary font-bold py-4 rounded-2xl mt-2">{t('cardCancel')}</button>
                 </div>
+              ) : cardSettingsAction === 'done' ? (
+                <div className="text-center py-4">
+                  <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-5xl mb-4">✅</motion.div>
+                  <button onClick={() => setShowCardSettings(false)} className="w-full bg-secondary font-bold py-4 rounded-2xl">{t('transferDone')}</button>
+                </div>
               ) : (
                 <div className="text-center">
                   <div className="text-5xl mb-4">{cardSettingsAction === 'block' ? '🔒' : cardSettingsAction === 'reissue' ? '💳' : '⚠️'}</div>
@@ -540,14 +565,11 @@ const Home = () => {
                     {cardSettingsAction === 'block' ? t('cardBlockConfirm') : cardSettingsAction === 'reissue' ? t('cardReissueConfirm') : t('cardFraudConfirm')}
                   </p>
                   <motion.button whileTap={{ scale: 0.97 }}
-                    onClick={() => setCardSettingsAction('done')}
+                    onClick={() => { setCardSettingsAction('done'); toast.success('✅'); }}
                     className={`w-full font-bold py-5 rounded-3xl shadow-button mb-3 ${cardSettingsAction === 'fraud' ? 'bg-destructive text-destructive-foreground' : 'gradient-primary text-primary-foreground'}`}>
                     {cardSettingsAction === 'block' ? t('cardBlock') : cardSettingsAction === 'reissue' ? t('cardReissue') : t('cardFraud')}
                   </motion.button>
                   <button onClick={() => setCardSettingsAction(null)} className="w-full bg-secondary font-bold py-4 rounded-2xl">{t('cardCancel')}</button>
-                  {cardSettingsAction === 'done' && (
-                    <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-success font-bold mt-4">✅</motion.p>
-                  )}
                 </div>
               )}
             </motion.div>

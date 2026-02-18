@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
 import { Send, CheckCircle, Phone } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Feedback = () => {
   const { t } = useLanguage();
@@ -19,6 +20,7 @@ const Feedback = () => {
   const handleSend = () => {
     if (!category) return;
     setSent(true);
+    toast.success(t('feedbackThanks'));
     setTimeout(() => {
       setSent(false);
       setCategory('');

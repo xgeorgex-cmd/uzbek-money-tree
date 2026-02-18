@@ -11,6 +11,8 @@ interface AppState {
   transactions: Transaction[];
   goals: Goal[];
   viewedStories: string[];
+  likedStories: string[];
+  dislikedStories: string[];
   theme: AppTheme;
   quizScore: number;
   lastQuizScore: number;
@@ -25,9 +27,13 @@ interface AppContextType extends AppState {
   updateAvatar: (avatarId: string, customPhoto?: string | null) => void;
   addGoal: (goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => void;
   contributeToGoal: (goalId: string, amount: number) => void;
+  withdrawFromGoal: (goalId: string, amount: number) => void;
   markStoryViewed: (storyId: string) => void;
+  likeStory: (storyId: string) => void;
+  dislikeStory: (storyId: string) => void;
   setTheme: (theme: AppTheme) => void;
   setQuizScore: (score: number) => void;
+  addQuizReward: (amount: number) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -41,6 +47,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         return {
           ...parsed,
           viewedStories: parsed.viewedStories || [],
+          likedStories: parsed.likedStories || [],
+          dislikedStories: parsed.dislikedStories || [],
           theme: parsed.theme || 'calm',
           customPhoto: parsed.customPhoto || null,
           quizScore: parsed.quizScore || 0,
@@ -60,6 +68,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       transactions: mockTransactions,
       goals: mockGoals,
       viewedStories: [],
+      likedStories: [],
+      dislikedStories: [],
       theme: 'calm' as AppTheme,
       quizScore: 0,
       lastQuizScore: 0,
@@ -68,7 +78,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     };
   });
 
-  // Apply theme class to document
   useEffect(() => {
     const root = document.documentElement;
     root.classList.remove('theme-playful', 'theme-anime', 'theme-national');
@@ -90,26 +99,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('app-state');
     document.documentElement.classList.remove('theme-playful', 'theme-anime', 'theme-national');
     setState({
-      isAuthenticated: false,
-      isOnboarded: false,
-      userName: '',
-      avatarId: '1',
-      customPhoto: null,
-      balance: 230000,
-      transactions: mockTransactions,
-      goals: mockGoals,
-      viewedStories: [],
-      theme: 'calm',
-      quizScore: 0,
-      lastQuizScore: 0,
-      loginStreak: 0,
-      appCustomized: false,
+      isAuthenticated: false, isOnboarded: false, userName: '', avatarId: '1', customPhoto: null,
+      balance: 230000, transactions: mockTransactions, goals: mockGoals, viewedStories: [],
+      likedStories: [], dislikedStories: [],
+      theme: 'calm', quizScore: 0, lastQuizScore: 0, loginStreak: 0, appCustomized: false,
     });
   }, []);
 
   const completeOnboarding = useCallback((name: string, avatarId: string, customPhoto?: string | null) => {
-    const newState = { ...state, isOnboarded: true, userName: name, avatarId, customPhoto: customPhoto || null };
-    save(newState);
+    save({ ...state, isOnboarded: true, userName: name, avatarId, customPhoto: customPhoto || null });
   }, [state]);
 
   const updateAvatar = useCallback((avatarId: string, customPhoto?: string | null) => {
@@ -117,14 +115,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [state]);
 
   const addGoal = useCallback((goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => {
-    const newGoal: Goal = {
-      ...goal,
-      id: Date.now().toString(),
-      currentAmount: 0,
-      createdAt: new Date().toISOString().split('T')[0],
-    };
-    const newState = { ...state, goals: [...state.goals, newGoal] };
-    save(newState);
+    const newGoal: Goal = { ...goal, id: Date.now().toString(), currentAmount: 0, createdAt: new Date().toISOString().split('T')[0] };
+    save({ ...state, goals: [...state.goals, newGoal] });
   }, [state]);
 
   const contributeToGoal = useCallback((goalId: string, amount: number) => {
@@ -133,27 +125,51 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       g.id === goalId ? { ...g, currentAmount: Math.min(g.currentAmount + amount, g.targetAmount) } : g
     );
     const newTx: Transaction = {
-      id: Date.now().toString(),
-      amount: -amount,
-      type: 'savings',
+      id: Date.now().toString(), amount: -amount, type: 'savings',
       description: `На ${state.goals.find(g => g.id === goalId)?.name || 'копилку'}`,
       source: 'Копилка',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: state.goals.find(g => g.id === goalId)?.emoji || '🔐',
     };
-    const newState = {
-      ...state,
-      balance: state.balance - amount,
-      goals: newGoals,
-      transactions: [newTx, ...state.transactions],
+    save({ ...state, balance: state.balance - amount, goals: newGoals, transactions: [newTx, ...state.transactions] });
+  }, [state]);
+
+  const withdrawFromGoal = useCallback((goalId: string, amount: number) => {
+    const goal = state.goals.find(g => g.id === goalId);
+    if (!goal || amount <= 0 || amount > goal.currentAmount) return;
+    const newGoals = state.goals.map(g =>
+      g.id === goalId ? { ...g, currentAmount: g.currentAmount - amount } : g
+    );
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: amount, type: 'income',
+      description: `Из копилки «${goal.name}»`,
+      source: 'Копилка',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: goal.emoji,
     };
-    save(newState);
+    save({ ...state, balance: state.balance + amount, goals: newGoals, transactions: [newTx, ...state.transactions] });
   }, [state]);
 
   const markStoryViewed = useCallback((storyId: string) => {
     if (!state.viewedStories.includes(storyId)) {
       save({ ...state, viewedStories: [...state.viewedStories, storyId] });
     }
+  }, [state]);
+
+  const likeStory = useCallback((storyId: string) => {
+    const liked = state.likedStories.includes(storyId)
+      ? state.likedStories.filter(id => id !== storyId)
+      : [...state.likedStories, storyId];
+    const disliked = state.dislikedStories.filter(id => id !== storyId);
+    save({ ...state, likedStories: liked, dislikedStories: disliked });
+  }, [state]);
+
+  const dislikeStory = useCallback((storyId: string) => {
+    const disliked = state.dislikedStories.includes(storyId)
+      ? state.dislikedStories.filter(id => id !== storyId)
+      : [...state.dislikedStories, storyId];
+    const liked = state.likedStories.filter(id => id !== storyId);
+    save({ ...state, likedStories: liked, dislikedStories: disliked });
   }, [state]);
 
   const setTheme = useCallback((theme: AppTheme) => {
@@ -164,10 +180,23 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     save({ ...state, lastQuizScore: state.quizScore, quizScore: score });
   }, [state]);
 
+  const addQuizReward = useCallback((amount: number) => {
+    if (amount <= 0) return;
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: amount, type: 'income',
+      description: 'Награда за квест 🧠',
+      source: 'Квест',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: '🏆',
+    };
+    save({ ...state, balance: state.balance + amount, transactions: [newTx, ...state.transactions] });
+  }, [state]);
+
   return (
     <AppContext.Provider value={{
       ...state, login, logout, completeOnboarding, updateAvatar, addGoal,
-      contributeToGoal, markStoryViewed, setTheme, setQuizScore
+      contributeToGoal, withdrawFromGoal, markStoryViewed, likeStory, dislikeStory,
+      setTheme, setQuizScore, addQuizReward
     }}>
       {children}
     </AppContext.Provider>

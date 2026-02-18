@@ -160,6 +160,9 @@ type TranslationKeys = {
   goalsDeadline: string;
   goalsDaysLeft: string;
   goalsFieldProgress: string;
+  goalsWithdraw: string;
+  goalsWithdrawSuccess: string;
+  quizRewardCredited: string;
   // Feedback
   feedbackTitle: string;
   feedbackLike: string;
@@ -366,6 +369,9 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsDeadline: 'Когда хочешь достигнуть?',
     goalsDaysLeft: 'дней осталось',
     goalsFieldProgress: 'Прогресс',
+    goalsWithdraw: 'Вывести',
+    goalsWithdrawSuccess: 'Деньги выведены на карту ✅',
+    quizRewardCredited: 'Награда зачислена на карту! 💰',
     feedbackTitle: 'Обратная связь',
     feedbackLike: 'Мне нравится 😊',
     feedbackSuggest: 'Хочу предложить 💡',
@@ -563,6 +569,9 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsDeadline: 'Qachon erishmoqchisan?',
     goalsDaysLeft: 'kun qoldi',
     goalsFieldProgress: 'Taraqqiyot',
+    goalsWithdraw: 'Chiqarish',
+    goalsWithdrawSuccess: 'Pul kartaga chiqarildi ✅',
+    quizRewardCredited: 'Mukofot kartaga o\'tkazildi! 💰',
     feedbackTitle: 'Fikr-mulohaza',
     feedbackLike: 'Menga yoqadi 😊',
     feedbackSuggest: 'Taklif qilmoqchiman 💡',
@@ -760,6 +769,9 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsDeadline: 'When do you want to reach it?',
     goalsDaysLeft: 'days left',
     goalsFieldProgress: 'Progress',
+    goalsWithdraw: 'Withdraw',
+    goalsWithdrawSuccess: 'Money withdrawn to card ✅',
+    quizRewardCredited: 'Reward credited to your card! 💰',
     feedbackTitle: 'Feedback',
     feedbackLike: 'I like it 😊',
     feedbackSuggest: 'I want to suggest 💡',
