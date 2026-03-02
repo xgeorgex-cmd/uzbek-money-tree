@@ -9,59 +9,56 @@ import { goalEmojis } from '@/data/mockData';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
-// Visual journey progress - a road with milestones, very clear for kids
+// Tree-style progress — a clear visual path from seed to trophy
 const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount }: { progress: number; emoji: string; currentAmount: number; targetAmount: number }) => {
-  const totalDots = 10;
-  const filled = Math.min(Math.round(progress * totalDots), totalDots);
-  
+  const pct = Math.min(Math.round(progress * 100), 100);
+  const milestones = [
+    { at: 0, icon: '🌱', label: 'Старт' },
+    { at: 25, icon: '🌿', label: '25%' },
+    { at: 50, icon: '🌳', label: '50%' },
+    { at: 75, icon: '🌸', label: '75%' },
+    { at: 100, icon: '🏆', label: 'Цель!' },
+  ];
+
   return (
-    <div className="my-4">
-      {/* Amount display */}
-      <div className="flex justify-between items-baseline mb-2">
-        <span className="text-xs font-bold text-muted-foreground">0</span>
-        <span className="text-sm font-black text-primary">{formatSum(currentAmount)}</span>
-        <span className="text-xs font-bold text-muted-foreground">{formatSum(targetAmount)}</span>
+    <div className="my-3">
+      {/* Amounts */}
+      <div className="flex justify-between items-baseline mb-1.5">
+        <span className="text-[11px] font-bold text-muted-foreground">{formatSum(currentAmount)}</span>
+        <span className="text-[11px] font-bold text-muted-foreground">из {formatSum(targetAmount)}</span>
       </div>
-      
-      {/* Road track */}
-      <div className="relative w-full h-10 bg-secondary rounded-full overflow-hidden">
-        {/* Filled track */}
-        <motion.div 
+
+      {/* Track */}
+      <div className="relative h-8 bg-secondary rounded-full overflow-hidden">
+        <motion.div
           className="absolute inset-y-0 left-0 gradient-primary rounded-full"
           initial={{ width: 0 }}
-          animate={{ width: `${Math.min(progress * 100, 100)}%` }}
+          animate={{ width: `${pct}%` }}
           transition={{ duration: 1, ease: 'easeOut' }}
         />
-        
-        {/* Milestone dots */}
-        <div className="absolute inset-0 flex items-center justify-between px-2">
-          {Array.from({ length: totalDots + 1 }).map((_, i) => {
-            const isFilled = i <= filled;
-            const isLast = i === totalDots;
-            const isCurrent = i === filled;
-            return (
-              <div key={i} className="relative flex items-center justify-center">
-                {isLast ? (
-                  <motion.span className="text-lg" animate={progress >= 1 ? { scale: [1, 1.3, 1] } : {}} transition={{ repeat: Infinity, duration: 1.5 }}>
-                    🏆
-                  </motion.span>
-                ) : isCurrent ? (
-                  <motion.span className="text-lg z-10" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 1.2 }}>
-                    {emoji}
-                  </motion.span>
-                ) : (
-                  <div className={`w-2.5 h-2.5 rounded-full transition-colors ${isFilled ? 'bg-primary-foreground/60' : 'bg-muted-foreground/30'}`} />
-                )}
-              </div>
-            );
-          })}
-        </div>
+        {/* Moving emoji */}
+        <motion.div
+          className="absolute top-1/2 -translate-y-1/2 text-xl z-10"
+          initial={{ left: '0%' }}
+          animate={{ left: `calc(${pct}% - 12px)` }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+        >
+          {emoji}
+        </motion.div>
       </div>
-      
-      {/* Percentage label */}
-      <p className="text-center text-xs font-black text-primary mt-2">
-        {Math.round(progress * 100)}%
-      </p>
+
+      {/* Milestones below */}
+      <div className="flex justify-between mt-1.5">
+        {milestones.map(m => {
+          const reached = pct >= m.at;
+          return (
+            <div key={m.at} className="flex flex-col items-center">
+              <span className={`text-sm ${reached ? '' : 'grayscale opacity-40'}`}>{m.icon}</span>
+              <span className={`text-[9px] font-bold ${reached ? 'text-primary' : 'text-muted-foreground'}`}>{m.label}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -188,7 +185,7 @@ const Goals = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <div className="px-5 pt-12">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-black">{t('goalsTitle')}</h1>
@@ -264,12 +261,12 @@ const Goals = () => {
                       </motion.p>
                     ) : (
                       <div className="grid grid-cols-3 gap-2 mt-3">
-                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => setActiveGoalId(isActive ? null : goal.id)}
+                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => { setActiveGoalId(goal.id); setSliderValue(0); setManualAmount(''); }}
                           className="gradient-warm text-accent-foreground font-bold text-xs py-3.5 rounded-2xl shadow-button flex flex-col items-center gap-1">
                           <Wallet size={16} />
                           {t('goalsTopUp')}
                         </motion.button>
-                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => setShowWithdraw(goal.id)}
+                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => { setShowWithdraw(goal.id); setWithdrawAmount(''); }}
                           className="bg-secondary text-foreground font-bold text-xs py-3.5 rounded-2xl flex flex-col items-center gap-1">
                           <ArrowDownCircle size={16} />
                           {t('goalsWithdraw')}
@@ -284,40 +281,48 @@ const Goals = () => {
                   </div>
                 </div>
 
-                <AnimatePresence>
-                  {isActive && !isCompleted && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                      <div className="mt-4 pt-4 border-t border-border">
-                        <input type="range" min={0} max={Math.min(balance, goal.targetAmount - goal.currentAmount)} step={1000}
-                          value={sliderValue} onChange={e => { setSliderValue(Number(e.target.value)); setManualAmount(''); }}
-                          className="w-full accent-primary h-2" />
-                        <p className="text-center font-black text-lg my-2 text-primary">
-                          {formatSum(manualAmount ? parseInt(manualAmount.replace(/\D/g, '')) || 0 : sliderValue)} {t('currencySuffix')}
-                        </p>
-                        <p className="text-xs text-muted-foreground font-semibold mb-1">{t('goalsManualAmount')}</p>
-                        <input value={manualAmount} onChange={e => { setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10)); setSliderValue(0); }}
-                          placeholder="0" inputMode="numeric"
-                          className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-3 outline-none focus:ring-2 focus:ring-primary text-center" />
-                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => handleContribute(goal.id)}
-                          disabled={(manualAmount ? parseInt(manualAmount.replace(/\D/g, '')) || 0 : sliderValue) === 0}
-                          className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button disabled:opacity-40">
-                          {t('goalsConfirm')}
-                        </motion.button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Top-up is now a modal, no inline expansion */}
               </motion.div>
             );
           })}
         </div>
       </div>
 
+      {/* Top-up modal (same style as withdraw) */}
+      <AnimatePresence>
+        {activeGoalId && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-center justify-center p-6" onClick={() => setActiveGoalId(null)}>
+            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-black">{t('goalsTopUp')}</h2>
+                <button onClick={() => setActiveGoalId(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
+              </div>
+              <p className="text-muted-foreground text-sm mb-2">
+                {goals.find(g => g.id === activeGoalId)?.name}
+              </p>
+              <p className="text-xs text-muted-foreground mb-4">
+                {t('homeCardBalance')}: {formatSum(balance)} {t('currencySuffix')}
+              </p>
+              <input value={manualAmount} onChange={e => setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                placeholder="0" inputMode="numeric"
+                className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+              <motion.button whileTap={{ scale: 0.97 }} onClick={() => handleContribute(activeGoalId)}
+                disabled={!manualAmount || Number(manualAmount) <= 0}
+                className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button disabled:opacity-40">
+                {t('goalsConfirm')}
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Withdraw modal */}
       <AnimatePresence>
         {showWithdraw && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowWithdraw(null)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowWithdraw(null)}>
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm">
               <div className="flex items-center justify-between mb-4">
@@ -344,7 +349,7 @@ const Goals = () => {
       <AnimatePresence>
         {showAskParents && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowAskParents(null)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowAskParents(null)}>
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm">
               <div className="flex items-center justify-between mb-4">
@@ -392,7 +397,7 @@ const Goals = () => {
       <AnimatePresence>
         {showCalc && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowCalc(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowCalc(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[85vh] overflow-y-auto">
@@ -437,7 +442,7 @@ const Goals = () => {
       <AnimatePresence>
         {showCreate && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-foreground/40 z-50 flex items-end" onClick={() => { setShowCreate(false); setEditGoalId(null); }}>
+            className="fixed inset-0 bg-foreground/40 z-[60] flex items-end" onClick={() => { setShowCreate(false); setEditGoalId(null); }}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={e => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[85vh] overflow-y-auto">

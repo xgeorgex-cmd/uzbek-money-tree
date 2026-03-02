@@ -99,7 +99,7 @@ const History = () => {
   const currentPeriodLabel = periods.find(p => p.key === period)?.label || t('historyLast3Months');
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <div className="px-5 pt-12">
         <h1 className="text-2xl font-black mb-2">{t('historyTitle')}</h1>
         <p className="text-xs text-muted-foreground font-semibold mb-4">{t('historyTotalOps')}: {transactions.length}</p>
@@ -245,7 +245,7 @@ const History = () => {
       <AnimatePresence>
         {selectedTx && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setSelectedTx(null)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-center justify-center p-6" onClick={() => setSelectedTx(null)}>
             <motion.div initial={{ scale: 0.8, y: 30 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.8, y: 30 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm shadow-card">
               <div className="flex items-center justify-between mb-4">
@@ -285,7 +285,7 @@ const History = () => {
       <AnimatePresence>
         {showDonutDetail && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowDonutDetail(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowDonutDetail(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[80vh] overflow-y-auto">
