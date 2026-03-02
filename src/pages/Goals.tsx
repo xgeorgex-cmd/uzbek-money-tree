@@ -2,46 +2,65 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle } from 'lucide-react';
+import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
+import OperationNotification from '@/components/OperationNotification';
 import { goalEmojis } from '@/data/mockData';
-import { toast } from 'sonner';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
-// Steps progress: a path with milestones
-const StepsProgress = ({ progress, emoji, currentAmount, targetAmount }: { progress: number; emoji: string; currentAmount: number; targetAmount: number }) => {
-  const steps = 5;
-  const filledSteps = Math.min(Math.floor(progress * steps), steps);
-  const stepEmojis = ['🌱', '🌿', '🌳', '⭐', '🏆'];
+// Visual journey progress - a road with milestones, very clear for kids
+const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount }: { progress: number; emoji: string; currentAmount: number; targetAmount: number }) => {
+  const totalDots = 10;
+  const filled = Math.min(Math.round(progress * totalDots), totalDots);
   
   return (
-    <div className="my-3">
-      <div className="flex items-center justify-between mb-1">
-        {Array.from({ length: steps }).map((_, i) => (
-          <div key={i} className="flex flex-col items-center">
-            <motion.div 
-              initial={{ scale: 0 }}
-              animate={{ scale: i <= filledSteps ? 1 : 0.6, opacity: i <= filledSteps ? 1 : 0.3 }}
-              transition={{ delay: i * 0.08 }}
-              className={`w-10 h-10 rounded-2xl flex items-center justify-center text-lg ${
-                i < filledSteps ? 'bg-success/20' : i === filledSteps ? 'bg-primary/20' : 'bg-secondary'
-              }`}>
-              {i < filledSteps ? stepEmojis[i] : i === filledSteps ? emoji : '·'}
-            </motion.div>
-          </div>
-        ))}
+    <div className="my-4">
+      {/* Amount display */}
+      <div className="flex justify-between items-baseline mb-2">
+        <span className="text-xs font-bold text-muted-foreground">0</span>
+        <span className="text-sm font-black text-primary">{formatSum(currentAmount)}</span>
+        <span className="text-xs font-bold text-muted-foreground">{formatSum(targetAmount)}</span>
       </div>
-      <div className="relative w-full h-2 bg-secondary rounded-full overflow-hidden mt-1">
+      
+      {/* Road track */}
+      <div className="relative w-full h-10 bg-secondary rounded-full overflow-hidden">
+        {/* Filled track */}
         <motion.div 
-          className="h-full gradient-primary rounded-full"
+          className="absolute inset-y-0 left-0 gradient-primary rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${Math.min(progress * 100, 100)}%` }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 1, ease: 'easeOut' }}
         />
+        
+        {/* Milestone dots */}
+        <div className="absolute inset-0 flex items-center justify-between px-2">
+          {Array.from({ length: totalDots + 1 }).map((_, i) => {
+            const isFilled = i <= filled;
+            const isLast = i === totalDots;
+            const isCurrent = i === filled;
+            return (
+              <div key={i} className="relative flex items-center justify-center">
+                {isLast ? (
+                  <motion.span className="text-lg" animate={progress >= 1 ? { scale: [1, 1.3, 1] } : {}} transition={{ repeat: Infinity, duration: 1.5 }}>
+                    🏆
+                  </motion.span>
+                ) : isCurrent ? (
+                  <motion.span className="text-lg z-10" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 1.2 }}>
+                    {emoji}
+                  </motion.span>
+                ) : (
+                  <div className={`w-2.5 h-2.5 rounded-full transition-colors ${isFilled ? 'bg-primary-foreground/60' : 'bg-muted-foreground/30'}`} />
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <p className="text-xs text-muted-foreground font-semibold mt-1 text-center">
-        {formatSum(currentAmount)} / {formatSum(targetAmount)}
+      
+      {/* Percentage label */}
+      <p className="text-center text-xs font-black text-primary mt-2">
+        {Math.round(progress * 100)}%
       </p>
     </div>
   );
@@ -60,11 +79,23 @@ const Goals = () => {
   const [calcAmount, setCalcAmount] = useState('');
   const [calcFreq, setCalcFreq] = useState<'daily' | 'weekly' | 'biweekly' | 'monthly'>('daily');
   const [showAskParents, setShowAskParents] = useState<string | null>(null);
+  const [askParentWho, setAskParentWho] = useState<'dad' | 'mom' | 'grandma'>('dad');
+  const [askParentAmount, setAskParentAmount] = useState('');
+  const [askParentMessage, setAskParentMessage] = useState('');
   const [showWithdraw, setShowWithdraw] = useState<string | null>(null);
   const [withdrawAmount, setWithdrawAmount] = useState('');
 
+  // Notification state
+  const [notif, setNotif] = useState<{ open: boolean; title: string; emoji: string; amount?: number; type?: string; description?: string }>({
+    open: false, title: '', emoji: '', amount: undefined, type: '', description: ''
+  });
+
   const totalSavings = goals.reduce((s, g) => s + g.currentAmount, 0);
   const interestEarned = Math.round(totalSavings * 0.15 / 12);
+
+  const showNotification = (title: string, emoji: string, amount?: number, type?: string, description?: string) => {
+    setNotif({ open: true, title, emoji, amount, type, description });
+  };
 
   const handleCreate = () => {
     const amount = parseInt(newGoal.targetAmount.replace(/\D/g, ''));
@@ -72,7 +103,12 @@ const Goals = () => {
     addGoal({ name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined });
     setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' });
     setShowCreate(false);
-    toast.success(editGoalId ? '✅ ' + t('goalsUpdate') : '✅ ' + t('goalsSave'));
+    showNotification(
+      editGoalId ? t('goalsUpdate') : t('goalsSave'),
+      editGoalId ? '✅' : '🎉',
+      undefined, undefined, newGoal.name
+    );
+    setEditGoalId(null);
   };
 
   const handleStartEdit = (goalId: string) => {
@@ -87,22 +123,40 @@ const Goals = () => {
   const handleContribute = (goalId: string) => {
     const amount = manualAmount ? parseInt(manualAmount.replace(/\D/g, '')) : sliderValue;
     if (amount > 0) {
+      const goalName = goals.find(g => g.id === goalId)?.name || '';
       contributeToGoal(goalId, amount);
       setSliderValue(0);
       setManualAmount('');
       setActiveGoalId(null);
-      toast.success(t('goalsConfirm') + ' ✅');
+      showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), goalName);
     }
   };
 
   const handleWithdraw = (goalId: string) => {
     const amount = parseInt(withdrawAmount.replace(/\D/g, ''));
     if (amount > 0) {
+      const goalName = goals.find(g => g.id === goalId)?.name || '';
       withdrawFromGoal(goalId, amount);
       setWithdrawAmount('');
       setShowWithdraw(null);
-      toast.success(t('goalsWithdrawSuccess'));
+      showNotification(t('goalsWithdrawSuccess'), '💰', amount, t('goalsWithdraw'), goalName);
     }
+  };
+
+  const handleOpenAskParents = (goalId: string) => {
+    const goal = goals.find(g => g.id === goalId);
+    if (goal) {
+      const tenPercent = Math.round(goal.targetAmount * 0.1);
+      setAskParentAmount(tenPercent.toString());
+      setAskParentMessage(t('goalsAskParentsMessagePlaceholder'));
+      setAskParentWho('dad');
+      setShowAskParents(goalId);
+    }
+  };
+
+  const handleSendParentRequest = () => {
+    setShowAskParents(null);
+    showNotification(t('requestMoneySent'), '💌', undefined, t('goalsAskParentsSend'));
   };
 
   const calcAmountNum = parseInt(calcAmount.replace(/\D/g, '')) || 0;
@@ -126,6 +180,12 @@ const Goals = () => {
     const diff = Math.ceil((new Date(deadline).getTime() - Date.now()) / (1000 * 60 * 60 * 24));
     return diff > 0 ? diff : 0;
   };
+
+  const parentOptions = [
+    { key: 'dad' as const, label: t('goalsAskParentsDad'), emoji: '👨' },
+    { key: 'mom' as const, label: t('goalsAskParentsMom'), emoji: '👩' },
+    { key: 'grandma' as const, label: t('goalsAskParentsGrandma'), emoji: '👵' },
+  ];
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -191,11 +251,11 @@ const Goals = () => {
                     </div>
                     {goal.reason && <p className="text-xs text-muted-foreground mb-1">{goal.reason}</p>}
 
-                    {/* Steps progress */}
-                    <StepsProgress progress={progress} emoji={goal.emoji} currentAmount={goal.currentAmount} targetAmount={goal.targetAmount} />
+                    {/* Journey progress */}
+                    <JourneyProgress progress={progress} emoji={goal.emoji} currentAmount={goal.currentAmount} targetAmount={goal.targetAmount} />
 
                     {daysLeft !== null && (
-                      <p className="text-xs text-primary font-bold text-center">{daysLeft} {t('goalsDaysLeft')}</p>
+                      <p className="text-xs text-primary font-bold text-center">⏰ {daysLeft} {t('goalsDaysLeft')}</p>
                     )}
 
                     {isCompleted ? (
@@ -203,18 +263,21 @@ const Goals = () => {
                         {t('goalsCompleted')}
                       </motion.p>
                     ) : (
-                      <div className="flex gap-2 mt-3">
+                      <div className="grid grid-cols-3 gap-2 mt-3">
                         <motion.button whileTap={{ scale: 0.97 }} onClick={() => setActiveGoalId(isActive ? null : goal.id)}
-                          className="flex-1 gradient-warm text-accent-foreground font-bold text-xs py-3 rounded-2xl shadow-button">
-                          {t('goalsSetAside')}
+                          className="gradient-warm text-accent-foreground font-bold text-xs py-3.5 rounded-2xl shadow-button flex flex-col items-center gap-1">
+                          <Wallet size={16} />
+                          {t('goalsTopUp')}
                         </motion.button>
                         <motion.button whileTap={{ scale: 0.97 }} onClick={() => setShowWithdraw(goal.id)}
-                          className="bg-secondary text-foreground font-bold text-xs py-3 px-4 rounded-2xl flex items-center gap-1">
-                          <ArrowDownCircle size={14} /> {t('goalsWithdraw')}
+                          className="bg-secondary text-foreground font-bold text-xs py-3.5 rounded-2xl flex flex-col items-center gap-1">
+                          <ArrowDownCircle size={16} />
+                          {t('goalsWithdraw')}
                         </motion.button>
-                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => setShowAskParents(goal.id)}
-                          className="bg-primary/10 text-primary font-bold text-xs py-3 px-4 rounded-2xl flex items-center gap-1">
-                          <Heart size={14} /> {t('goalsAskParents')}
+                        <motion.button whileTap={{ scale: 0.97 }} onClick={() => handleOpenAskParents(goal.id)}
+                          className="bg-primary/10 text-primary font-bold text-xs py-3.5 rounded-2xl flex flex-col items-center gap-1">
+                          <Heart size={16} />
+                          {t('goalsAskParents').split(' ').slice(0, 2).join(' ')}
                         </motion.button>
                       </div>
                     )}
@@ -257,7 +320,10 @@ const Goals = () => {
             className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowWithdraw(null)}>
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm">
-              <h2 className="text-xl font-black mb-2">{t('goalsWithdraw')}</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-black">{t('goalsWithdraw')}</h2>
+                <button onClick={() => setShowWithdraw(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
+              </div>
               <p className="text-muted-foreground text-sm mb-4">
                 {goals.find(g => g.id === showWithdraw)?.name} — {formatSum(goals.find(g => g.id === showWithdraw)?.currentAmount || 0)} {t('currencySuffix')}
               </p>
@@ -274,22 +340,48 @@ const Goals = () => {
         )}
       </AnimatePresence>
 
-      {/* Ask parents modal */}
+      {/* Ask parents modal - enhanced */}
       <AnimatePresence>
         {showAskParents && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowAskParents(null)}>
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
-              onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm text-center">
-              <div className="text-6xl mb-4">🙏</div>
-              <h2 className="text-xl font-black mb-2">{t('goalsAskParentsAdd')}</h2>
-              <p className="text-muted-foreground text-sm mb-6">
-                {goals.find(g => g.id === showAskParents)?.name} — {formatSum(goals.find(g => g.id === showAskParents)?.targetAmount || 0)} {t('currencySuffix')}
-              </p>
-              <motion.button whileTap={{ scale: 0.97 }}
-                onClick={() => { setShowAskParents(null); toast.success(t('requestMoneySent')); }}
-                className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button">
-                {t('requestMoneySend')}
+              onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-black">{t('goalsAskParentsAdd')}</h2>
+                <button onClick={() => setShowAskParents(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
+              </div>
+
+              {/* Who to ask */}
+              <p className="text-sm font-bold text-muted-foreground mb-2">{t('goalsAskParentsWho')}</p>
+              <div className="flex gap-2 mb-4">
+                {parentOptions.map(p => (
+                  <button key={p.key} onClick={() => setAskParentWho(p.key)}
+                    className={`flex-1 py-3 rounded-2xl flex flex-col items-center gap-1 text-xs font-bold transition-all ${
+                      askParentWho === p.key ? 'gradient-primary text-primary-foreground shadow-button' : 'bg-secondary text-muted-foreground'
+                    }`}>
+                    <span className="text-xl">{p.emoji}</span>
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Amount */}
+              <p className="text-sm font-bold text-muted-foreground mb-1">{t('goalsAskParentsAmount')}</p>
+              <input value={askParentAmount} onChange={e => setAskParentAmount(e.target.value.replace(/\D/g, ''))}
+                placeholder="0" inputMode="numeric"
+                className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+
+              {/* Message */}
+              <p className="text-sm font-bold text-muted-foreground mb-1">{t('goalsAskParentsMessage')}</p>
+              <textarea value={askParentMessage} onChange={e => setAskParentMessage(e.target.value.slice(0, 120))}
+                placeholder={t('goalsAskParentsMessagePlaceholder')} rows={3}
+                className="w-full bg-secondary text-foreground font-semibold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary resize-none text-sm" />
+
+              <motion.button whileTap={{ scale: 0.97 }} onClick={handleSendParentRequest}
+                disabled={!askParentAmount || Number(askParentAmount) <= 0}
+                className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button disabled:opacity-40">
+                {t('goalsAskParentsSend')}
               </motion.button>
             </motion.div>
           </motion.div>
@@ -386,6 +478,18 @@ const Goals = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Operation notification modal */}
+      <OperationNotification
+        open={notif.open}
+        title={notif.title}
+        emoji={notif.emoji}
+        amount={notif.amount}
+        type={notif.type}
+        description={notif.description}
+        onDetails
+        onClose={() => setNotif(n => ({ ...n, open: false }))}
+      />
 
       <BottomNav />
     </div>
