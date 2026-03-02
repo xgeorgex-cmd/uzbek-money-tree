@@ -213,12 +213,6 @@ const Home = () => {
           <p className="text-sm font-semibold text-foreground/80 leading-relaxed">{t('storyFinTip')}</p>
         </motion.div>
 
-        {/* Spending donut + categories */}
-        <SpendingDonut
-          transactions={transactions}
-          currencySuffix={t('currencySuffix')}
-          title={t('historyDonutTitle')}
-        />
 
         {/* Last 3 transactions */}
         <div>
