@@ -138,44 +138,37 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-background pb-28">
       {/* Header with themed gradient */}
-      <div className="relative overflow-hidden px-6 pt-12 pb-10 rounded-b-[2.5rem]" style={{ background: 'var(--gradient-hero)' }}>
-        {/* Decorative floating shapes */}
-        <div className="absolute top-4 right-8 w-24 h-24 rounded-full bg-primary-foreground/5 blur-xl" />
-        <div className="absolute bottom-0 left-4 w-32 h-32 rounded-full bg-primary-foreground/5 blur-2xl" />
-        <div className="absolute top-16 right-20 w-8 h-8 rounded-full bg-primary-foreground/10 animate-bounce-soft" />
-
+      <div className="relative overflow-hidden px-6 pt-10 pb-5 rounded-b-[2rem]" style={{ background: 'var(--gradient-hero)' }}>
+        <div className="absolute top-2 right-8 w-16 h-16 rounded-full bg-primary-foreground/5 blur-xl" />
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-5">
+          <div className="flex items-center gap-3 mb-3">
             <motion.button whileTap={{ scale: 0.9, rotate: 10 }} onClick={() => setShowAvatarPicker(true)}
-              className="w-13 h-13 bg-primary-foreground/15 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden border border-primary-foreground/10">
+              className="w-11 h-11 bg-primary-foreground/15 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden border border-primary-foreground/10">
               {avatarDisplay}
             </motion.button>
-            <div>
-              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')},</p>
-              <h1 className="text-primary-foreground text-xl font-black">{userName || 'Друг'}!</h1>
+            <div className="flex-1">
+              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')}, {userName || 'Друг'}!</p>
             </div>
           </div>
 
-          {/* Balance card */}
-          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={() => setShowCardDetail(true)}
-            className="bg-primary-foreground/10 backdrop-blur-md rounded-3xl p-5 border border-primary-foreground/10 cursor-pointer active:scale-[0.98] transition-transform">
-            <div className="flex items-center justify-between mb-1">
-              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeCardBalance')}</p>
-              <div className="flex items-center gap-1 bg-primary-foreground/10 rounded-xl px-2.5 py-1">
-                <div className="w-5 h-3.5 rounded-sm bg-gradient-to-r from-blue-400 to-blue-600" />
-                <span className="text-primary-foreground/70 text-[10px] font-bold">9012</span>
-              </div>
+          <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={() => setShowCardDetail(true)}
+            className="flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform">
+            <div>
+              <motion.p className="text-primary-foreground text-3xl font-black" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 300 }}>
+                {formatSum(balance)} <span className="text-sm font-bold">{t('currencySuffix')}</span>
+              </motion.p>
             </div>
-            <motion.p className="text-primary-foreground text-4xl font-black" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 300 }}>
-              {formatSum(balance)} <span className="text-lg font-bold">{t('currencySuffix')}</span>
-            </motion.p>
-            <p className="text-primary-foreground/40 text-xs font-semibold mt-1">{t('homeCardDetails')} →</p>
+            <div className="flex items-center gap-1.5 bg-primary-foreground/10 rounded-xl px-2.5 py-1.5">
+              <div className="w-5 h-3.5 rounded-sm bg-gradient-to-r from-blue-400 to-blue-600" />
+              <span className="text-primary-foreground/70 text-[10px] font-bold">•• 9012</span>
+              <ChevronRight size={14} className="text-primary-foreground/50" />
+            </div>
           </motion.div>
         </div>
       </div>
 
       <div className="px-5 mt-5 space-y-4">
-        {/* Stories ribbon — horizontal cards like Tinkoff */}
+        {/* Stories ribbon */}
         <div>
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-bold text-muted-foreground">{t('homeStories')}</p>
@@ -206,36 +199,9 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Financial tip */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-          className="bg-savings/15 border border-savings/30 rounded-3xl p-4 flex items-start gap-3">
-          <Sparkles className="text-savings shrink-0 mt-0.5" size={20} />
-          <p className="text-sm font-semibold text-foreground/80 leading-relaxed">{t('storyFinTip')}</p>
-        </motion.div>
-
-
-        {/* Last 3 transactions */}
-        <div>
-          <p className="text-xs font-bold text-muted-foreground mb-2">{t('homeLastTransactions')}</p>
-          {lastTxs.map((tx, i) => (
-            <motion.div key={tx.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.05 }}
-              onClick={() => navigate('/history')}
-              className="bg-card rounded-3xl p-4 shadow-card flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform mb-2">
-              <div className="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-lg">{tx.icon}</div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold truncate">{tx.description}</p>
-                <p className="text-xs text-muted-foreground">{tx.date}</p>
-              </div>
-              <p className={`font-black text-sm ${tx.type === 'income' ? 'text-success' : tx.type === 'savings' ? 'text-savings' : 'text-destructive'}`}>
-                {tx.type === 'income' ? '+' : ''}{formatSum(tx.amount)} {t('currencySuffix')}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Goal progress */}
+        {/* Goal progress — before transactions */}
         {closestGoal && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className="bg-card rounded-3xl p-5 shadow-card">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs text-muted-foreground font-semibold">{t('homeTotalSavings')}</p>
@@ -252,7 +218,7 @@ const Home = () => {
             </div>
             <div className="w-full h-3 bg-secondary rounded-full overflow-hidden mb-3">
               <motion.div className="h-full gradient-primary rounded-full" initial={{ width: 0 }}
-                animate={{ width: `${closestProgress * 100}%` }} transition={{ duration: 1, ease: 'easeOut', delay: 0.6 }} />
+                animate={{ width: `${closestProgress * 100}%` }} transition={{ duration: 1, ease: 'easeOut', delay: 0.4 }} />
             </div>
             <p className="text-xs text-muted-foreground">
               {t('homeRemaining')}: <span className="font-bold text-foreground">{formatSum(closestGoal.targetAmount - closestGoal.currentAmount)} {t('currencySuffix')}</span>
@@ -263,6 +229,25 @@ const Home = () => {
             </motion.button>
           </motion.div>
         )}
+
+        {/* Last 3 transactions */}
+        <div>
+          <p className="text-xs font-bold text-muted-foreground mb-2">{t('homeLastTransactions')}</p>
+          {lastTxs.map((tx, i) => (
+            <motion.div key={tx.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 + i * 0.05 }}
+              onClick={() => navigate('/history')}
+              className="bg-card rounded-3xl p-4 shadow-card flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform mb-2">
+              <div className="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-lg">{tx.icon}</div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold truncate">{tx.description}</p>
+                <p className="text-xs text-muted-foreground">{tx.date}</p>
+              </div>
+              <p className={`font-black text-sm ${tx.type === 'income' ? 'text-success' : tx.type === 'savings' ? 'text-savings' : 'text-destructive'}`}>
+                {tx.type === 'income' ? '+' : ''}{formatSum(tx.amount)} {t('currencySuffix')}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Avatar picker modal */}
