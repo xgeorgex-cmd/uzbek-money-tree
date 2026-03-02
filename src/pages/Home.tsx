@@ -7,6 +7,7 @@ import { avatars, mockStories, quizQuestions } from '@/data/mockData';
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
+import SpendingDonut from '@/components/SpendingDonut';
 import { toast } from 'sonner';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
@@ -136,43 +137,69 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-background pb-28">
-      {/* Header */}
-      <div className="gradient-primary px-6 pt-12 pb-8 rounded-b-[2rem]">
-        <div className="flex items-center gap-3 mb-6">
-          <motion.button whileTap={{ scale: 0.9, rotate: 10 }} onClick={() => setShowAvatarPicker(true)}
-            className="w-12 h-12 bg-card/20 rounded-2xl flex items-center justify-center overflow-hidden">
-            {avatarDisplay}
-          </motion.button>
-          <div>
-            <p className="text-primary-foreground/70 text-sm font-semibold">{t('homeGreeting')},</p>
-            <h1 className="text-primary-foreground text-xl font-black">{userName || 'Друг'}!</h1>
-          </div>
-        </div>
+      {/* Header with themed gradient */}
+      <div className="relative overflow-hidden px-6 pt-12 pb-10 rounded-b-[2.5rem]" style={{ background: 'var(--gradient-hero)' }}>
+        {/* Decorative floating shapes */}
+        <div className="absolute top-4 right-8 w-24 h-24 rounded-full bg-primary-foreground/5 blur-xl" />
+        <div className="absolute bottom-0 left-4 w-32 h-32 rounded-full bg-primary-foreground/5 blur-2xl" />
+        <div className="absolute top-16 right-20 w-8 h-8 rounded-full bg-primary-foreground/10 animate-bounce-soft" />
 
-        <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={() => setShowCardDetail(true)}
-          className="bg-card/10 backdrop-blur-sm rounded-3xl p-5 border border-primary-foreground/10 cursor-pointer active:scale-[0.98] transition-transform">
-          <p className="text-primary-foreground/70 text-sm font-semibold mb-1">{t('homeCardBalance')}</p>
-          <motion.p className="text-primary-foreground text-4xl font-black" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 300 }}>
-            {formatSum(balance)} <span className="text-lg font-bold">{t('currencySuffix')}</span>
-          </motion.p>
-          <p className="text-primary-foreground/50 text-xs font-semibold mt-1">{t('homeCardDetails')} →</p>
-        </motion.div>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-5">
+            <motion.button whileTap={{ scale: 0.9, rotate: 10 }} onClick={() => setShowAvatarPicker(true)}
+              className="w-13 h-13 bg-primary-foreground/15 backdrop-blur-sm rounded-2xl flex items-center justify-center overflow-hidden border border-primary-foreground/10">
+              {avatarDisplay}
+            </motion.button>
+            <div>
+              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')},</p>
+              <h1 className="text-primary-foreground text-xl font-black">{userName || 'Друг'}!</h1>
+            </div>
+          </div>
+
+          {/* Balance card */}
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={() => setShowCardDetail(true)}
+            className="bg-primary-foreground/10 backdrop-blur-md rounded-3xl p-5 border border-primary-foreground/10 cursor-pointer active:scale-[0.98] transition-transform">
+            <div className="flex items-center justify-between mb-1">
+              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeCardBalance')}</p>
+              <div className="flex items-center gap-1 bg-primary-foreground/10 rounded-xl px-2.5 py-1">
+                <div className="w-5 h-3.5 rounded-sm bg-gradient-to-r from-blue-400 to-blue-600" />
+                <span className="text-primary-foreground/70 text-[10px] font-bold">9012</span>
+              </div>
+            </div>
+            <motion.p className="text-primary-foreground text-4xl font-black" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 300 }}>
+              {formatSum(balance)} <span className="text-lg font-bold">{t('currencySuffix')}</span>
+            </motion.p>
+            <p className="text-primary-foreground/40 text-xs font-semibold mt-1">{t('homeCardDetails')} →</p>
+          </motion.div>
+        </div>
       </div>
 
-      <div className="px-5 mt-6 space-y-4">
-        {/* Stories ribbon */}
+      <div className="px-5 mt-5 space-y-4">
+        {/* Stories ribbon — horizontal cards like Tinkoff */}
         <div>
-          <p className="text-xs font-bold text-muted-foreground mb-2">{t('homeStories')}</p>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-xs font-bold text-muted-foreground">{t('homeStories')}</p>
+          </div>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-hide">
-            {sortedStories.map((story) => {
+            {sortedStories.map((story, i) => {
               const isViewed = viewedStories.includes(story.id);
               return (
-                <motion.button key={story.id} whileTap={{ scale: 0.93 }} onClick={() => handleStoryClick(story.id)}
-                  className={`shrink-0 w-[4.5rem] h-[5.5rem] rounded-3xl flex flex-col items-center justify-center gap-1 ${story.color} border-2 transition-all ${
-                    isViewed ? 'border-border opacity-60 blur-[0.5px]' : 'border-primary/40'
-                  }`}>
-                  <span className="text-2xl">{story.emoji}</span>
-                  <span className="text-[9px] font-bold text-foreground/70 leading-tight text-center px-1">{story.title}</span>
+                <motion.button
+                  key={story.id}
+                  whileTap={{ scale: 0.93 }}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.03 }}
+                  onClick={() => handleStoryClick(story.id)}
+                  className={`shrink-0 w-[6.5rem] h-[7.5rem] rounded-3xl flex flex-col items-center justify-center gap-1.5 ${story.color} border-2 transition-all relative overflow-hidden ${
+                    isViewed ? 'border-border/50 opacity-50' : 'border-primary/30 shadow-sm'
+                  }`}
+                >
+                  {!isViewed && (
+                    <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary" />
+                  )}
+                  <span className="text-3xl drop-shadow-sm">{story.emoji}</span>
+                  <span className="text-[10px] font-bold text-foreground/80 leading-tight text-center px-2 line-clamp-2">{story.title}</span>
                 </motion.button>
               );
             })}
@@ -185,6 +212,13 @@ const Home = () => {
           <Sparkles className="text-savings shrink-0 mt-0.5" size={20} />
           <p className="text-sm font-semibold text-foreground/80 leading-relaxed">{t('storyFinTip')}</p>
         </motion.div>
+
+        {/* Spending donut + categories */}
+        <SpendingDonut
+          transactions={transactions}
+          currencySuffix={t('currencySuffix')}
+          title={t('historyDonutTitle')}
+        />
 
         {/* Last 3 transactions */}
         <div>
