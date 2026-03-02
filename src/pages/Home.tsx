@@ -135,7 +135,7 @@ const Home = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       {/* Header */}
       <div className="gradient-primary px-6 pt-12 pb-8 rounded-b-[2rem]">
         <div className="flex items-center gap-3 mb-6">
@@ -241,7 +241,7 @@ const Home = () => {
       <AnimatePresence>
         {showAvatarPicker && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowAvatarPicker(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowAvatarPicker(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10">
@@ -273,7 +273,7 @@ const Home = () => {
       <AnimatePresence>
         {activeStory && currentStory && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-6" onClick={handleCloseStory}>
+            className="fixed inset-0 z-[60] bg-foreground/60 flex items-center justify-center p-6" onClick={handleCloseStory}>
             <motion.div initial={{ scale: 0.8, y: 50 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.8, y: 50 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm shadow-card">
               <div className="flex justify-end mb-2">
@@ -306,7 +306,7 @@ const Home = () => {
       <AnimatePresence>
         {showQuiz && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/60 flex items-center justify-center p-4">
+            className="fixed inset-0 z-[60] bg-foreground/60 flex items-center justify-center p-4">
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
               className="bg-card rounded-3xl p-6 w-full max-w-sm shadow-card max-h-[90vh] overflow-y-auto">
               <div className="flex justify-end mb-2">
@@ -383,7 +383,7 @@ const Home = () => {
       <AnimatePresence>
         {showCardDetail && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowCardDetail(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowCardDetail(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[85vh] overflow-y-auto">
@@ -420,7 +420,7 @@ const Home = () => {
       <AnimatePresence>
         {showTransfer && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowTransfer(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowTransfer(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[90vh] overflow-y-auto">
@@ -500,7 +500,7 @@ const Home = () => {
       <AnimatePresence>
         {showRequestMoney && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowRequestMoney(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-center justify-center p-6" onClick={() => setShowRequestMoney(false)}>
             <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
               onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm text-center">
               <div className="text-6xl mb-4">💌</div>
@@ -523,7 +523,7 @@ const Home = () => {
       <AnimatePresence>
         {showCardSettings && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-foreground/40 flex items-end" onClick={() => setShowCardSettings(false)}>
+            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowCardSettings(false)}>
             <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10">

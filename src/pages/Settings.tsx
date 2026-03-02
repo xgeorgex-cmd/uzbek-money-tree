@@ -43,7 +43,7 @@ const Settings = () => {
   const earnedCount = unlockedAchievements.filter(a => a.unlocked).length;
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <div className="px-5 pt-12">
         <h1 className="text-2xl font-black mb-6">{t('settingsTitle')}</h1>
 
