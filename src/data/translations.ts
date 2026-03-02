@@ -162,6 +162,21 @@ type TranslationKeys = {
   goalsFieldProgress: string;
   goalsWithdraw: string;
   goalsWithdrawSuccess: string;
+  goalsTopUp: string;
+  goalsAskParentsWho: string;
+  goalsAskParentsDad: string;
+  goalsAskParentsMom: string;
+  goalsAskParentsGrandma: string;
+  goalsAskParentsAmount: string;
+  goalsAskParentsMessage: string;
+  goalsAskParentsMessagePlaceholder: string;
+  goalsAskParentsSend: string;
+  notifTitle: string;
+  notifDetails: string;
+  notifOk: string;
+  notifOperationAmount: string;
+  notifOperationType: string;
+  notifOperationDate: string;
   quizRewardCredited: string;
   // Feedback
   feedbackTitle: string;
@@ -371,6 +386,21 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsFieldProgress: 'Прогресс',
     goalsWithdraw: 'Вывести',
     goalsWithdrawSuccess: 'Деньги выведены на карту ✅',
+    goalsTopUp: 'Пополнить',
+    goalsAskParentsWho: 'У кого попросить?',
+    goalsAskParentsDad: 'Папа',
+    goalsAskParentsMom: 'Мама',
+    goalsAskParentsGrandma: 'Бабушка',
+    goalsAskParentsAmount: 'Сумма запроса',
+    goalsAskParentsMessage: 'Сообщение',
+    goalsAskParentsMessagePlaceholder: 'Помоги мне накопить на мечту! 🙏',
+    goalsAskParentsSend: 'Отправить запрос',
+    notifTitle: 'Операция выполнена',
+    notifDetails: 'Подробности',
+    notifOk: 'Хорошо',
+    notifOperationAmount: 'Сумма',
+    notifOperationType: 'Тип',
+    notifOperationDate: 'Дата',
     quizRewardCredited: 'Награда зачислена на карту! 💰',
     feedbackTitle: 'Обратная связь',
     feedbackLike: 'Мне нравится 😊',
@@ -571,6 +601,21 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsFieldProgress: 'Taraqqiyot',
     goalsWithdraw: 'Chiqarish',
     goalsWithdrawSuccess: 'Pul kartaga chiqarildi ✅',
+    goalsTopUp: 'To\'ldirish',
+    goalsAskParentsWho: 'Kimdan so\'rash?',
+    goalsAskParentsDad: 'Ota',
+    goalsAskParentsMom: 'Ona',
+    goalsAskParentsGrandma: 'Buvi',
+    goalsAskParentsAmount: 'So\'rov summasi',
+    goalsAskParentsMessage: 'Xabar',
+    goalsAskParentsMessagePlaceholder: 'Orzuyimga yetishishga yordam bering! 🙏',
+    goalsAskParentsSend: 'So\'rov yuborish',
+    notifTitle: 'Operatsiya bajarildi',
+    notifDetails: 'Batafsil',
+    notifOk: 'Yaxshi',
+    notifOperationAmount: 'Summa',
+    notifOperationType: 'Turi',
+    notifOperationDate: 'Sana',
     quizRewardCredited: 'Mukofot kartaga o\'tkazildi! 💰',
     feedbackTitle: 'Fikr-mulohaza',
     feedbackLike: 'Menga yoqadi 😊',
@@ -771,6 +816,21 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsFieldProgress: 'Progress',
     goalsWithdraw: 'Withdraw',
     goalsWithdrawSuccess: 'Money withdrawn to card ✅',
+    goalsTopUp: 'Top up',
+    goalsAskParentsWho: 'Who to ask?',
+    goalsAskParentsDad: 'Dad',
+    goalsAskParentsMom: 'Mom',
+    goalsAskParentsGrandma: 'Grandma',
+    goalsAskParentsAmount: 'Request amount',
+    goalsAskParentsMessage: 'Message',
+    goalsAskParentsMessagePlaceholder: 'Help me save for my dream! 🙏',
+    goalsAskParentsSend: 'Send request',
+    notifTitle: 'Operation completed',
+    notifDetails: 'Details',
+    notifOk: 'OK',
+    notifOperationAmount: 'Amount',
+    notifOperationType: 'Type',
+    notifOperationDate: 'Date',
     quizRewardCredited: 'Reward credited to your card! 💰',
     feedbackTitle: 'Feedback',
     feedbackLike: 'I like it 😊',

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { avatars, mockStories, quizQuestions } from '@/data/mockData';
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
+import OperationNotification from '@/components/OperationNotification';
 import { toast } from 'sonner';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
@@ -44,6 +45,9 @@ const Home = () => {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [newCustomPhoto, setNewCustomPhoto] = useState<string | null>(null);
+  const [notif, setNotif] = useState<{ open: boolean; title: string; emoji: string; amount?: number; type?: string; description?: string }>({
+    open: false, title: '', emoji: ''
+  });
 
   const currentStory = mockStories.find(s => s.id === activeStory);
 
@@ -109,14 +113,18 @@ const Home = () => {
     }
   };
 
+  const showNotif = (title: string, emoji: string, amount?: number, type?: string, description?: string) => {
+    setNotif({ open: true, title, emoji, amount, type, description });
+  };
+
   const handleTransfer = () => {
     setTransferStep('success');
-    toast.success(t('transferSuccess'));
+    showNotif(t('transferSuccess'), '✅', transferAmount ? -Number(transferAmount) : undefined, t('homeTransferMoney'));
   };
 
   const handleRequestMoney = () => {
     setRequestSent(true);
-    toast.success(t('requestMoneySent'));
+    showNotif(t('requestMoneySent'), '💌');
     setTimeout(() => { setRequestSent(false); setShowRequestMoney(false); }, 2000);
   };
 
@@ -576,6 +584,17 @@ const Home = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <OperationNotification
+        open={notif.open}
+        title={notif.title}
+        emoji={notif.emoji}
+        amount={notif.amount}
+        type={notif.type}
+        description={notif.description}
+        onDetails
+        onClose={() => setNotif(n => ({ ...n, open: false }))}
+      />
 
       <BottomNav />
     </div>
