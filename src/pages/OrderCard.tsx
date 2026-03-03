@@ -24,62 +24,67 @@ const OrderCard = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-background">
+    <div className="min-h-screen flex flex-col px-5 pt-14 pb-6 bg-background">
       <button onClick={() => navigate('/')} className="absolute top-12 left-5 p-2 rounded-xl bg-secondary">
         <ArrowLeft size={20} />
       </button>
 
-      <motion.img
-        src={humoSticker}
-        alt="HUMO Pay sticker"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring' }}
-        className="w-64 rounded-2xl mb-6 shadow-lg"
-      />
+      <div className="flex flex-col items-center flex-1">
+        <motion.img
+          src={humoSticker}
+          alt="HUMO Pay sticker"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring' }}
+          className="w-40 rounded-2xl mb-3 shadow-lg"
+        />
 
-      <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-2xl font-black mb-4 text-center">
-        {t('orderCardTitle')}
-      </motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-xl font-black mb-1 text-center">
+          {t('orderCardTitle')}
+        </motion.h1>
 
-      <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-muted-foreground text-center mb-8 max-w-xs leading-relaxed">
-        {t('orderCardDesc')}
-      </motion.p>
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-muted-foreground text-center mb-4 text-sm max-w-xs leading-relaxed">
+          {t('orderCardDesc')}
+        </motion.p>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-card rounded-2xl p-6 shadow-card w-full max-w-sm space-y-4">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">1️⃣</span>
-          <p className="text-sm font-semibold">{t('orderCardStep1')}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">2️⃣</span>
-          <p className="text-sm font-semibold">{t('orderCardStep2')}</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">3️⃣</span>
-          <p className="text-sm font-semibold">{t('orderCardStep3')}</p>
-        </div>
-      </motion.div>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-card rounded-2xl p-4 shadow-card w-full max-w-sm space-y-3 mb-4">
+          <div className="flex items-center gap-3">
+            <span className="text-lg">1️⃣</span>
+            <p className="text-sm font-semibold">{t('orderCardStep1')}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-lg">2️⃣</span>
+            <p className="text-sm font-semibold">{t('orderCardStep2')}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-lg">3️⃣</span>
+            <p className="text-sm font-semibold">{t('orderCardStep3')}</p>
+          </div>
+        </motion.div>
 
-      <motion.button
-        whileTap={{ scale: 0.95 }}
-        onClick={() => navigate('/')}
-        className="mt-8 gradient-primary text-primary-foreground font-bold text-lg px-10 py-4 rounded-2xl shadow-button"
-      >
-        {t('orderCardGotIt')}
-      </motion.button>
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={handleShare}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="w-full max-w-sm gradient-primary text-primary-foreground font-bold text-base py-4 rounded-2xl shadow-button flex items-center justify-center gap-2 mb-3"
+        >
+          <Share2 size={18} />
+          {t('orderCardShare')}
+        </motion.button>
 
-      <motion.button
-        whileTap={{ scale: 0.95 }}
-        onClick={handleShare}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-3 flex items-center gap-2 text-primary font-semibold text-sm"
-      >
-        <Share2 size={16} />
-        {t('orderCardShare')}
-      </motion.button>
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate('/')}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="w-full max-w-sm bg-secondary text-foreground font-bold text-base py-4 rounded-2xl"
+        >
+          {t('orderCardGotIt')}
+        </motion.button>
+      </div>
     </div>
   );
 };
