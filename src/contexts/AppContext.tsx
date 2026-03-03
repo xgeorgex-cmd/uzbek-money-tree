@@ -27,6 +27,7 @@ interface AppContextType extends AppState {
   completeOnboarding: (name: string, avatarId: string, customPhoto?: string | null) => void;
   updateAvatar: (avatarId: string, customPhoto?: string | null) => void;
   addGoal: (goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => void;
+  deleteGoal: (goalId: string) => void;
   contributeToGoal: (goalId: string, amount: number) => void;
   withdrawFromGoal: (goalId: string, amount: number) => void;
   markStoryViewed: (storyId: string) => void;
@@ -95,8 +96,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = useCallback((cardNum?: string) => {
-    save({ ...state, isAuthenticated: true, loginStreak: state.loginStreak + 1, cardNumber: cardNum || state.cardNumber });
-  }, [state]);
+    setState(prev => {
+      const newState = { ...prev, isAuthenticated: true, loginStreak: prev.loginStreak + 1, cardNumber: cardNum || prev.cardNumber };
+      localStorage.setItem('app-state', JSON.stringify(newState));
+      return newState;
+    });
+  }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem('app-state');
@@ -120,6 +125,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const addGoal = useCallback((goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => {
     const newGoal: Goal = { ...goal, id: Date.now().toString(), currentAmount: 0, createdAt: new Date().toISOString().split('T')[0] };
     save({ ...state, goals: [...state.goals, newGoal] });
+  }, [state]);
+
+  const deleteGoal = useCallback((goalId: string) => {
+    const goal = state.goals.find(g => g.id === goalId);
+    if (!goal) return;
+    const returnAmount = goal.currentAmount;
+    const newGoals = state.goals.filter(g => g.id !== goalId);
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: returnAmount, type: 'income',
+      description: `Закрытие копилки «${goal.name}»`,
+      source: 'Копилка',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: goal.emoji,
+    };
+    const txs = returnAmount > 0 ? [newTx, ...state.transactions] : state.transactions;
+    save({ ...state, balance: state.balance + returnAmount, goals: newGoals, transactions: txs });
   }, [state]);
 
   const contributeToGoal = useCallback((goalId: string, amount: number) => {
@@ -197,7 +218,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AppContext.Provider value={{
-      ...state, login, logout, completeOnboarding, updateAvatar, addGoal,
+      ...state, login, logout, completeOnboarding, updateAvatar, addGoal, deleteGoal,
       contributeToGoal, withdrawFromGoal, markStoryViewed, likeStory, dislikeStory,
       setTheme, setQuizScore, addQuizReward
     }}>
