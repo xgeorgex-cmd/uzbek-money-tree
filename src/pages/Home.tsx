@@ -184,15 +184,16 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.03 }}
                   onClick={() => handleStoryClick(story.id)}
-                  className={`shrink-0 w-[6.5rem] h-[7.5rem] rounded-3xl flex flex-col items-center justify-center gap-1.5 ${story.color} border-2 transition-all relative overflow-hidden ${
+                  className={`shrink-0 w-[6.5rem] h-[7.5rem] rounded-2xl flex flex-col items-end justify-end overflow-hidden border-2 transition-all relative ${
                     isViewed ? 'border-border/50 opacity-50' : 'border-primary/30 shadow-sm'
                   }`}
                 >
-                  {!isViewed && (
-                    <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary" />
+                  {story.image && (
+                    <img src={story.image} alt={story.title} className="absolute inset-0 w-full h-full object-cover" />
                   )}
-                  <span className="text-3xl drop-shadow-sm">{story.emoji}</span>
-                  <span className="text-[10px] font-bold text-foreground/80 leading-tight text-center px-2 line-clamp-2">{story.title}</span>
+                  <div className="relative z-10 w-full bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-5">
+                    <span className="text-[10px] font-bold text-white leading-tight line-clamp-2">{story.title}</span>
+                  </div>
                 </motion.button>
               );
             })}
