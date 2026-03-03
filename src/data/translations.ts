@@ -217,6 +217,10 @@ type TranslationKeys = {
   // Order card
   orderCardTitle: string;
   orderCardDesc: string;
+  orderCardStep1: string;
+  orderCardStep2: string;
+  orderCardStep3: string;
+  orderCardGotIt: string;
   // Quiz
   quizTitle: string;
   quizIntro: string;
@@ -238,7 +242,7 @@ export const translations: Record<Language, TranslationKeys> = {
     welcomeSubtitle: 'Это твой личный кошелёк',
     welcomeDescription: 'Следи за деньгами, копи на мечту и учись управлять финансами!',
     welcomeStart: 'Начать',
-    welcomeOrderCard: 'Заказать карту',
+    welcomeOrderCard: 'Получить стикер',
     welcomeHaveCard: 'У меня уже есть карта',
     loginTitle: 'Вход',
     loginPhone: 'Номер телефона',
@@ -433,8 +437,12 @@ export const translations: Record<Language, TranslationKeys> = {
     navSettings: 'Ещё',
     currencySuffix: 'сум',
     storyFinTip: 'Знаешь ли ты? Если откладывать по 1000 сум каждый день, через год у тебя будет 365 000 сум! 🤯',
-    orderCardTitle: 'Заказать карту',
-    orderCardDesc: 'Попроси родителей оформить тебе детскую карту в ближайшем отделении банка',
+    orderCardTitle: 'Получи платёжный стикер',
+    orderCardDesc: 'Наклей HUMO Pay на заднюю панель телефона и оплачивай покупки одним касанием!',
+    orderCardStep1: 'Попроси маму или папу',
+    orderCardStep2: 'Получи стикер HUMO Pay в отделении банка',
+    orderCardStep3: 'Наклей на телефон и плати! 🎉',
+    orderCardGotIt: 'Понятно!',
     quizTitle: 'Финансовый квест 🧠',
     quizIntro: 'Ответь на 5 вопросов по финансовой грамотности и заработай бонусы!',
     quizReward: 'За каждый верный ответ — 10 сум',
@@ -453,7 +461,7 @@ export const translations: Record<Language, TranslationKeys> = {
     welcomeSubtitle: 'Bu sening shaxsiy hamyoning',
     welcomeDescription: 'Pulingni kuzat, orzuying uchun yig\' va moliyani boshqarishni o\'rgan!',
     welcomeStart: 'Boshlash',
-    welcomeOrderCard: 'Karta buyurtma berish',
+    welcomeOrderCard: 'Stiker olish',
     welcomeHaveCard: 'Menda karta bor',
     loginTitle: 'Kirish',
     loginPhone: 'Telefon raqami',
@@ -648,8 +656,12 @@ export const translations: Record<Language, TranslationKeys> = {
     navSettings: 'Yana',
     currencySuffix: 'so\'m',
     storyFinTip: 'Bilasanmi? Har kuni 1000 so\'m yig\'sang, bir yilda 365 000 so\'m bo\'ladi! 🤯',
-    orderCardTitle: 'Karta buyurtma berish',
-    orderCardDesc: 'Ota-onangdan eng yaqin bank bo\'limida bolalar kartasini rasmiylashtirshni so\'ra',
+    orderCardTitle: 'To\'lov stikeri oling',
+    orderCardDesc: 'HUMO Pay stikerini telefoningiz orqa paneliga yopishtiring va bir tegish bilan to\'lang!',
+    orderCardStep1: 'Ota-onangdan so\'ra',
+    orderCardStep2: 'Bank bo\'limidan HUMO Pay stikerini oling',
+    orderCardStep3: 'Telefonga yopishtirib, to\'lang! 🎉',
+    orderCardGotIt: 'Tushundim!',
     quizTitle: 'Moliyaviy kvest 🧠',
     quizIntro: 'Moliyaviy savodxonlik bo\'yicha 5 ta savolga javob bering va bonuslar ishlang!',
     quizReward: 'Har bir to\'g\'ri javob uchun — 10 so\'m',
@@ -668,7 +680,7 @@ export const translations: Record<Language, TranslationKeys> = {
     welcomeSubtitle: 'This is your personal wallet',
     welcomeDescription: 'Track your money, save for dreams, and learn to manage finances!',
     welcomeStart: 'Get Started',
-    welcomeOrderCard: 'Order a card',
+    welcomeOrderCard: 'Get a sticker',
     welcomeHaveCard: 'I already have a card',
     loginTitle: 'Sign In',
     loginPhone: 'Phone Number',
@@ -863,8 +875,12 @@ export const translations: Record<Language, TranslationKeys> = {
     navSettings: 'More',
     currencySuffix: 'sum',
     storyFinTip: 'Did you know? If you save 1,000 sum every day, in a year you\'ll have 365,000 sum! 🤯',
-    orderCardTitle: 'Order a card',
-    orderCardDesc: 'Ask your parents to get you a kids card at the nearest bank branch',
+    orderCardTitle: 'Get a payment sticker',
+    orderCardDesc: 'Stick HUMO Pay on the back of your phone and pay with a single tap!',
+    orderCardStep1: 'Ask mom or dad',
+    orderCardStep2: 'Get a HUMO Pay sticker at a bank branch',
+    orderCardStep3: 'Stick it on your phone and pay! 🎉',
+    orderCardGotIt: 'Got it!',
     quizTitle: 'Financial Quest 🧠',
     quizIntro: 'Answer 5 financial literacy questions and earn bonuses!',
     quizReward: 'For each correct answer — 10 sum',
