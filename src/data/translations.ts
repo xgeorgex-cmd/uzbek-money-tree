@@ -171,6 +171,12 @@ type TranslationKeys = {
   goalsAskParentsMessage: string;
   goalsAskParentsMessagePlaceholder: string;
   goalsAskParentsSend: string;
+  goalsCloseGoal: string;
+  goalsCloseConfirmTitle: string;
+  goalsCloseConfirmDesc: string;
+  goalsCloseConfirmYes: string;
+  goalsCloseConfirmNo: string;
+  goalsClosedSuccess: string;
   notifTitle: string;
   notifDetails: string;
   notifOk: string;
@@ -400,6 +406,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsAskParentsMessage: 'Сообщение',
     goalsAskParentsMessagePlaceholder: 'Помоги мне накопить на мечту! 🙏',
     goalsAskParentsSend: 'Отправить запрос',
+    goalsCloseGoal: 'Закрыть копилку',
+    goalsCloseConfirmTitle: 'Закрыть копилку?',
+    goalsCloseConfirmDesc: 'Деньги будут перечислены на карту, а прогресс и цель исчезнут. Придётся начать заново.',
+    goalsCloseConfirmYes: 'Да, закрыть',
+    goalsCloseConfirmNo: 'Отмена',
+    goalsClosedSuccess: 'Деньги перечислены на карту',
     notifTitle: 'Операция выполнена',
     notifDetails: 'Подробности',
     notifOk: 'Хорошо',
@@ -620,6 +632,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsAskParentsMessage: 'Xabar',
     goalsAskParentsMessagePlaceholder: 'Orzuyimga yetishishga yordam bering! 🙏',
     goalsAskParentsSend: 'So\'rov yuborish',
+    goalsCloseGoal: 'To\'plagichni yopish',
+    goalsCloseConfirmTitle: 'To\'plagichni yopishni xohlaysizmi?',
+    goalsCloseConfirmDesc: 'Pullar kartaga o\'tkaziladi, jarayon va maqsad yo\'qoladi. Qaytadan boshlashga to\'g\'ri keladi.',
+    goalsCloseConfirmYes: 'Ha, yopish',
+    goalsCloseConfirmNo: 'Bekor qilish',
+    goalsClosedSuccess: 'Pullar kartaga o\'tkazildi',
     notifTitle: 'Operatsiya bajarildi',
     notifDetails: 'Batafsil',
     notifOk: 'Yaxshi',
@@ -840,6 +858,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsAskParentsMessage: 'Message',
     goalsAskParentsMessagePlaceholder: 'Help me save for my dream! 🙏',
     goalsAskParentsSend: 'Send request',
+    goalsCloseGoal: 'Close savings goal',
+    goalsCloseConfirmTitle: 'Close this savings goal?',
+    goalsCloseConfirmDesc: 'Money will be transferred to your card. Progress and goal will be lost. You\'ll have to start over.',
+    goalsCloseConfirmYes: 'Yes, close',
+    goalsCloseConfirmNo: 'Cancel',
+    goalsClosedSuccess: 'Money transferred to card',
     notifTitle: 'Operation completed',
     notifDetails: 'Details',
     notifOk: 'OK',

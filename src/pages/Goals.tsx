@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet } from 'lucide-react';
+import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2 } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
 import { goalEmojis } from '@/data/mockData';
@@ -65,7 +65,7 @@ const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount }: { pro
 
 const Goals = () => {
   const { t } = useLanguage();
-  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal } = useApp();
+  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal, deleteGoal } = useApp();
   const [showCreate, setShowCreate] = useState(false);
   const [editGoalId, setEditGoalId] = useState<string | null>(null);
   const [activeGoalId, setActiveGoalId] = useState<string | null>(null);
@@ -81,6 +81,7 @@ const Goals = () => {
   const [askParentMessage, setAskParentMessage] = useState('');
   const [showWithdraw, setShowWithdraw] = useState<string | null>(null);
   const [withdrawAmount, setWithdrawAmount] = useState('');
+  const [closeGoalId, setCloseGoalId] = useState<string | null>(null);
 
   // Notification state
   const [notif, setNotif] = useState<{ open: boolean; title: string; emoji: string; amount?: number; type?: string; description?: string }>({
@@ -154,6 +155,16 @@ const Goals = () => {
   const handleSendParentRequest = () => {
     setShowAskParents(null);
     showNotification(t('requestMoneySent'), '💌', undefined, t('goalsAskParentsSend'));
+  };
+
+  const handleCloseGoal = () => {
+    if (!closeGoalId) return;
+    const goal = goals.find(g => g.id === closeGoalId);
+    deleteGoal(closeGoalId);
+    setCloseGoalId(null);
+    setShowCreate(false);
+    setEditGoalId(null);
+    showNotification(t('goalsClosedSuccess'), '💸', goal?.currentAmount || undefined, undefined, goal?.name);
   };
 
   const calcAmountNum = parseInt(calcAmount.replace(/\D/g, '')) || 0;
@@ -479,6 +490,38 @@ const Goals = () => {
                 className="w-full gradient-primary text-primary-foreground font-bold text-lg py-5 rounded-3xl shadow-button">
                 {editGoalId ? t('goalsUpdate') : t('goalsSave')}
               </motion.button>
+              {editGoalId && (
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => setCloseGoalId(editGoalId)}
+                  className="w-full bg-destructive/10 text-destructive font-bold text-sm py-4 rounded-2xl mt-3 flex items-center justify-center gap-2">
+                  <Trash2 size={16} />
+                  {t('goalsCloseGoal')}
+                </motion.button>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Close goal confirmation */}
+      <AnimatePresence>
+        {closeGoalId && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] bg-foreground/50 flex items-center justify-center p-6" onClick={() => setCloseGoalId(null)}>
+            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }}
+              onClick={(e) => e.stopPropagation()} className="bg-card rounded-3xl p-6 w-full max-w-sm text-center">
+              <div className="text-5xl mb-4">⚠️</div>
+              <h2 className="text-xl font-black mb-2">{t('goalsCloseConfirmTitle')}</h2>
+              <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{t('goalsCloseConfirmDesc')}</p>
+              <div className="flex gap-3">
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => setCloseGoalId(null)}
+                  className="flex-1 bg-secondary text-foreground font-bold py-4 rounded-2xl">
+                  {t('goalsCloseConfirmNo')}
+                </motion.button>
+                <motion.button whileTap={{ scale: 0.97 }} onClick={handleCloseGoal}
+                  className="flex-1 bg-destructive text-destructive-foreground font-bold py-4 rounded-2xl">
+                  {t('goalsCloseConfirmYes')}
+                </motion.button>
+              </div>
             </motion.div>
           </motion.div>
         )}
