@@ -33,6 +33,7 @@ export interface Story {
   content: string;
   color: string;
   type?: 'info' | 'quiz';
+  image?: string;
 }
 
 export interface QuizQuestion {
@@ -69,22 +70,38 @@ export const avatars: Avatar[] = [
   { id: '15', emoji: '🦜', name: 'Попугай' },
 ];
 
+import story1Img from '@/assets/stories/story-1.jpg';
+import story2Img from '@/assets/stories/story-2.jpg';
+import story3Img from '@/assets/stories/story-3.jpg';
+import story4Img from '@/assets/stories/story-4.jpg';
+import story5Img from '@/assets/stories/story-5.jpg';
+import story6Img from '@/assets/stories/story-6.jpg';
+import story7Img from '@/assets/stories/story-7.jpg';
+import story8Img from '@/assets/stories/story-8.jpg';
+import story9Img from '@/assets/stories/story-9.jpg';
+import story10Img from '@/assets/stories/story-10.jpg';
+import story11Img from '@/assets/stories/story-11.jpg';
+import story12Img from '@/assets/stories/story-12.jpg';
+import story13Img from '@/assets/stories/story-13.jpg';
+import story14Img from '@/assets/stories/story-14.jpg';
+import story15Img from '@/assets/stories/story-15.jpg';
+
 export const mockStories: Story[] = [
-  { id: '1', emoji: '💡', title: 'Совет дня', content: 'Перед покупкой подожди 24 часа — может, передумаешь!', color: 'bg-savings/20' },
-  { id: '2', emoji: '🧠', title: 'Решай — зарабатывай!', content: 'Ответь на вопросы и заработай сумы!', color: 'bg-primary/20', type: 'quiz' },
-  { id: '3', emoji: '🏦', title: 'Что такое банк?', content: 'Банк — это место, где хранят деньги и дают их в долг другим людям. За хранение банк платит тебе проценты!', color: 'bg-primary/20' },
-  { id: '4', emoji: '🌍', title: 'Деньги мира', content: 'В Японии на монетах изображены цветы, а в Австралии — животные! Узбекский сум назван в честь золота.', color: 'bg-success/20' },
-  { id: '5', emoji: '📊', title: 'Правило 50/30/20', content: '50% на нужное, 30% на желания, 20% — в копилку! Это правило помогает управлять деньгами.', color: 'bg-accent/20' },
-  { id: '6', emoji: '🎯', title: 'Цель = мотивация', content: 'Люди, которые ставят цели, копят в 3 раза быстрее! Поставь свою цель прямо сейчас.', color: 'bg-destructive/20' },
-  { id: '7', emoji: '🎮', title: 'Игра на монетки', content: 'Знаешь ли ты, что первые деньги были из ракушек? А монеты придумали 2700 лет назад в Лидии!', color: 'bg-primary/20' },
-  { id: '8', emoji: '🍕', title: 'Пицца или копилка?', content: 'Если вместо одной пиццы в неделю откладывать деньги, через год у тебя будет целый велосипед!', color: 'bg-accent/20' },
-  { id: '9', emoji: '🦸', title: 'Финансовый герой', content: 'Настоящий герой умеет не только зарабатывать, но и разумно тратить. Ты уже на пути!', color: 'bg-success/20' },
-  { id: '10', emoji: '🎪', title: 'Весёлый факт', content: 'Самая дорогая монета в мире стоит 18,9 миллионов долларов! Это серебряный доллар 1794 года.', color: 'bg-savings/20' },
-  { id: '11', emoji: '🌟', title: 'Ты молодец!', content: 'Каждый раз, когда ты открываешь приложение, ты учишься управлять деньгами. Так держать!', color: 'bg-primary/20' },
-  { id: '12', emoji: '🎨', title: 'Нарисуй мечту', content: 'Нарисуй то, на что копишь, и повесь рисунок на стену. Визуализация помогает достигать целей!', color: 'bg-accent/20' },
-  { id: '13', emoji: '🤝', title: 'Делись добром', content: 'Когда копишь деньги, можно часть отложить на подарки друзьям. Щедрость делает счастливее!', color: 'bg-success/20' },
-  { id: '14', emoji: '📱', title: 'Цифровые деньги', content: 'Сегодня большинство денег существуют только в компьютерах. Наличные — лишь малая часть!', color: 'bg-savings/20' },
-  { id: '15', emoji: '🏆', title: 'Челлендж недели', content: 'Попробуй целую неделю записывать все свои траты. Ты удивишься, куда уходят деньги!', color: 'bg-destructive/20' },
+  { id: '1', emoji: '💡', title: 'Совет дня', content: 'Перед покупкой подожди 24 часа — может, передумаешь!', color: 'bg-savings/20', image: story1Img },
+  { id: '2', emoji: '🧠', title: 'Решай — зарабатывай!', content: 'Ответь на вопросы и заработай сумы!', color: 'bg-primary/20', type: 'quiz', image: story2Img },
+  { id: '3', emoji: '🏦', title: 'Что такое банк?', content: 'Банк — это место, где хранят деньги и дают их в долг другим людям. За хранение банк платит тебе проценты!', color: 'bg-primary/20', image: story3Img },
+  { id: '4', emoji: '🌍', title: 'Деньги мира', content: 'В Японии на монетах изображены цветы, а в Австралии — животные! Узбекский сум назван в честь золота.', color: 'bg-success/20', image: story4Img },
+  { id: '5', emoji: '📊', title: 'Правило 50/30/20', content: '50% на нужное, 30% на желания, 20% — в копилку! Это правило помогает управлять деньгами.', color: 'bg-accent/20', image: story5Img },
+  { id: '6', emoji: '🎯', title: 'Цель = мотивация', content: 'Люди, которые ставят цели, копят в 3 раза быстрее! Поставь свою цель прямо сейчас.', color: 'bg-destructive/20', image: story6Img },
+  { id: '7', emoji: '🎮', title: 'Игра на монетки', content: 'Знаешь ли ты, что первые деньги были из ракушек? А монеты придумали 2700 лет назад в Лидии!', color: 'bg-primary/20', image: story7Img },
+  { id: '8', emoji: '🍕', title: 'Пицца или копилка?', content: 'Если вместо одной пиццы в неделю откладывать деньги, через год у тебя будет целый велосипед!', color: 'bg-accent/20', image: story8Img },
+  { id: '9', emoji: '🦸', title: 'Финансовый герой', content: 'Настоящий герой умеет не только зарабатывать, но и разумно тратить. Ты уже на пути!', color: 'bg-success/20', image: story9Img },
+  { id: '10', emoji: '🎪', title: 'Весёлый факт', content: 'Самая дорогая монета в мире стоит 18,9 миллионов долларов! Это серебряный доллар 1794 года.', color: 'bg-savings/20', image: story10Img },
+  { id: '11', emoji: '🌟', title: 'Ты молодец!', content: 'Каждый раз, когда ты открываешь приложение, ты учишься управлять деньгами. Так держать!', color: 'bg-primary/20', image: story11Img },
+  { id: '12', emoji: '🎨', title: 'Нарисуй мечту', content: 'Нарисуй то, на что копишь, и повесь рисунок на стену. Визуализация помогает достигать целей!', color: 'bg-accent/20', image: story12Img },
+  { id: '13', emoji: '🤝', title: 'Делись добром', content: 'Когда копишь деньги, можно часть отложить на подарки друзьям. Щедрость делает счастливее!', color: 'bg-success/20', image: story13Img },
+  { id: '14', emoji: '📱', title: 'Цифровые деньги', content: 'Сегодня большинство денег существуют только в компьютерах. Наличные — лишь малая часть!', color: 'bg-savings/20', image: story14Img },
+  { id: '15', emoji: '🏆', title: 'Челлендж недели', content: 'Попробуй целую неделю записывать все свои траты. Ты удивишься, куда уходят деньги!', color: 'bg-destructive/20', image: story15Img },
 ];
 
 export const quizQuestions: QuizQuestion[] = [
