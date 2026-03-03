@@ -7,6 +7,7 @@ interface AppState {
   userName: string;
   avatarId: string;
   customPhoto: string | null;
+  cardNumber: string;
   balance: number;
   transactions: Transaction[];
   goals: Goal[];
@@ -21,7 +22,7 @@ interface AppState {
 }
 
 interface AppContextType extends AppState {
-  login: () => void;
+  login: (cardNumber?: string) => void;
   logout: () => void;
   completeOnboarding: (name: string, avatarId: string, customPhoto?: string | null) => void;
   updateAvatar: (avatarId: string, customPhoto?: string | null) => void;
@@ -55,6 +56,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           lastQuizScore: parsed.lastQuizScore || 0,
           loginStreak: parsed.loginStreak || 0,
           appCustomized: parsed.appCustomized || false,
+          cardNumber: parsed.cardNumber || '',
         };
       } catch {}
     }
@@ -65,6 +67,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       avatarId: '1',
       customPhoto: null,
       balance: 230000,
+      cardNumber: '',
       transactions: mockTransactions,
       goals: mockGoals,
       viewedStories: [],
@@ -91,8 +94,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('app-state', JSON.stringify(newState));
   };
 
-  const login = useCallback(() => {
-    save({ ...state, isAuthenticated: true, loginStreak: state.loginStreak + 1 });
+  const login = useCallback((cardNum?: string) => {
+    save({ ...state, isAuthenticated: true, loginStreak: state.loginStreak + 1, cardNumber: cardNum || state.cardNumber });
   }, [state]);
 
   const logout = useCallback(() => {
@@ -100,7 +103,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.classList.remove('theme-playful', 'theme-anime', 'theme-national');
     setState({
       isAuthenticated: false, isOnboarded: false, userName: '', avatarId: '1', customPhoto: null,
-      balance: 230000, transactions: mockTransactions, goals: mockGoals, viewedStories: [],
+      cardNumber: '', balance: 230000, transactions: mockTransactions, goals: mockGoals, viewedStories: [],
       likedStories: [], dislikedStories: [],
       theme: 'calm', quizScore: 0, lastQuizScore: 0, loginStreak: 0, appCustomized: false,
     });

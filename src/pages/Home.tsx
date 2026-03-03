@@ -14,10 +14,11 @@ const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 const Home = () => {
   const { t } = useLanguage();
-  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory } = useApp();
+  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory, cardNumber } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const lastTxs = transactions.slice(0, 3);
+  const last4 = cardNumber ? cardNumber.slice(-4) : '••••';
 
   const totalSavings = goals.reduce((s, g) => s + g.currentAmount, 0);
   const closestGoal = [...goals].filter(g => g.currentAmount < g.targetAmount)
@@ -160,7 +161,7 @@ const Home = () => {
             </div>
             <div className="flex items-center gap-1.5 bg-primary-foreground/10 rounded-xl px-2.5 py-1.5">
               <div className="w-5 h-3.5 rounded-sm bg-gradient-to-r from-blue-400 to-blue-600" />
-              <span className="text-primary-foreground/70 text-[10px] font-bold">•• 9012</span>
+              <span className="text-primary-foreground/70 text-[10px] font-bold">•• {last4}</span>
               <ChevronRight size={14} className="text-primary-foreground/50" />
             </div>
           </motion.div>
@@ -406,7 +407,7 @@ const Home = () => {
               <div className="gradient-primary rounded-3xl p-5 mb-6">
                 <p className="text-primary-foreground/70 text-xs font-semibold mb-1">{t('homeCardBalance')}</p>
                 <p className="text-primary-foreground text-3xl font-black mb-4">{formatSum(balance)} {t('currencySuffix')}</p>
-                <p className="text-primary-foreground/60 text-sm font-bold tracking-widest">•••• •••• •••• 9012</p>
+                <p className="text-primary-foreground/60 text-sm font-bold tracking-widest">•••• •••• •••• {last4}</p>
               </div>
               <div className="space-y-3">
                 <motion.button whileTap={{ scale: 0.97 }}
@@ -445,7 +446,7 @@ const Home = () => {
                   <h2 className="text-xl font-black mb-4">{t('transferTitle')}</h2>
                   <div className="gradient-primary rounded-2xl p-4 mb-4">
                     <p className="text-primary-foreground/70 text-xs font-semibold">{t('transferFrom')}</p>
-                    <p className="text-primary-foreground font-black text-lg">•••• 9012 · {formatSum(balance)} {t('currencySuffix')}</p>
+                    <p className="text-primary-foreground font-black text-lg">•••• {last4} · {formatSum(balance)} {t('currencySuffix')}</p>
                   </div>
                   <div className="flex gap-2 mb-4 bg-secondary rounded-3xl p-1">
                     <button onClick={() => setTransferTo('self')}
@@ -567,7 +568,7 @@ const Home = () => {
                 <div className="space-y-3">
                   <div className="bg-secondary rounded-2xl p-4">
                     <p className="text-xs text-muted-foreground">{t('cardNumber')}</p>
-                    <p className="font-black tracking-widest">8600 1234 5678 9012</p>
+                    <p className="font-black tracking-widest">•••• •••• •••• {last4}</p>
                   </div>
                   <div className="bg-secondary rounded-2xl p-4">
                     <p className="text-xs text-muted-foreground">{t('cardExpiry')}</p>

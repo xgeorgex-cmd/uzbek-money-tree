@@ -28,8 +28,8 @@ const Login = () => {
   };
 
   const handleBiometricChoice = (allow: boolean) => {
-    // In a real app would register biometric here
-    login();
+    const digits = cardNumber.replace(/\s/g, '');
+    login(digits || undefined);
     navigate(isOnboarded ? '/home' : '/onboarding');
   };
 
