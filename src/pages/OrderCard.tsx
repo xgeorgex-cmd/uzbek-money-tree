@@ -1,12 +1,27 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Share2 } from 'lucide-react';
 import humoSticker from '@/assets/humo-sticker.jpeg';
 
 const OrderCard = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+
+  const handleShare = async () => {
+    const shareUrl = 'https://humo.tj/pay-kids';
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'HUMO Pay Kids',
+          text: t('orderCardDesc'),
+          url: shareUrl,
+        });
+      } catch {}
+    } else {
+      await navigator.clipboard.writeText(shareUrl);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-background">
@@ -52,6 +67,18 @@ const OrderCard = () => {
         className="mt-8 gradient-primary text-primary-foreground font-bold text-lg px-10 py-4 rounded-2xl shadow-button"
       >
         {t('orderCardGotIt')}
+      </motion.button>
+
+      <motion.button
+        whileTap={{ scale: 0.95 }}
+        onClick={handleShare}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="mt-3 flex items-center gap-2 text-primary font-semibold text-sm"
+      >
+        <Share2 size={16} />
+        {t('orderCardShare')}
       </motion.button>
     </div>
   );
