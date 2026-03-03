@@ -241,6 +241,8 @@ type TranslationKeys = {
   quizLastTime: string;
   quizComeBack: string;
   quizDone: string;
+  profileEditNamePlaceholder: string;
+  profileEditSave: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -469,6 +471,8 @@ export const translations: Record<Language, TranslationKeys> = {
     quizLastTime: 'В прошлый раз',
     quizComeBack: 'Возвращайся через неделю за новыми вопросами! 📅',
     quizDone: 'Вернуться',
+    profileEditNamePlaceholder: 'Как тебя зовут?',
+    profileEditSave: 'Сохранить',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
@@ -695,6 +699,8 @@ export const translations: Record<Language, TranslationKeys> = {
     quizLastTime: 'O\'tgan safar',
     quizComeBack: 'Yangi savollar uchun bir haftadan keyin qaytib keling! 📅',
     quizDone: 'Qaytish',
+    profileEditNamePlaceholder: 'Ismingni yoz',
+    profileEditSave: 'Saqlash',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
@@ -921,5 +927,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizLastTime: 'Last time',
     quizComeBack: 'Come back in a week for new questions! 📅',
     quizDone: 'Go back',
+    profileEditNamePlaceholder: 'What\'s your name?',
+    profileEditSave: 'Save',
   },
 };

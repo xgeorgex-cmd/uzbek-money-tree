@@ -4,6 +4,7 @@ import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
+import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { Language } from '@/data/translations';
 import { appThemes, achievements, avatars } from '@/data/mockData';
 import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown, Palette, Trophy } from 'lucide-react';
@@ -16,6 +17,7 @@ const Settings = () => {
   const avatar = avatars.find(a => a.id === avatarId);
   const [showTutorial, setShowTutorial] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
+  const [showProfileEdit, setShowProfileEdit] = useState(false);
 
   const languages: { code: Language; label: string; flag: string }[] = [
     { code: 'ru', label: 'Русский', flag: '🇷🇺' },
@@ -48,7 +50,8 @@ const Settings = () => {
         <h1 className="text-2xl font-black mb-6">{t('settingsTitle')}</h1>
 
         {/* Profile */}
-        <div className="bg-card rounded-3xl p-5 shadow-card flex items-center gap-4 mb-6">
+        <motion.button whileTap={{ scale: 0.98 }} onClick={() => setShowProfileEdit(true)}
+          className="w-full bg-card rounded-3xl p-5 shadow-card flex items-center gap-4 mb-6 text-left">
           <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl overflow-hidden">
             {customPhoto ? <img src={customPhoto} alt="avatar" className="w-full h-full object-cover rounded-2xl" /> : (avatar?.emoji || '🦊')}
           </div>
@@ -56,7 +59,7 @@ const Settings = () => {
             <h2 className="font-black text-lg">{userName || 'Друг'}</h2>
             <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : avatar?.name}</p>
           </div>
-        </div>
+        </motion.button>
 
         {/* Theme selector */}
         <div className="bg-card rounded-3xl p-5 shadow-card mb-4">
@@ -171,6 +174,7 @@ const Settings = () => {
           {t('settingsLogout')}
         </motion.button>
       </div>
+      <ProfileEditDialog open={showProfileEdit} onClose={() => setShowProfileEdit(false)} />
       <BottomNav />
     </div>
   );
