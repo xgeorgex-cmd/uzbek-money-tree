@@ -8,6 +8,7 @@ import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, 
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
 import SpendingDonut from '@/components/SpendingDonut';
+import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { toast } from 'sonner';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
@@ -252,37 +253,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Avatar picker modal */}
-      <AnimatePresence>
-        {showAvatarPicker && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-foreground/40 flex items-end" onClick={() => setShowAvatarPicker(false)}>
-            <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10">
-              <div className="w-10 h-1 bg-border rounded-full mx-auto mb-6" />
-              <h2 className="text-xl font-black mb-4">{t('homeChangeAvatar')}</h2>
-              <div className="grid grid-cols-5 gap-3 mb-4">
-                {avatars.map(av => (
-                  <motion.button key={av.id} whileTap={{ scale: 0.9 }}
-                    onClick={() => { updateAvatar(av.id, null); setShowAvatarPicker(false); toast.success('✅'); }}
-                    className={`w-14 h-14 text-2xl rounded-2xl flex items-center justify-center mx-auto ${
-                      avatarId === av.id && !customPhoto ? 'bg-primary/15 ring-2 ring-primary' : 'bg-secondary'
-                    }`}>
-                    {av.emoji}
-                  </motion.button>
-                ))}
-              </div>
-              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarPhotoUpload} />
-              <motion.button whileTap={{ scale: 0.95 }} onClick={() => fileInputRef.current?.click()}
-                className="w-full bg-secondary text-foreground font-bold py-4 rounded-2xl flex items-center justify-center gap-2">
-                <Camera size={18} className="text-primary" />
-                {t('onboardUploadPhoto')}
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Profile edit dialog */}
+      <ProfileEditDialog open={showAvatarPicker} onClose={() => setShowAvatarPicker(false)} />
 
       {/* Story fullscreen modal with like/dislike */}
       <AnimatePresence>

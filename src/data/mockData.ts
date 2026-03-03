@@ -85,10 +85,12 @@ import story12Img from '@/assets/stories/story-12.jpg';
 import story13Img from '@/assets/stories/story-13.jpg';
 import story14Img from '@/assets/stories/story-14.jpg';
 import story15Img from '@/assets/stories/story-15.jpg';
+import humoStickerImg from '@/assets/humo-sticker.jpeg';
 
 export const mockStories: Story[] = [
   { id: '1', emoji: '💡', title: 'Совет дня', content: 'Перед покупкой подожди 24 часа — может, передумаешь!', color: 'bg-savings/20', image: story1Img },
   { id: '2', emoji: '🧠', title: 'Решай — зарабатывай!', content: 'Ответь на вопросы и заработай сумы!', color: 'bg-primary/20', type: 'quiz', image: story2Img },
+  { id: '16', emoji: '💳', title: 'Что такое HUMO?', content: 'HUMO — это национальная платёжная система Узбекистана. С её помощью можно оплачивать покупки картой или стикером, переводить деньги и копить. HUMO работает по всей стране — в магазинах, кафе и онлайн!', color: 'bg-primary/20', image: humoStickerImg },
   { id: '3', emoji: '🏦', title: 'Что такое банк?', content: 'Банк — это место, где хранят деньги и дают их в долг другим людям. За хранение банк платит тебе проценты!', color: 'bg-primary/20', image: story3Img },
   { id: '4', emoji: '🌍', title: 'Деньги мира', content: 'В Японии на монетах изображены цветы, а в Австралии — животные! Узбекский сум назван в честь золота.', color: 'bg-success/20', image: story4Img },
   { id: '5', emoji: '📊', title: 'Правило 50/30/20', content: '50% на нужное, 30% на желания, 20% — в копилку! Это правило помогает управлять деньгами.', color: 'bg-accent/20', image: story5Img },
