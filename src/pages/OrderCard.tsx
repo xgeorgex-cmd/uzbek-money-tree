@@ -2,7 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Share2 } from 'lucide-react';
-import humoSticker from '@/assets/humo-sticker.jpeg';
+import cardSticker from '@/assets/card-sticker-cropped.png';
 
 const OrderCard = () => {
   const { t } = useLanguage();
@@ -31,13 +31,13 @@ const OrderCard = () => {
 
       <div className="flex flex-col items-center flex-1">
         <motion.img
-
+          src={cardSticker}
           alt="HUMO Pay sticker"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring' }}
-          className="w-40 rounded-2xl mb-3 shadow-lg" src="/lovable-uploads/14d66e40-35da-4c4e-8457-2a7d656076b4.png" />
-        
+          className="w-56 rounded-2xl mb-3 shadow-lg"
+        />
 
         <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-xl font-black mb-1 text-center">
           {t('orderCardTitle')}
@@ -85,8 +85,8 @@ const OrderCard = () => {
           {t('orderCardGotIt')}
         </motion.button>
       </div>
-    </div>);
-
+    </div>
+  );
 };
 
 export default OrderCard;
