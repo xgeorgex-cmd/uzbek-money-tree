@@ -15,7 +15,7 @@ const OrderCard = () => {
         await navigator.share({
           title: 'HUMO Pay Kids',
           text: t('orderCardDesc'),
-          url: shareUrl,
+          url: shareUrl
         });
       } catch {}
     } else {
@@ -31,13 +31,13 @@ const OrderCard = () => {
 
       <div className="flex flex-col items-center flex-1">
         <motion.img
-          src={humoSticker}
+
           alt="HUMO Pay sticker"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring' }}
-          className="w-40 rounded-2xl mb-3 shadow-lg"
-        />
+          className="w-40 rounded-2xl mb-3 shadow-lg" src="/lovable-uploads/14d66e40-35da-4c4e-8457-2a7d656076b4.png" />
+        
 
         <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-xl font-black mb-1 text-center">
           {t('orderCardTitle')}
@@ -68,8 +68,8 @@ const OrderCard = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="w-full max-w-sm gradient-primary text-primary-foreground font-bold text-base py-4 rounded-2xl shadow-button flex items-center justify-center gap-2 mb-3"
-        >
+          className="w-full max-w-sm gradient-primary text-primary-foreground font-bold text-base py-4 rounded-2xl shadow-button flex items-center justify-center gap-2 mb-3">
+          
           <Share2 size={18} />
           {t('orderCardShare')}
         </motion.button>
@@ -80,13 +80,13 @@ const OrderCard = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="w-full max-w-sm bg-secondary text-foreground font-bold text-base py-4 rounded-2xl"
-        >
+          className="w-full max-w-sm bg-secondary text-foreground font-bold text-base py-4 rounded-2xl">
+          
           {t('orderCardGotIt')}
         </motion.button>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default OrderCard;
