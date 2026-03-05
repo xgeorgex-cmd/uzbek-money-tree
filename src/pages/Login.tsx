@@ -29,7 +29,9 @@ const Login = () => {
 
   const handleBiometricChoice = (allow: boolean) => {
     const digits = cardNumber.replace(/\s/g, '');
-    login(digits || undefined);
+    // If logged in by phone, generate a random card number for the prototype
+    const finalCard = digits || ('8600' + Array.from({ length: 12 }, () => Math.floor(Math.random() * 10)).join(''));
+    login(finalCard);
     navigate(isOnboarded ? '/home' : '/onboarding');
   };
 
