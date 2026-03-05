@@ -470,6 +470,12 @@ const Home = () => {
                           { name: 'Дедушка', emoji: '👴', phone: '+998 93 ••• •• 78' },
                           { name: 'Брат', emoji: '👦', phone: '+998 94 ••• •• 90' },
                           { name: 'Сестра', emoji: '👧', phone: '+998 95 ••• •• 11' },
+                          { name: 'Азиз', emoji: '👦', phone: '+998 97 ••• •• 22' },
+                          { name: 'Малика', emoji: '👧', phone: '+998 90 ••• •• 33' },
+                          { name: 'Жасур', emoji: '👦', phone: '+998 91 ••• •• 44' },
+                          { name: 'Нилуфар', emoji: '👧', phone: '+998 93 ••• •• 55' },
+                          { name: 'Бро 😎', emoji: '🤙', phone: '+998 94 ••• •• 66' },
+                          { name: 'Кеша', emoji: '🎮', phone: '+998 95 ••• •• 77' },
                         ].filter(c => !contactSearch || c.name.toLowerCase().includes(contactSearch.toLowerCase()))
                          .map(contact => (
                           <motion.button key={contact.name} whileTap={{ scale: 0.97 }}
