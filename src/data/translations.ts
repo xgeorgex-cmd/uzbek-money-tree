@@ -68,6 +68,9 @@ type TranslationKeys = {
   transferToOther: string;
   transferChooseGoal: string;
   transferPhoneOrCard: string;
+  transferContactBook: string;
+  transferContactHint: string;
+  transferSelectContact: string;
   transferAmount: string;
   transferSend: string;
   transferSuccess: string;
@@ -313,6 +316,9 @@ export const translations: Record<Language, TranslationKeys> = {
     transferToOther: 'Другому',
     transferChooseGoal: 'Выбери копилку',
     transferPhoneOrCard: 'Номер телефона или карты',
+    transferContactBook: 'Адресная книга',
+    transferContactHint: 'Переводы доступны только контактам из адресной книги — для твоей безопасности 🔒',
+    transferSelectContact: 'Выбери получателя',
     transferAmount: 'Сумма перевода',
     transferSend: 'Перевести',
     transferSuccess: 'Перевод выполнен! ✅',
@@ -545,6 +551,9 @@ export const translations: Record<Language, TranslationKeys> = {
     transferToOther: 'Boshqaga',
     transferChooseGoal: 'To\'plagichni tanlang',
     transferPhoneOrCard: 'Telefon yoki karta raqami',
+    transferContactBook: 'Kontaktlar kitobi',
+    transferContactHint: 'O\'tkazmalar faqat kontaktlar kitobidagi kontaktlarga — xavfsizligingiz uchun 🔒',
+    transferSelectContact: 'Qabul qiluvchini tanlang',
     transferAmount: 'O\'tkazma summasi',
     transferSend: 'O\'tkazish',
     transferSuccess: 'O\'tkazma bajarildi! ✅',
@@ -777,6 +786,9 @@ export const translations: Record<Language, TranslationKeys> = {
     transferToOther: 'To someone',
     transferChooseGoal: 'Choose savings goal',
     transferPhoneOrCard: 'Phone or card number',
+    transferContactBook: 'Contact book',
+    transferContactHint: 'Transfers are only available to contacts in your address book — for your safety 🔒',
+    transferSelectContact: 'Select recipient',
     transferAmount: 'Transfer amount',
     transferSend: 'Transfer',
     transferSuccess: 'Transfer complete! ✅',
