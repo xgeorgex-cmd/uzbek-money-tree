@@ -7,7 +7,7 @@ import BottomNav from '@/components/BottomNav';
 import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { Language } from '@/data/translations';
 import { appThemes, achievements, avatars } from '@/data/mockData';
-import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown, Palette, Trophy } from 'lucide-react';
+import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown, Palette, Trophy, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Settings = () => {
@@ -159,6 +159,16 @@ const Settings = () => {
             ))}
           </div>
         </div>
+
+        {/* Tests */}
+        <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/tests')}
+          className="w-full bg-card rounded-3xl p-5 shadow-card flex items-center gap-3 mb-4 text-left">
+          <GraduationCap size={18} className="text-accent" />
+          <div>
+            <span className="font-bold block">{t('testsTitle')}</span>
+            <span className="text-xs text-muted-foreground">{t('testsSettingsDesc')}</span>
+          </div>
+        </motion.button>
 
         {/* Feedback */}
         <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/feedback')}

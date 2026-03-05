@@ -14,6 +14,7 @@ import Goals from "./pages/Goals";
 import Feedback from "./pages/Feedback";
 import Settings from "./pages/Settings";
 import OrderCard from "./pages/OrderCard";
+import Tests from "./pages/Tests";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/feedback" element={<Feedback />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/order-card" element={<OrderCard />} />
+              <Route path="/tests" element={<Tests />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
