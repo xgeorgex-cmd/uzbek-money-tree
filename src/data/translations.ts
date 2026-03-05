@@ -177,6 +177,10 @@ type TranslationKeys = {
   goalsCloseConfirmYes: string;
   goalsCloseConfirmNo: string;
   goalsClosedSuccess: string;
+  goalsCalcButton: string;
+  goalsNewButton: string;
+  goalsAboutAccount: string;
+  goalsActions: string;
   notifTitle: string;
   notifDetails: string;
   notifOk: string;
@@ -414,6 +418,10 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCloseConfirmYes: 'Да, закрыть',
     goalsCloseConfirmNo: 'Отмена',
     goalsClosedSuccess: 'Деньги перечислены на карту',
+    goalsCalcButton: 'Сколько заработаю',
+    goalsNewButton: 'Открыть ещё одну копилку',
+    goalsAboutAccount: 'О счёте',
+    goalsActions: 'Действия',
     notifTitle: 'Операция выполнена',
     notifDetails: 'Подробности',
     notifOk: 'Хорошо',
@@ -642,6 +650,10 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCloseConfirmYes: 'Ha, yopish',
     goalsCloseConfirmNo: 'Bekor qilish',
     goalsClosedSuccess: 'Pullar kartaga o\'tkazildi',
+    goalsCalcButton: 'Qancha ishlayman',
+    goalsNewButton: 'Yana bir to\'plagich ochish',
+    goalsAboutAccount: 'Hisob haqida',
+    goalsActions: 'Amallar',
     notifTitle: 'Operatsiya bajarildi',
     notifDetails: 'Batafsil',
     notifOk: 'Yaxshi',
@@ -870,6 +882,10 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsCloseConfirmYes: 'Yes, close',
     goalsCloseConfirmNo: 'Cancel',
     goalsClosedSuccess: 'Money transferred to card',
+    goalsCalcButton: 'How much will I earn',
+    goalsNewButton: 'Open another savings',
+    goalsAboutAccount: 'About account',
+    goalsActions: 'Actions',
     notifTitle: 'Operation completed',
     notifDetails: 'Details',
     notifOk: 'OK',
