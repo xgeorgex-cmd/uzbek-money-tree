@@ -235,6 +235,15 @@ type TranslationKeys = {
   orderCardStep3: string;
   orderCardGotIt: string;
   orderCardShare: string;
+  orderBenefit1Title: string;
+  orderBenefit1Desc: string;
+  orderBenefit2Title: string;
+  orderBenefit2Desc: string;
+  orderBenefit3Title: string;
+  orderBenefit3Desc: string;
+  orderBenefit4Title: string;
+  orderBenefit4Desc: string;
+  orderBenefitsHeading: string;
   // Quiz
   quizTitle: string;
   quizIntro: string;
@@ -523,6 +532,15 @@ export const translations: Record<Language, TranslationKeys> = {
     orderCardStep3: 'Наклей на телефон — плати, копи и пользуйся другими функциями приложения! 🎉',
     orderCardGotIt: 'Понятно!',
     orderCardShare: 'Поделиться ссылкой с родителями 📤',
+    orderBenefitsHeading: 'Что даёт стикер ребёнку',
+    orderBenefit1Title: 'Кэшбэк за покупки',
+    orderBenefit1Desc: 'Получай возврат денег за каждую покупку — копи бонусы и трать с умом!',
+    orderBenefit2Title: 'Удобно копить',
+    orderBenefit2Desc: 'Ставь цели и копи на мечту — приложение подскажет, сколько осталось!',
+    orderBenefit3Title: 'Свои деньги',
+    orderBenefit3Desc: 'Учись распоряжаться деньгами как взрослый — под присмотром родителей',
+    orderBenefit4Title: 'Безопасные платежи',
+    orderBenefit4Desc: 'Оплачивай покупки одним касанием телефона — быстро и безопасно!',
     quizTitle: 'Финансовый квест 🧠',
     quizIntro: 'Ответь на 5 вопросов по финансовой грамотности и заработай бонусы!',
     quizReward: 'За каждый верный ответ — 10 сум',
@@ -932,6 +950,15 @@ export const translations: Record<Language, TranslationKeys> = {
     orderCardStep3: 'Telefonga yopishtirib — to\'la, yig\' va ilovaning boshqa funksiyalaridan foydalaning! 🎉',
     orderCardGotIt: 'Tushundim!',
     orderCardShare: 'Ota-onaga havola yuborish 📤',
+    orderBenefitsHeading: 'Stiker bolaga nima beradi',
+    orderBenefit1Title: 'Xaridlar uchun keshbek',
+    orderBenefit1Desc: 'Har bir xarid uchun pul qaytariladi — bonuslarni yig\' va oqilona sarfla!',
+    orderBenefit2Title: 'Qulay jamg\'arish',
+    orderBenefit2Desc: 'Maqsad qo\'y va orzuying uchun yig\' — ilova qancha qolganini ko\'rsatadi!',
+    orderBenefit3Title: 'O\'z puling',
+    orderBenefit3Desc: 'Kattalar kabi pulni boshqarishni o\'rgan — ota-onalar nazorati ostida',
+    orderBenefit4Title: 'Xavfsiz to\'lovlar',
+    orderBenefit4Desc: 'Telefonni tegizib to\'la — tez va xavfsiz!',
     quizTitle: 'Moliyaviy kvest 🧠',
     quizIntro: 'Moliyaviy savodxonlik bo\'yicha 5 ta savolga javob bering va bonuslar ishlang!',
     quizReward: 'Har bir to\'g\'ri javob uchun — 10 so\'m',
@@ -1216,6 +1243,15 @@ export const translations: Record<Language, TranslationKeys> = {
     orderCardStep3: 'Stick it on your phone — pay, save and use other app features! 🎉',
     orderCardGotIt: 'Got it!',
     orderCardShare: 'Share link with parents 📤',
+    orderBenefitsHeading: 'What the sticker gives your kid',
+    orderBenefit1Title: 'Cashback on purchases',
+    orderBenefit1Desc: 'Get money back on every purchase — save bonuses and spend wisely!',
+    orderBenefit2Title: 'Easy saving',
+    orderBenefit2Desc: 'Set goals and save for your dream — the app shows how much is left!',
+    orderBenefit3Title: 'Your own money',
+    orderBenefit3Desc: 'Learn to manage money like a grown-up — with parental supervision',
+    orderBenefit4Title: 'Safe payments',
+    orderBenefit4Desc: 'Pay with a tap of your phone — fast and secure!',
     quizTitle: 'Financial Quest 🧠',
     quizIntro: 'Answer 5 financial literacy questions and earn bonuses!',
     quizReward: 'For each correct answer — 10 sum',
