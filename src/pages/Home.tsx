@@ -4,7 +4,7 @@ import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { avatars, mockStories, quizQuestions } from '@/data/mockData';
-import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown, BookUser, Search } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
 import SpendingDonut from '@/components/SpendingDonut';
@@ -37,6 +37,7 @@ const Home = () => {
   const [transferTo, setTransferTo] = useState<'self' | 'other'>('self');
   const [transferRecipient, setTransferRecipient] = useState('');
   const [transferAmount, setTransferAmount] = useState('');
+  const [contactSearch, setContactSearch] = useState('');
   const [transferGoalId, setTransferGoalId] = useState('');
   const [requestSent, setRequestSent] = useState(false);
 
@@ -447,10 +448,52 @@ const Home = () => {
                     </div>
                   ) : (
                     <div className="mb-4">
-                      <p className="text-sm font-bold text-muted-foreground mb-1">{t('transferPhoneOrCard')}</p>
-                      <input value={transferRecipient} onChange={e => setTransferRecipient(e.target.value)}
-                        placeholder="+998... или 8600..."
-                        className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl outline-none focus:ring-2 focus:ring-primary" />
+                      {/* Safety hint */}
+                      <div className="bg-primary/10 rounded-2xl p-3 flex items-start gap-2 mb-4">
+                        <Shield size={16} className="text-primary shrink-0 mt-0.5" />
+                        <p className="text-xs font-semibold text-foreground/80">{t('transferContactHint')}</p>
+                      </div>
+                      <p className="text-sm font-bold text-muted-foreground mb-2">{t('transferSelectContact')}</p>
+                      {/* Search */}
+                      <div className="relative mb-3">
+                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                        <input value={contactSearch} onChange={e => setContactSearch(e.target.value)}
+                          placeholder="🔍"
+                          className="w-full bg-secondary text-foreground font-semibold pl-10 pr-4 py-3 rounded-2xl outline-none focus:ring-2 focus:ring-primary text-sm" />
+                      </div>
+                      {/* Contact list */}
+                      <div className="space-y-2 max-h-48 overflow-y-auto">
+                        {[
+                          { name: 'Папа', emoji: '👨', phone: '+998 90 ••• •• 12' },
+                          { name: 'Мама', emoji: '👩', phone: '+998 91 ••• •• 34' },
+                          { name: 'Бабушка', emoji: '👵', phone: '+998 90 ••• •• 56' },
+                          { name: 'Дедушка', emoji: '👴', phone: '+998 93 ••• •• 78' },
+                          { name: 'Брат', emoji: '👦', phone: '+998 94 ••• •• 90' },
+                          { name: 'Сестра', emoji: '👧', phone: '+998 95 ••• •• 11' },
+                        ].filter(c => !contactSearch || c.name.toLowerCase().includes(contactSearch.toLowerCase()))
+                         .map(contact => (
+                          <motion.button key={contact.name} whileTap={{ scale: 0.97 }}
+                            onClick={() => setTransferRecipient(contact.name)}
+                            className={`w-full rounded-2xl p-3.5 flex items-center gap-3 text-left transition-all ${
+                              transferRecipient === contact.name 
+                                ? 'bg-primary/15 ring-2 ring-primary' 
+                                : 'bg-secondary'
+                            }`}>
+                            <div className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-xl">
+                              {contact.emoji}
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-sm font-bold">{contact.name}</p>
+                              <p className="text-xs text-muted-foreground">{contact.phone}</p>
+                            </div>
+                            {transferRecipient === contact.name && (
+                              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+                                <Check size={18} className="text-primary" />
+                              </motion.div>
+                            )}
+                          </motion.button>
+                        ))}
+                      </div>
                     </div>
                   )}
 
