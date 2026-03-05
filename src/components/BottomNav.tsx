@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Clock, Vault, Settings } from 'lucide-react';
+import { Home, Clock, PiggyBank, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const BottomNav = () => {
@@ -11,7 +11,7 @@ const BottomNav = () => {
   const items = [
     { path: '/home', icon: Home, label: t('navHome') },
     { path: '/history', icon: Clock, label: t('navHistory') },
-    { path: '/goals', icon: Vault, label: t('navGoals') },
+    { path: '/goals', icon: PiggyBank, label: t('navGoals') },
     { path: '/settings', icon: Settings, label: t('navSettings') },
   ];
 

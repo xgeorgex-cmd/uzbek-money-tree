@@ -490,6 +490,9 @@ const Goals = () => {
                       transition={{ duration: 0.8 }}
                     />
                   </div>
+                  {daysLeft !== null && daysLeft > 0 && (
+                    <p className="text-[11px] text-primary font-bold mt-1">⏰ {daysLeft} {t('goalsDaysLeft')}</p>
+                  )}
                 </div>
                 <ChevronRight size={18} className="text-muted-foreground shrink-0" />
               </motion.button>
