@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
-import { goalEmojis } from '@/data/mockData';
+import { goalEmojis, goalName as gName, goalReason as gReason } from '@/data/mockData';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
