@@ -186,6 +186,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
         category: 'transfer',
         description: t(template.descKey),
         source: t(template.sourceKey),
+        descKey: template.descKey,
+        sourceKey: template.sourceKey,
         icon: template.icon,
         date: `${day}.${m}`,
       });
