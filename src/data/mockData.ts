@@ -205,6 +205,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
         category: template.category,
         description: t(template.descKey),
         source: t(template.sourceKey),
+        descKey: template.descKey,
+        sourceKey: template.sourceKey,
         icon: template.icon,
         date: `${day}.${m}`,
       });
