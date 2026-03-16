@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
 import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { Language } from '@/data/translations';
-import { appThemes, achievements, avatars } from '@/data/mockData';
+import { appThemes, achievements, avatars, getTranslatedThemes } from '@/data/mockData';
 import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown, Palette, Trophy, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 
