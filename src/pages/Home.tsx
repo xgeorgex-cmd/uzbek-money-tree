@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { avatars, mockStories, quizQuestions } from '@/data/mockData';
+import { avatars, mockStories, quizQuestions, txDesc, txSource, goalName } from '@/data/mockData';
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown, BookUser, Search } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
