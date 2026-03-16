@@ -153,7 +153,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: -amount, type: 'savings',
       description: `На ${state.goals.find(g => g.id === goalId)?.name || 'копилку'}`,
+      descKey: 'txToPiggy',
       source: 'Копилка',
+      sourceKey: 'txPiggyBank',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: state.goals.find(g => g.id === goalId)?.emoji || '🔐',
     };
