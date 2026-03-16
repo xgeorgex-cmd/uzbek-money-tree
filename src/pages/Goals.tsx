@@ -159,7 +159,7 @@ const Goals = () => {
     setShowCreate(false);
     setEditGoalId(null);
     setSelectedGoalId(null);
-    showNotification(t('goalsClosedSuccess'), '💸', goal?.currentAmount || undefined, undefined, goal?.name);
+    showNotification(t('goalsClosedSuccess'), '💸', goal?.currentAmount || undefined, undefined, goal ? gName(goal, t) : undefined);
   };
 
   const calcAmountNum = parseInt(calcAmount.replace(/\D/g, '')) || 0;
