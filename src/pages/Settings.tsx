@@ -69,7 +69,7 @@ const Settings = () => {
           </div>
           <p className="text-xs text-muted-foreground mb-3">{t('settingsThemeDesc')}</p>
           <div className="grid grid-cols-2 gap-2">
-            {appThemes.map(th => (
+            {getTranslatedThemes(t).map(th => (
               <motion.button key={th.key} whileTap={{ scale: 0.95 }} onClick={() => { setTheme(th.key); toast.success('✅ ' + th.name); }}
                 className={`py-3 rounded-2xl font-bold text-sm transition-all ${
                   theme === th.key ? 'gradient-primary text-primary-foreground shadow-button' : 'bg-secondary text-foreground'
