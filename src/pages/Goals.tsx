@@ -216,7 +216,7 @@ const Goals = () => {
           {/* Account info card — reference style */}
           <div className="mb-6">
             <p className="text-sm text-muted-foreground mb-1">
-              {selectedGoal.reason || selectedGoal.name}
+              {gReason(selectedGoal, t) || gName(selectedGoal, t)}
             </p>
             <div className="flex items-end justify-between">
               <div>
