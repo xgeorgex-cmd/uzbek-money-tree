@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
-import { getTranslatedCategories, Transaction } from '@/data/mockData';
+import { getTranslatedCategories, Transaction, txDesc, txSource } from '@/data/mockData';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { X, Sparkles, Receipt, ChevronDown, RotateCcw } from 'lucide-react';
 
