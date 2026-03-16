@@ -134,8 +134,8 @@ export const achievements: Achievement[] = [
   { id: 'quiz_master', emoji: '🧠', nameKey: 'achQuizName', descriptionKey: 'achQuizDesc', condition: 'quiz_perfect', unlockedMessageKey: 'achQuizMsg' },
 ];
 
-// Translation helper type
-type TFunc = (key: any) => string;
+
+
 
 // Income templates with translation keys
 const incomeTemplateKeys = [
