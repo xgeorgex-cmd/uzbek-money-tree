@@ -68,11 +68,12 @@ const History = () => {
     const cat = tx.category || 'other';
     categoryTotals[cat] = (categoryTotals[cat] || 0) + Math.abs(tx.amount);
   });
+  const translatedCats = getTranslatedCategories(t);
   const donutData = Object.entries(categoryTotals).map(([key, value]) => ({
-    name: expenseCategories[key]?.label || key,
+    name: translatedCats[key]?.label || key,
     value,
-    color: expenseCategories[key]?.color || '#B8B8B8',
-    emoji: expenseCategories[key]?.emoji || '📦',
+    color: translatedCats[key]?.color || '#B8B8B8',
+    emoji: translatedCats[key]?.emoji || '📦',
   }));
   const totalExpenses = donutData.reduce((s, d) => s + d.value, 0);
 
