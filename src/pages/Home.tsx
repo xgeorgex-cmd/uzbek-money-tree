@@ -268,8 +268,8 @@ const Home = () => {
                 <button onClick={handleCloseStory} className="p-2 rounded-full bg-secondary"><X size={16} /></button>
               </div>
               <div className="text-6xl text-center mb-4">{currentStory.emoji}</div>
-              <h2 className="text-xl font-black text-center mb-3">{currentStory.title}</h2>
-              <p className="text-muted-foreground text-center leading-relaxed mb-6">{currentStory.content}</p>
+              <h2 className="text-xl font-black text-center mb-3">{t(currentStory.titleKey as any)}</h2>
+              <p className="text-muted-foreground text-center leading-relaxed mb-6">{t(currentStory.contentKey as any)}</p>
               {/* Like / Dislike */}
               <div className="flex items-center justify-center gap-6">
                 <motion.button whileTap={{ scale: 0.85 }} onClick={() => { likeStory(currentStory.id); toast.success('👍'); }}
