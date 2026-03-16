@@ -216,7 +216,7 @@ const Home = () => {
                 <span className="text-2xl">{closestGoal.emoji}</span>
                 <div>
                   <p className="text-xs text-muted-foreground font-semibold">{t('homeClosestGoal')}</p>
-                  <p className="text-sm font-bold">{closestGoal.name}</p>
+                  <p className="text-sm font-bold">{goalName(closestGoal, t)}</p>
                 </div>
               </div>
             </div>
