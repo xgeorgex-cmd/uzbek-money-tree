@@ -301,7 +301,7 @@ const Goals = () => {
                   <h2 className="text-xl font-black">{t('goalsTopUp')}</h2>
                   <button onClick={() => setActiveGoalId(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
                 </div>
-                <p className="text-muted-foreground text-sm mb-2">{selectedGoal.name}</p>
+                <p className="text-muted-foreground text-sm mb-2">{gName(selectedGoal, t)}</p>
                 <p className="text-xs text-muted-foreground mb-4">{t('homeCardBalance')}: {formatSum(balance)} {t('currencySuffix')}</p>
                 <input value={manualAmount} onChange={e => setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10))}
                   placeholder="0" inputMode="numeric"
