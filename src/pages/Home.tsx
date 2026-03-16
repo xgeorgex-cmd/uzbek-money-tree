@@ -440,7 +440,7 @@ const Home = () => {
                           className={`w-full bg-secondary rounded-2xl p-3 flex items-center gap-3 text-left ${transferGoalId === g.id ? 'ring-2 ring-primary' : ''}`}>
                           <span className="text-xl">{g.emoji}</span>
                           <div className="flex-1">
-                            <p className="text-sm font-bold">{g.name}</p>
+                            <p className="text-sm font-bold">{goalName(g, t)}</p>
                             <p className="text-xs text-muted-foreground">{formatSum(g.currentAmount)} / {formatSum(g.targetAmount)}</p>
                           </div>
                         </button>

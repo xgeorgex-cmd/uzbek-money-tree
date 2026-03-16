@@ -268,7 +268,7 @@ const History = () => {
                 </div>
                 <div className="bg-secondary rounded-2xl p-3 flex justify-between">
                   <span className="text-sm text-muted-foreground">{t('historyTxSource')}</span>
-                  <span className="text-sm font-bold">{selectedTx.source}</span>
+                  <span className="text-sm font-bold">{txSource(selectedTx, t)}</span>
                 </div>
                 <div className="bg-secondary rounded-2xl p-3 flex justify-between">
                   <span className="text-sm text-muted-foreground">{t('historyTxAmount')}</span>
