@@ -17,6 +17,7 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutProps) => {
   const { t } = useLanguage();
   const { categories, totalExpense } = useMemo(() => {
+    const cats = getTranslatedCategories(t);
     const expenseTxs = transactions.filter(tx => tx.type === 'expense' || tx.type === 'cash');
     const total = expenseTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
     
