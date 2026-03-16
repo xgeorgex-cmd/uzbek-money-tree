@@ -219,6 +219,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
       category: 'savings',
       description: t('txToBike'),
       source: t('txPiggyBank'),
+      descKey: 'txToBike',
+      sourceKey: 'txPiggyBank',
       date: `15.${m}`,
       icon: '🚲',
     });
@@ -230,6 +232,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
       category: 'cash',
       description: t('txCashWithdraw'),
       source: t('txATM'),
+      descKey: 'txCashWithdraw',
+      sourceKey: 'txATM',
       date: `20.${m}`,
       icon: '🏧',
     });
