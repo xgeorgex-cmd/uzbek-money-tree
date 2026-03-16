@@ -131,7 +131,7 @@ const Goals = () => {
       withdrawFromGoal(goalId, amount);
       setWithdrawAmount('');
       setShowWithdraw(null);
-      showNotification(t('goalsWithdrawSuccess'), '💰', amount, t('goalsWithdraw'), goalName);
+      showNotification(t('goalsWithdrawSuccess'), '💰', amount, t('goalsWithdraw'), gnText);
     }
   };
 
