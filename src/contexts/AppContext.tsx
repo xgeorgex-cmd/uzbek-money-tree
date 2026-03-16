@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
-import { Goal, Transaction, mockGoals, mockTransactions, AppTheme } from '@/data/mockData';
+import { Goal, Transaction, mockGoals, mockTransactions, AppTheme, migrateTransaction } from '@/data/mockData';
 
 interface AppState {
   isAuthenticated: boolean;
