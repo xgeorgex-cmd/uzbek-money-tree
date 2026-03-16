@@ -477,7 +477,7 @@ const Goals = () => {
                 className="bg-card rounded-3xl p-4 shadow-card w-full text-left flex items-center gap-4">
                 <div className="text-3xl">{goal.emoji}</div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-sm truncate">{goal.name}</h3>
+                  <h3 className="font-bold text-sm truncate">{gName(goal, t)}</h3>
                   <p className="text-xs text-muted-foreground">
                     {formatSum(goal.currentAmount)} / {formatSum(goal.targetAmount)} {t('currencySuffix')}
                   </p>
