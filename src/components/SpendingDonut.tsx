@@ -69,7 +69,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
             })}
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="text-xs text-muted-foreground font-semibold">Всего</p>
+            <p className="text-xs text-muted-foreground font-semibold">{t('donutTotal')}</p>
             <p className="text-sm font-black">{(totalExpense / 1000).toFixed(0)}k</p>
           </div>
         </div>
