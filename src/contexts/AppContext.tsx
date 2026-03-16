@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
-import { Goal, Transaction, mockGoals, mockTransactions, AppTheme } from '@/data/mockData';
+import { Goal, Transaction, mockGoals, mockTransactions, AppTheme, migrateTransaction } from '@/data/mockData';
 
 interface AppState {
   isAuthenticated: boolean;
@@ -48,6 +48,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const parsed = JSON.parse(saved);
         return {
           ...parsed,
+          transactions: Array.isArray(parsed.transactions)
+            ? parsed.transactions.map((tx: Transaction) => migrateTransaction(tx))
+            : mockTransactions,
           viewedStories: parsed.viewedStories || [],
           likedStories: parsed.likedStories || [],
           dislikedStories: parsed.dislikedStories || [],
