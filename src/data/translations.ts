@@ -276,7 +276,55 @@ type TranslationKeys = {
   contactGrandpa: string;
   contactBrother: string;
   contactSister: string;
-  // Tests
+  // Avatars
+  avatarFox: string; avatarPanda: string; avatarLion: string; avatarCat: string; avatarBunny: string;
+  avatarBear: string; avatarUnicorn: string; avatarFrog: string; avatarButterfly: string; avatarKoala: string;
+  avatarOwl: string; avatarPenguin: string; avatarShark: string; avatarTiger: string; avatarParrot: string;
+  // Themes
+  themeCalmName: string; themePlayfulName: string; themeAnimeName: string; themeNationalName: string;
+  // Expense categories
+  catFood: string; catEducation: string; catEntertainment: string; catTransport: string;
+  catCash: string; catSavings: string; catTransfer: string; catOther: string;
+  // Achievements
+  achNoCashName: string; achNoCashDesc: string; achNoCashMsg: string;
+  achSaverName: string; achSaverDesc: string; achSaverMsg: string;
+  achDailyName: string; achDailyDesc: string; achDailyMsg: string;
+  achCustomizerName: string; achCustomizerDesc: string; achCustomizerMsg: string;
+  achDreamerName: string; achDreamerDesc: string; achDreamerMsg: string;
+  achQuizName: string; achQuizDesc: string; achQuizMsg: string;
+  // Stories
+  storyTipTitle: string; storyTipContent: string;
+  storyQuizTitle: string; storyQuizContent: string;
+  storyHumoTitle: string; storyHumoContent: string;
+  storyBankTitle: string; storyBankContent: string;
+  storyMoneyWorldTitle: string; storyMoneyWorldContent: string;
+  storyRuleTitle: string; storyRuleContent: string;
+  storyGoalTitle: string; storyGoalContent: string;
+  storyCoinsTitle: string; storyCoinsContent: string;
+  storyPizzaTitle: string; storyPizzaContent: string;
+  storyHeroTitle: string; storyHeroContent: string;
+  storyFunFactTitle: string; storyFunFactContent: string;
+  storyGreatTitle: string; storyGreatContent: string;
+  storyDrawTitle: string; storyDrawContent: string;
+  storyShareTitle: string; storyShareContent: string;
+  storyDigitalTitle: string; storyDigitalContent: string;
+  storyChallengeTitle: string; storyChallengeContent: string;
+  // Transaction templates
+  txFromMom: string; txFromDad: string; txFromGrandma: string; txFromGrandpa: string; txGoodGrades: string;
+  txIceCream: string; txSchoolShop: string; txJuiceBun: string; txFastFood: string; txGames: string;
+  txStationery: string; txTransport: string; txSnacks: string; txDrinks: string; txGiftFriend: string;
+  txToBike: string; txPiggyBank: string; txCashWithdraw: string; txATM: string;
+  txSourceShop: string; txSourceSchool: string; txSourceBazaar: string; txSourceCafe: string;
+  txSourceMetro: string;
+  // Quiz
+  quizQ1: string; quizQ1a: string; quizQ1b: string; quizQ1c: string; quizQ1d: string; quizQ1exp: string;
+  quizQ2: string; quizQ2a: string; quizQ2b: string; quizQ2c: string; quizQ2d: string; quizQ2exp: string;
+  quizQ3: string; quizQ3a: string; quizQ3b: string; quizQ3c: string; quizQ3d: string; quizQ3exp: string;
+  quizQ4: string; quizQ4a: string; quizQ4b: string; quizQ4c: string; quizQ4d: string; quizQ4exp: string;
+  quizQ5: string; quizQ5a: string; quizQ5b: string; quizQ5c: string; quizQ5d: string; quizQ5exp: string;
+  // Goal defaults
+  goalBike: string; goalBikeReason: string; goalHeadphones: string; goalHeadphonesReason: string;
+  //
   testsTitle: string;
   testsSettingsDesc: string;
   testsDesc: string;
