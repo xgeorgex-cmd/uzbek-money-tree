@@ -135,7 +135,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: returnAmount, type: 'income',
       description: `Закрытие копилки «${goal.name}»`,
+      descKey: 'txClosePiggy',
       source: 'Копилка',
+      sourceKey: 'txPiggyBank',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: goal.emoji,
     };
