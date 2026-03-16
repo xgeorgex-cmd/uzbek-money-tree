@@ -150,7 +150,7 @@ const Home = () => {
               {avatarDisplay}
             </motion.button>
             <div className="flex-1">
-              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')}, {userName || 'Друг'}!</p>
+              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')}, {userName || t('defaultUserName')}!</p>
             </div>
           </div>
 
