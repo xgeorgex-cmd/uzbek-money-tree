@@ -192,10 +192,10 @@ const Home = () => {
                   }`}
                 >
                   {story.image && (
-                    <img src={story.image} alt={story.title} className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={story.image} alt={t(story.titleKey as any)} className="absolute inset-0 w-full h-full object-cover" />
                   )}
                   <div className="relative z-10 w-full bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-5">
-                    <span className="text-[10px] font-bold text-white leading-tight line-clamp-2">{story.title}</span>
+                    <span className="text-[10px] font-bold text-white leading-tight line-clamp-2">{t(story.titleKey as any)}</span>
                   </div>
                 </motion.button>
               );
@@ -268,8 +268,8 @@ const Home = () => {
                 <button onClick={handleCloseStory} className="p-2 rounded-full bg-secondary"><X size={16} /></button>
               </div>
               <div className="text-6xl text-center mb-4">{currentStory.emoji}</div>
-              <h2 className="text-xl font-black text-center mb-3">{currentStory.title}</h2>
-              <p className="text-muted-foreground text-center leading-relaxed mb-6">{currentStory.content}</p>
+              <h2 className="text-xl font-black text-center mb-3">{t(currentStory.titleKey as any)}</h2>
+              <p className="text-muted-foreground text-center leading-relaxed mb-6">{t(currentStory.contentKey as any)}</p>
               {/* Like / Dislike */}
               <div className="flex items-center justify-center gap-6">
                 <motion.button whileTap={{ scale: 0.85 }} onClick={() => { likeStory(currentStory.id); toast.success('👍'); }}
@@ -317,12 +317,12 @@ const Home = () => {
               {quizStep === 'question' && (
                 <div>
                   <p className="text-xs text-muted-foreground font-bold mb-2">{quizQIndex + 1} / {quizQuestions.length}</p>
-                  <h3 className="text-lg font-black mb-4">{quizQuestions[quizQIndex].question}</h3>
+                  <h3 className="text-lg font-black mb-4">{t(quizQuestions[quizQIndex].questionKey as any)}</h3>
                   <div className="space-y-2">
-                    {quizQuestions[quizQIndex].options.map((opt, i) => (
+                    {quizQuestions[quizQIndex].optionKeys.map((optKey, i) => (
                       <motion.button key={i} whileTap={{ scale: 0.97 }} onClick={() => handleQuizAnswer(i)}
                         className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl text-left text-sm">
-                        {opt}
+                        {t(optKey as any)}
                       </motion.button>
                     ))}
                   </div>
@@ -337,7 +337,7 @@ const Home = () => {
                   <h3 className="text-lg font-black mb-2">
                     {quizAnswer === quizQuestions[quizQIndex].correctIndex ? t('quizCorrect') : t('quizWrong')}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-6">{quizQuestions[quizQIndex].explanation}</p>
+                  <p className="text-muted-foreground text-sm mb-6">{t(quizQuestions[quizQIndex].explanationKey as any)}</p>
                   <motion.button whileTap={{ scale: 0.97 }} onClick={handleQuizNext}
                     className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button">
                     {t('quizNext')}

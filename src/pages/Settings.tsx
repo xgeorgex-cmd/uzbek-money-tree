@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
 import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { Language } from '@/data/translations';
-import { appThemes, achievements, avatars } from '@/data/mockData';
+import { appThemes, achievements, avatars, getTranslatedThemes } from '@/data/mockData';
 import { MessageSquare, LogOut, Globe, BookOpen, ChevronDown, Palette, Trophy, GraduationCap } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -57,7 +57,7 @@ const Settings = () => {
           </div>
           <div>
             <h2 className="font-black text-lg">{userName || t('defaultUserName')}</h2>
-            <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : avatar?.name}</p>
+            <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : (avatar ? t(avatar.nameKey as any) : '')}</p>
           </div>
         </motion.button>
 
@@ -69,7 +69,7 @@ const Settings = () => {
           </div>
           <p className="text-xs text-muted-foreground mb-3">{t('settingsThemeDesc')}</p>
           <div className="grid grid-cols-2 gap-2">
-            {appThemes.map(th => (
+            {getTranslatedThemes(t).map(th => (
               <motion.button key={th.key} whileTap={{ scale: 0.95 }} onClick={() => { setTheme(th.key); toast.success('✅ ' + th.name); }}
                 className={`py-3 rounded-2xl font-bold text-sm transition-all ${
                   theme === th.key ? 'gradient-primary text-primary-foreground shadow-button' : 'bg-secondary text-foreground'
@@ -104,8 +104,8 @@ const Settings = () => {
                       className={`bg-secondary rounded-2xl p-4 flex items-center gap-3 ${!a.unlocked ? 'opacity-50 grayscale' : ''}`}>
                       <span className="text-2xl">{a.unlocked ? a.emoji : '❓'}</span>
                       <div className="flex-1">
-                        <p className="font-bold text-sm">{a.unlocked ? a.name : '???'}</p>
-                        <p className="text-xs text-muted-foreground">{a.unlocked ? a.unlockedMessage : a.description}</p>
+                        <p className="font-bold text-sm">{a.unlocked ? t(a.nameKey as any) : '???'}</p>
+                        <p className="text-xs text-muted-foreground">{a.unlocked ? t(a.unlockedMessageKey as any) : t(a.descriptionKey as any)}</p>
                       </div>
                       {a.unlocked && <span className="text-success text-lg">✅</span>}
                     </motion.div>

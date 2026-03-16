@@ -276,7 +276,55 @@ type TranslationKeys = {
   contactGrandpa: string;
   contactBrother: string;
   contactSister: string;
-  // Tests
+  // Avatars
+  avatarFox: string; avatarPanda: string; avatarLion: string; avatarCat: string; avatarBunny: string;
+  avatarBear: string; avatarUnicorn: string; avatarFrog: string; avatarButterfly: string; avatarKoala: string;
+  avatarOwl: string; avatarPenguin: string; avatarShark: string; avatarTiger: string; avatarParrot: string;
+  // Themes
+  themeCalmName: string; themePlayfulName: string; themeAnimeName: string; themeNationalName: string;
+  // Expense categories
+  catFood: string; catEducation: string; catEntertainment: string; catTransport: string;
+  catCash: string; catSavings: string; catTransfer: string; catOther: string;
+  // Achievements
+  achNoCashName: string; achNoCashDesc: string; achNoCashMsg: string;
+  achSaverName: string; achSaverDesc: string; achSaverMsg: string;
+  achDailyName: string; achDailyDesc: string; achDailyMsg: string;
+  achCustomizerName: string; achCustomizerDesc: string; achCustomizerMsg: string;
+  achDreamerName: string; achDreamerDesc: string; achDreamerMsg: string;
+  achQuizName: string; achQuizDesc: string; achQuizMsg: string;
+  // Stories
+  storyTipTitle: string; storyTipContent: string;
+  storyQuizTitle: string; storyQuizContent: string;
+  storyHumoTitle: string; storyHumoContent: string;
+  storyBankTitle: string; storyBankContent: string;
+  storyMoneyWorldTitle: string; storyMoneyWorldContent: string;
+  storyRuleTitle: string; storyRuleContent: string;
+  storyGoalTitle: string; storyGoalContent: string;
+  storyCoinsTitle: string; storyCoinsContent: string;
+  storyPizzaTitle: string; storyPizzaContent: string;
+  storyHeroTitle: string; storyHeroContent: string;
+  storyFunFactTitle: string; storyFunFactContent: string;
+  storyGreatTitle: string; storyGreatContent: string;
+  storyDrawTitle: string; storyDrawContent: string;
+  storyShareTitle: string; storyShareContent: string;
+  storyDigitalTitle: string; storyDigitalContent: string;
+  storyChallengeTitle: string; storyChallengeContent: string;
+  // Transaction templates
+  txFromMom: string; txFromDad: string; txFromGrandma: string; txFromGrandpa: string; txGoodGrades: string;
+  txIceCream: string; txSchoolShop: string; txJuiceBun: string; txFastFood: string; txGames: string;
+  txStationery: string; txTransport: string; txSnacks: string; txDrinks: string; txGiftFriend: string;
+  txToBike: string; txPiggyBank: string; txCashWithdraw: string; txATM: string;
+  txSourceShop: string; txSourceSchool: string; txSourceBazaar: string; txSourceCafe: string;
+  txSourceMetro: string;
+  // Quiz
+  quizQ1: string; quizQ1a: string; quizQ1b: string; quizQ1c: string; quizQ1d: string; quizQ1exp: string;
+  quizQ2: string; quizQ2a: string; quizQ2b: string; quizQ2c: string; quizQ2d: string; quizQ2exp: string;
+  quizQ3: string; quizQ3a: string; quizQ3b: string; quizQ3c: string; quizQ3d: string; quizQ3exp: string;
+  quizQ4: string; quizQ4a: string; quizQ4b: string; quizQ4c: string; quizQ4d: string; quizQ4exp: string;
+  quizQ5: string; quizQ5a: string; quizQ5b: string; quizQ5c: string; quizQ5d: string; quizQ5exp: string;
+  // Goal defaults
+  goalBike: string; goalBikeReason: string; goalHeadphones: string; goalHeadphonesReason: string;
+  //
   testsTitle: string;
   testsSettingsDesc: string;
   testsDesc: string;
@@ -588,6 +636,45 @@ export const translations: Record<Language, TranslationKeys> = {
     contactGrandpa: 'Дедушка',
     contactBrother: 'Брат',
     contactSister: 'Сестра',
+    avatarFox: 'Лисёнок', avatarPanda: 'Панда', avatarLion: 'Львёнок', avatarCat: 'Котик', avatarBunny: 'Зайка',
+    avatarBear: 'Мишка', avatarUnicorn: 'Единорог', avatarFrog: 'Лягушонок', avatarButterfly: 'Бабочка', avatarKoala: 'Коала',
+    avatarOwl: 'Совёнок', avatarPenguin: 'Пингвин', avatarShark: 'Акула', avatarTiger: 'Тигрёнок', avatarParrot: 'Попугай',
+    themeCalmName: 'Спокойная', themePlayfulName: 'Игривая', themeAnimeName: 'Аниме', themeNationalName: 'Национальная',
+    catFood: 'Еда', catEducation: 'Учёба', catEntertainment: 'Развлечения', catTransport: 'Транспорт',
+    catCash: 'Наличные', catSavings: 'Копилки', catTransfer: 'Переводы', catOther: 'Другое',
+    achNoCashName: 'Безналичный герой', achNoCashDesc: 'Не снимай наличные 30 дней', achNoCashMsg: 'Ты целый месяц обходился без наличных! Круто!',
+    achSaverName: 'Мастер накоплений', achSaverDesc: 'Накопи 100 000 сум в копилках', achSaverMsg: 'Ты накопил больше 100 000 сум! Отличная работа!',
+    achDailyName: 'Верный друг', achDailyDesc: 'Заходи в приложение 7 дней подряд', achDailyMsg: 'Целая неделя с нами! Ты настоящий финансовый герой!',
+    achCustomizerName: 'Дизайнер', achCustomizerDesc: 'Настрой приложение под себя', achCustomizerMsg: 'Ты сделал приложение своим! Красота!',
+    achDreamerName: 'Мечтатель', achDreamerDesc: 'Создай свою первую копилку', achDreamerMsg: 'Первый шаг к мечте сделан! Продолжай!',
+    achQuizName: 'Умник', achQuizDesc: 'Ответь правильно на все вопросы квиза', achQuizMsg: 'Все ответы верные! Ты настоящий финансовый гений!',
+    storyTipTitle: 'Совет дня', storyTipContent: 'Перед покупкой подожди 24 часа — может, передумаешь!',
+    storyQuizTitle: 'Решай — зарабатывай!', storyQuizContent: 'Ответь на вопросы и заработай сумы!',
+    storyHumoTitle: 'Что такое HUMO?', storyHumoContent: 'HUMO — это национальная платёжная система Узбекистана. С её помощью можно оплачивать покупки картой или стикером, переводить деньги и копить. HUMO работает по всей стране — в магазинах, кафе и онлайн!',
+    storyBankTitle: 'Что такое банк?', storyBankContent: 'Банк — это место, где хранят деньги и дают их в долг другим людям. За хранение банк платит тебе проценты!',
+    storyMoneyWorldTitle: 'Деньги мира', storyMoneyWorldContent: 'В Японии на монетах изображены цветы, а в Австралии — животные! Узбекский сум назван в честь золота.',
+    storyRuleTitle: 'Правило 50/30/20', storyRuleContent: '50% на нужное, 30% на желания, 20% — в копилку! Это правило помогает управлять деньгами.',
+    storyGoalTitle: 'Цель = мотивация', storyGoalContent: 'Люди, которые ставят цели, копят в 3 раза быстрее! Поставь свою цель прямо сейчас.',
+    storyCoinsTitle: 'Игра на монетки', storyCoinsContent: 'Знаешь ли ты, что первые деньги были из ракушек? А монеты придумали 2700 лет назад в Лидии!',
+    storyPizzaTitle: 'Пицца или копилка?', storyPizzaContent: 'Если вместо одной пиццы в неделю откладывать деньги, через год у тебя будет целый велосипед!',
+    storyHeroTitle: 'Финансовый герой', storyHeroContent: 'Настоящий герой умеет не только зарабатывать, но и разумно тратить. Ты уже на пути!',
+    storyFunFactTitle: 'Весёлый факт', storyFunFactContent: 'Самая дорогая монета в мире стоит 18,9 миллионов долларов! Это серебряный доллар 1794 года.',
+    storyGreatTitle: 'Ты молодец!', storyGreatContent: 'Каждый раз, когда ты открываешь приложение, ты учишься управлять деньгами. Так держать!',
+    storyDrawTitle: 'Нарисуй мечту', storyDrawContent: 'Нарисуй то, на что копишь, и повесь рисунок на стену. Визуализация помогает достигать целей!',
+    storyShareTitle: 'Делись добром', storyShareContent: 'Когда копишь деньги, можно часть отложить на подарки друзьям. Щедрость делает счастливее!',
+    storyDigitalTitle: 'Цифровые деньги', storyDigitalContent: 'Сегодня большинство денег существуют только в компьютерах. Наличные — лишь малая часть!',
+    storyChallengeTitle: 'Челлендж недели', storyChallengeContent: 'Попробуй целую неделю записывать все свои траты. Ты удивишься, куда уходят деньги!',
+    txFromMom: 'От мамы', txFromDad: 'От папы', txFromGrandma: 'Подарок от бабушки', txFromGrandpa: 'Подарок от дедушки', txGoodGrades: 'За хорошие оценки',
+    txIceCream: 'Мороженое', txSchoolShop: 'Школьный магазин', txJuiceBun: 'Сок и булочка', txFastFood: 'Фаст-фуд', txGames: 'Игры',
+    txStationery: 'Канцтовары', txTransport: 'Транспорт', txSnacks: 'Снеки', txDrinks: 'Напитки', txGiftFriend: 'Подарок другу',
+    txToBike: 'На велосипед', txPiggyBank: 'Копилка', txCashWithdraw: 'Снятие наличных', txATM: 'Банкомат',
+    txSourceShop: 'Магазин', txSourceSchool: 'Школа', txSourceBazaar: 'Базар', txSourceCafe: 'Кафе', txSourceMetro: 'Метро',
+    quizQ1: 'Что лучше делать с карманными деньгами?', quizQ1a: 'Потратить всё сразу', quizQ1b: 'Часть потратить, часть отложить', quizQ1c: 'Спрятать под подушку', quizQ1d: 'Отдать другу', quizQ1exp: 'Правильно! Лучше часть потратить на нужное, а часть отложить в копилку для большой мечты.',
+    quizQ2: 'Что такое "копилка" в банке?', quizQ2a: 'Стеклянная банка', quizQ2b: 'Специальный счёт для накоплений', quizQ2c: 'Место где печатают деньги', quizQ2d: 'Игрушка', quizQ2exp: 'Верно! Копилка в банке — это специальный счёт, где деньги не только хранятся, но и растут благодаря процентам.',
+    quizQ3: 'Зачем ставить финансовую цель?', quizQ3a: 'Это не нужно', quizQ3b: 'Чтобы родители были довольны', quizQ3c: 'Чтобы знать сколько и зачем копить', quizQ3d: 'Чтобы похвастаться', quizQ3exp: 'Точно! Цель помогает понять, сколько нужно откладывать и мотивирует копить.',
+    quizQ4: 'Что значит "жить по средствам"?', quizQ4a: 'Не тратить вообще', quizQ4b: 'Тратить не больше, чем получаешь', quizQ4c: 'Тратить всё сразу', quizQ4d: 'Брать в долг', quizQ4exp: 'Правильно! Это значит тратить не больше, чем у тебя есть. Важное правило для всех!',
+    quizQ5: 'Что такое проценты по вкладу?', quizQ5a: 'Штраф банка', quizQ5b: 'Деньги, которые банк платит тебе за хранение', quizQ5c: 'Комиссия за перевод', quizQ5d: 'Цена карты', quizQ5exp: 'Верно! Банк платит тебе проценты за то, что ты хранишь деньги у него. Твои деньги растут!',
+    goalBike: 'Велосипед', goalBikeReason: 'Кататься с друзьями по парку!', goalHeadphones: 'Наушники', goalHeadphonesReason: 'Слушать музыку на прогулке',
     testsTitle: 'Тесты',
     testsSettingsDesc: 'Проверь свои знания по финансовой грамотности',
     testsDesc: 'Тесты разработаны Центральным банком, Министерством образования и другими институтами Узбекистана для повышения финансовой грамотности молодёжи.',
@@ -1022,6 +1109,45 @@ export const translations: Record<Language, TranslationKeys> = {
     contactGrandpa: 'Bobo',
     contactBrother: 'Aka',
     contactSister: 'Opa',
+    avatarFox: 'Tulki', avatarPanda: 'Panda', avatarLion: 'Arslon', avatarCat: 'Mushuk', avatarBunny: 'Quyon',
+    avatarBear: 'Ayiq', avatarUnicorn: 'Yagona shox', avatarFrog: 'Baqa', avatarButterfly: 'Kapalak', avatarKoala: 'Koala',
+    avatarOwl: 'Boyqush', avatarPenguin: 'Pingvin', avatarShark: 'Akula', avatarTiger: 'Yo\'lbars', avatarParrot: 'To\'tiqush',
+    themeCalmName: 'Tinch', themePlayfulName: 'O\'ynoqi', themeAnimeName: 'Anime', themeNationalName: 'Milliy',
+    catFood: 'Ovqat', catEducation: 'O\'qish', catEntertainment: 'Ko\'ngilochar', catTransport: 'Transport',
+    catCash: 'Naqd pul', catSavings: 'To\'plagich', catTransfer: 'O\'tkazmalar', catOther: 'Boshqa',
+    achNoCashName: 'Naqdsiz qahramon', achNoCashDesc: '30 kun naqd pul yechma', achNoCashMsg: 'Bir oy naqd pulsiz yashading! Ajoyib!',
+    achSaverName: 'Jamg\'arma ustasi', achSaverDesc: 'To\'plagichlarda 100 000 so\'m jamg\'ar', achSaverMsg: '100 000 so\'mdan ko\'p jamg\'arding! Zo\'r ish!',
+    achDailyName: 'Sodiq do\'st', achDailyDesc: 'Ilovaga 7 kun ketma-ket kir', achDailyMsg: 'Bir hafta biz bilan! Sen haqiqiy moliyaviy qahramonsan!',
+    achCustomizerName: 'Dizayner', achCustomizerDesc: 'Ilovani o\'zingga moslash', achCustomizerMsg: 'Ilovani o\'zingniki qilding! Chiroyli!',
+    achDreamerName: 'Orzumand', achDreamerDesc: 'Birinchi to\'plagichni yarat', achDreamerMsg: 'Orzuga birinchi qadam qo\'yildi! Davom et!',
+    achQuizName: 'Bilimdon', achQuizDesc: 'Viktorinaning barcha savollariga to\'g\'ri javob ber', achQuizMsg: 'Barcha javoblar to\'g\'ri! Sen haqiqiy moliyaviy dahosan!',
+    storyTipTitle: 'Kun maslahati', storyTipContent: 'Xarid qilishdan oldin 24 soat kut — balki fikringa o\'zgarar!',
+    storyQuizTitle: 'Hal qil — ishla!', storyQuizContent: 'Savollarga javob ber va so\'m ishla!',
+    storyHumoTitle: 'HUMO nima?', storyHumoContent: 'HUMO — bu O\'zbekistonning milliy to\'lov tizimi. Uning yordamida karta yoki stiker bilan xarid qilish, pul o\'tkazish va jamg\'arish mumkin. HUMO butun mamlakatda ishlaydi!',
+    storyBankTitle: 'Bank nima?', storyBankContent: 'Bank — bu pul saqlanadigan va boshqalarga qarzga beriladigan joy. Saqlash uchun bank senga foiz to\'laydi!',
+    storyMoneyWorldTitle: 'Dunyo pullari', storyMoneyWorldContent: 'Yaponiyada tangalarda gullar, Avstraliyada esa hayvonlar tasvirlangan! O\'zbek so\'mi oltin sharafiga nomlangan.',
+    storyRuleTitle: '50/30/20 qoidasi', storyRuleContent: '50% zaruriy narsalarga, 30% istaklarga, 20% — to\'plagichga! Bu qoida pulni boshqarishga yordam beradi.',
+    storyGoalTitle: 'Maqsad = motivatsiya', storyGoalContent: 'Maqsad qo\'ygan odamlar 3 baravar tezroq jamg\'aradi! O\'z maqsadingni hoziroq qo\'y.',
+    storyCoinsTitle: 'Tanga o\'yini', storyCoinsContent: 'Bilasanmi, birinchi pullar chig\'anoqlardan bo\'lgan? Tangalarni 2700 yil oldin Lidiyada o\'ylab topishgan!',
+    storyPizzaTitle: 'Pitsa yoki to\'plagich?', storyPizzaContent: 'Agar haftada bitta pitsa o\'rniga pul yig\'sang, bir yilda butun velosiped bo\'ladi!',
+    storyHeroTitle: 'Moliyaviy qahramon', storyHeroContent: 'Haqiqiy qahramon nafaqat pul ishlashni, balki oqilona sarflashni ham biladi. Sen allaqachon yo\'ldassan!',
+    storyFunFactTitle: 'Qiziq fakt', storyFunFactContent: 'Dunyodagi eng qimmat tanga 18,9 million dollar turadi! Bu 1794-yilgi kumush dollar.',
+    storyGreatTitle: 'Sen zo\'rsan!', storyGreatContent: 'Har safar ilovani ochganingda, pulni boshqarishni o\'rganasan. Shu tartibda davom et!',
+    storyDrawTitle: 'Orzuni chiz', storyDrawContent: 'Nimaga pul yig\'ayotganingni chiz va devorga os. Vizualizatsiya maqsadga erishishga yordam beradi!',
+    storyShareTitle: 'Yaxshilik qil', storyShareContent: 'Pul yig\'ayotganda, do\'stlarga sovg\'a uchun ham ajratish mumkin. Saxiylik baxtliroq qiladi!',
+    storyDigitalTitle: 'Raqamli pullar', storyDigitalContent: 'Bugungi kunda ko\'pchilik pullar faqat kompyuterlarda mavjud. Naqd pul — bu kichik qism!',
+    storyChallengeTitle: 'Hafta chellendji', storyChallengeContent: 'Bir hafta davomida barcha xarajatlaringni yozib bor. Pullar qayerga ketayotganiga hayron qolasan!',
+    txFromMom: 'Onadan', txFromDad: 'Dadadan', txFromGrandma: 'Buvidan sovg\'a', txFromGrandpa: 'Bobodan sovg\'a', txGoodGrades: 'Yaxshi baholar uchun',
+    txIceCream: 'Muzqaymoq', txSchoolShop: 'Maktab do\'koni', txJuiceBun: 'Sharbat va non', txFastFood: 'Fast-fud', txGames: 'O\'yinlar',
+    txStationery: 'Ish qurollari', txTransport: 'Transport', txSnacks: 'Gazaklar', txDrinks: 'Ichimliklar', txGiftFriend: 'Do\'stga sovg\'a',
+    txToBike: 'Velosipedga', txPiggyBank: 'To\'plagich', txCashWithdraw: 'Naqd pul yechish', txATM: 'Bankomat',
+    txSourceShop: 'Do\'kon', txSourceSchool: 'Maktab', txSourceBazaar: 'Bozor', txSourceCafe: 'Kafe', txSourceMetro: 'Metro',
+    quizQ1: 'Cho\'ntak puli bilan nima qilish yaxshi?', quizQ1a: 'Hammasini sarflash', quizQ1b: 'Bir qismini sarflab, bir qismini yig\'ish', quizQ1c: 'Yostiq ostiga yashirish', quizQ1d: 'Do\'stga berish', quizQ1exp: 'To\'g\'ri! Bir qismini zaruriy narsalarga sarflab, bir qismini to\'plagichga qo\'yish yaxshi.',
+    quizQ2: 'Bankdagi "to\'plagich" nima?', quizQ2a: 'Shisha banka', quizQ2b: 'Jamg\'arish uchun maxsus hisob', quizQ2c: 'Pul bosiladigan joy', quizQ2d: 'O\'yinchoq', quizQ2exp: 'To\'g\'ri! Bankdagi to\'plagich — bu pul nafaqat saqlanadigan, balki foizlar tufayli o\'sadigan maxsus hisob.',
+    quizQ3: 'Nima uchun moliyaviy maqsad qo\'yish kerak?', quizQ3a: 'Kerak emas', quizQ3b: 'Ota-ona rozi bo\'lishi uchun', quizQ3c: 'Qancha va nima uchun yig\'ishni bilish uchun', quizQ3d: 'Maqtanish uchun', quizQ3exp: 'To\'g\'ri! Maqsad qancha yig\'ish kerakligini tushunishga yordam beradi.',
+    quizQ4: '"Imkoniyatiga qarab yashash" nima degani?', quizQ4a: 'Umuman sarflamaslik', quizQ4b: 'Oladigan puldan ko\'p sarflamaslik', quizQ4c: 'Hammasini sarflash', quizQ4d: 'Qarz olish', quizQ4exp: 'To\'g\'ri! Bu o\'zingda boridan ko\'p sarflamaslik degani. Hamma uchun muhim qoida!',
+    quizQ5: 'Omonat foizi nima?', quizQ5a: 'Bank jarima', quizQ5b: 'Bank senga saqlash uchun to\'laydigan pul', quizQ5c: 'O\'tkazma komissiyasi', quizQ5d: 'Karta narxi', quizQ5exp: 'To\'g\'ri! Bank senga pul saqlash uchun foiz to\'laydi. Puling o\'sadi!',
+    goalBike: 'Velosiped', goalBikeReason: 'Do\'stlar bilan parkda uchish!', goalHeadphones: 'Quloqchin', goalHeadphonesReason: 'Sayr paytida musiqa tinglash',
     testsTitle: 'Testlar',
     testsSettingsDesc: 'Moliyaviy savodxonligingizni tekshiring',
     testsDesc: "Testlar O'zbekiston Markaziy banki, Ta'lim vazirligi va boshqa tashkilotlar tomonidan yoshlar moliyaviy savodxonligini oshirish uchun ishlab chiqilgan.",
@@ -1331,6 +1457,45 @@ export const translations: Record<Language, TranslationKeys> = {
     contactGrandpa: 'Grandpa',
     contactBrother: 'Brother',
     contactSister: 'Sister',
+    avatarFox: 'Fox', avatarPanda: 'Panda', avatarLion: 'Lion Cub', avatarCat: 'Kitty', avatarBunny: 'Bunny',
+    avatarBear: 'Bear', avatarUnicorn: 'Unicorn', avatarFrog: 'Frog', avatarButterfly: 'Butterfly', avatarKoala: 'Koala',
+    avatarOwl: 'Owl', avatarPenguin: 'Penguin', avatarShark: 'Shark', avatarTiger: 'Tiger Cub', avatarParrot: 'Parrot',
+    themeCalmName: 'Calm', themePlayfulName: 'Playful', themeAnimeName: 'Anime', themeNationalName: 'National',
+    catFood: 'Food', catEducation: 'Education', catEntertainment: 'Entertainment', catTransport: 'Transport',
+    catCash: 'Cash', catSavings: 'Savings', catTransfer: 'Transfers', catOther: 'Other',
+    achNoCashName: 'Cashless Hero', achNoCashDesc: 'Don\'t withdraw cash for 30 days', achNoCashMsg: 'A whole month without cash! Awesome!',
+    achSaverName: 'Savings Master', achSaverDesc: 'Save 100,000 sum in piggy banks', achSaverMsg: 'You saved over 100,000 sum! Great work!',
+    achDailyName: 'Loyal Friend', achDailyDesc: 'Open the app 7 days in a row', achDailyMsg: 'A whole week with us! You\'re a real financial hero!',
+    achCustomizerName: 'Designer', achCustomizerDesc: 'Customize the app', achCustomizerMsg: 'You made the app your own! Beautiful!',
+    achDreamerName: 'Dreamer', achDreamerDesc: 'Create your first piggy bank', achDreamerMsg: 'First step towards your dream! Keep going!',
+    achQuizName: 'Smarty', achQuizDesc: 'Answer all quiz questions correctly', achQuizMsg: 'All answers correct! You\'re a financial genius!',
+    storyTipTitle: 'Tip of the Day', storyTipContent: 'Before buying, wait 24 hours — you might change your mind!',
+    storyQuizTitle: 'Solve & Earn!', storyQuizContent: 'Answer questions and earn sums!',
+    storyHumoTitle: 'What is HUMO?', storyHumoContent: 'HUMO is the national payment system of Uzbekistan. With it you can pay by card or sticker, transfer money, and save. HUMO works all over the country — in shops, cafes, and online!',
+    storyBankTitle: 'What is a bank?', storyBankContent: 'A bank is a place that stores money and lends it to others. The bank pays you interest for storing!',
+    storyMoneyWorldTitle: 'World Money', storyMoneyWorldContent: 'In Japan, coins feature flowers, and in Australia — animals! The Uzbek sum is named after gold.',
+    storyRuleTitle: '50/30/20 Rule', storyRuleContent: '50% for needs, 30% for wants, 20% for savings! This rule helps manage money.',
+    storyGoalTitle: 'Goal = Motivation', storyGoalContent: 'People who set goals save 3 times faster! Set your goal right now.',
+    storyCoinsTitle: 'Coin Game', storyCoinsContent: 'Did you know the first money was made of shells? Coins were invented 2,700 years ago in Lydia!',
+    storyPizzaTitle: 'Pizza or Savings?', storyPizzaContent: 'If instead of one pizza a week you save money, in a year you\'ll have a whole bicycle!',
+    storyHeroTitle: 'Financial Hero', storyHeroContent: 'A real hero knows not only how to earn but also how to spend wisely. You\'re already on your way!',
+    storyFunFactTitle: 'Fun Fact', storyFunFactContent: 'The most expensive coin in the world costs $18.9 million! It\'s a 1794 silver dollar.',
+    storyGreatTitle: 'You\'re great!', storyGreatContent: 'Every time you open the app, you learn to manage money. Keep it up!',
+    storyDrawTitle: 'Draw Your Dream', storyDrawContent: 'Draw what you\'re saving for and put it on the wall. Visualization helps achieve goals!',
+    storyShareTitle: 'Share Kindness', storyShareContent: 'When saving, you can set aside some for gifts to friends. Generosity makes you happier!',
+    storyDigitalTitle: 'Digital Money', storyDigitalContent: 'Today most money exists only in computers. Cash is just a small part!',
+    storyChallengeTitle: 'Weekly Challenge', storyChallengeContent: 'Try writing down all your expenses for a week. You\'ll be surprised where the money goes!',
+    txFromMom: 'From Mom', txFromDad: 'From Dad', txFromGrandma: 'Gift from Grandma', txFromGrandpa: 'Gift from Grandpa', txGoodGrades: 'For good grades',
+    txIceCream: 'Ice cream', txSchoolShop: 'School shop', txJuiceBun: 'Juice and bun', txFastFood: 'Fast food', txGames: 'Games',
+    txStationery: 'Stationery', txTransport: 'Transport', txSnacks: 'Snacks', txDrinks: 'Drinks', txGiftFriend: 'Gift for friend',
+    txToBike: 'For bicycle', txPiggyBank: 'Piggy bank', txCashWithdraw: 'Cash withdrawal', txATM: 'ATM',
+    txSourceShop: 'Shop', txSourceSchool: 'School', txSourceBazaar: 'Bazaar', txSourceCafe: 'Cafe', txSourceMetro: 'Metro',
+    quizQ1: 'What\'s the best thing to do with pocket money?', quizQ1a: 'Spend it all at once', quizQ1b: 'Spend some, save some', quizQ1c: 'Hide it under the pillow', quizQ1d: 'Give it to a friend', quizQ1exp: 'Correct! It\'s best to spend some on needs and save some for a big dream.',
+    quizQ2: 'What is a "piggy bank" at the bank?', quizQ2a: 'A glass jar', quizQ2b: 'A special savings account', quizQ2c: 'Where money is printed', quizQ2d: 'A toy', quizQ2exp: 'Right! A piggy bank at the bank is a special account where money is stored and grows with interest.',
+    quizQ3: 'Why set a financial goal?', quizQ3a: 'It\'s not needed', quizQ3b: 'To make parents happy', quizQ3c: 'To know how much and why to save', quizQ3d: 'To show off', quizQ3exp: 'Exactly! A goal helps understand how much to save and motivates you.',
+    quizQ4: 'What does "live within your means" mean?', quizQ4a: 'Don\'t spend at all', quizQ4b: 'Don\'t spend more than you earn', quizQ4c: 'Spend everything at once', quizQ4d: 'Borrow money', quizQ4exp: 'Correct! It means spending no more than you have. An important rule for everyone!',
+    quizQ5: 'What is deposit interest?', quizQ5a: 'A bank fine', quizQ5b: 'Money the bank pays you for storing', quizQ5c: 'Transfer fee', quizQ5d: 'Card price', quizQ5exp: 'Right! The bank pays you interest for storing your money. Your money grows!',
+    goalBike: 'Bicycle', goalBikeReason: 'Ride with friends in the park!', goalHeadphones: 'Headphones', goalHeadphonesReason: 'Listen to music while walking',
     testsTitle: 'Tests',
     testsSettingsDesc: 'Test your financial literacy knowledge',
     testsDesc: 'Tests developed by the Central Bank, Ministry of Education, and other institutions of Uzbekistan to improve financial literacy among youth.',
