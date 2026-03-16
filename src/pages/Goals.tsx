@@ -235,7 +235,7 @@ const Goals = () => {
           </div>
 
           {/* Progress */}
-          <JourneyProgress progress={progress} emoji={selectedGoal.emoji} currentAmount={selectedGoal.currentAmount} targetAmount={selectedGoal.targetAmount} />
+          <JourneyProgress progress={progress} emoji={selectedGoal.emoji} currentAmount={selectedGoal.currentAmount} targetAmount={selectedGoal.targetAmount} t={t} />
 
           {isCompleted && (
             <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-success font-bold text-sm mt-2 text-center mb-4">
