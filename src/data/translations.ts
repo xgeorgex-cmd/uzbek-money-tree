@@ -1151,6 +1151,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizQ4: '"Imkoniyatiga qarab yashash" nima degani?', quizQ4a: 'Umuman sarflamaslik', quizQ4b: 'Oladigan puldan ko\'p sarflamaslik', quizQ4c: 'Hammasini sarflash', quizQ4d: 'Qarz olish', quizQ4exp: 'To\'g\'ri! Bu o\'zingda boridan ko\'p sarflamaslik degani. Hamma uchun muhim qoida!',
     quizQ5: 'Omonat foizi nima?', quizQ5a: 'Bank jarima', quizQ5b: 'Bank senga saqlash uchun to\'laydigan pul', quizQ5c: 'O\'tkazma komissiyasi', quizQ5d: 'Karta narxi', quizQ5exp: 'To\'g\'ri! Bank senga pul saqlash uchun foiz to\'laydi. Puling o\'sadi!',
     goalBike: 'Velosiped', goalBikeReason: 'Do\'stlar bilan parkda uchish!', goalHeadphones: 'Quloqchin', goalHeadphonesReason: 'Sayr paytida musiqa tinglash',
+    txClosePiggy: 'To\'plagichni yopish', txToPiggy: 'To\'plagichga', txFromPiggy: 'To\'plagichdan', txQuizReward: 'Viktorina mukofoti 🧠', txQuest: 'Viktorina',
     testsTitle: 'Testlar',
     testsSettingsDesc: 'Moliyaviy savodxonligingizni tekshiring',
     testsDesc: "Testlar O'zbekiston Markaziy banki, Ta'lim vazirligi va boshqa tashkilotlar tomonidan yoshlar moliyaviy savodxonligini oshirish uchun ishlab chiqilgan.",
