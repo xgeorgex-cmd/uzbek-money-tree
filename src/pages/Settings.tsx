@@ -57,7 +57,7 @@ const Settings = () => {
           </div>
           <div>
             <h2 className="font-black text-lg">{userName || t('defaultUserName')}</h2>
-            <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : avatar?.name}</p>
+            <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : (avatar ? t(avatar.nameKey as any) : '')}</p>
           </div>
         </motion.button>
 
