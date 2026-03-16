@@ -215,7 +215,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: amount, type: 'income',
       description: 'Награда за квест 🧠',
+      descKey: 'txQuizReward',
       source: 'Квест',
+      sourceKey: 'txQuest',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: '🏆',
     };
