@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Transaction, expenseCategories } from '@/data/mockData';
+import { Transaction, getTranslatedCategories } from '@/data/mockData';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SpendingDonutProps {
