@@ -127,7 +127,7 @@ const Goals = () => {
   const handleWithdraw = (goalId: string) => {
     const amount = parseInt(withdrawAmount.replace(/\D/g, ''));
     if (amount > 0) {
-      const goalName = goals.find(g => g.id === goalId)?.name || '';
+      const gn = goals.find(g => g.id === goalId); const gnText = gn ? gName(gn, t) : '';
       withdrawFromGoal(goalId, amount);
       setWithdrawAmount('');
       setShowWithdraw(null);
