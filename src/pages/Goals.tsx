@@ -10,14 +10,14 @@ import { goalEmojis } from '@/data/mockData';
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 // Tree-style progress
-const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount }: { progress: number; emoji: string; currentAmount: number; targetAmount: number }) => {
+const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { progress: number; emoji: string; currentAmount: number; targetAmount: number; t: (key: any) => string }) => {
   const pct = Math.min(Math.round(progress * 100), 100);
   const milestones = [
-    { at: 0, icon: '🌱', label: 'Старт' },
+    { at: 0, icon: '🌱', label: t('goalsMilestoneStart') },
     { at: 25, icon: '🌿', label: '25%' },
     { at: 50, icon: '🌳', label: '50%' },
     { at: 75, icon: '🌸', label: '75%' },
-    { at: 100, icon: '🏆', label: 'Цель!' },
+    { at: 100, icon: '🏆', label: t('goalsMilestoneGoal') },
   ];
 
   return (
