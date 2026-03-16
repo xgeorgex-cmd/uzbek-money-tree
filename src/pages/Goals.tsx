@@ -24,7 +24,7 @@ const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { 
     <div className="my-3">
       <div className="flex justify-between items-baseline mb-1.5">
         <span className="text-[11px] font-bold text-muted-foreground">{formatSum(currentAmount)}</span>
-        <span className="text-[11px] font-bold text-muted-foreground">из {formatSum(targetAmount)}</span>
+        <span className="text-[11px] font-bold text-muted-foreground">{t('goalsAmountOf')} {formatSum(targetAmount)}</span>
       </div>
       <div className="relative h-8 bg-secondary rounded-full overflow-hidden">
         <motion.div
