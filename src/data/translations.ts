@@ -259,6 +259,23 @@ type TranslationKeys = {
   quizDone: string;
   profileEditNamePlaceholder: string;
   profileEditSave: string;
+  // Dynamic UI text
+  defaultUserName: string;
+  onboardNamePlaceholder: string;
+  goalsMilestoneStart: string;
+  goalsMilestoneGoal: string;
+  goalsAmountOf: string;
+  goalsFromCard: string;
+  goalsToCard: string;
+  donutTotal: string;
+  donutOperations: string;
+  notifDescription: string;
+  contactDad: string;
+  contactMom: string;
+  contactGrandma: string;
+  contactGrandpa: string;
+  contactBrother: string;
+  contactSister: string;
   // Tests
   testsTitle: string;
   testsSettingsDesc: string;
