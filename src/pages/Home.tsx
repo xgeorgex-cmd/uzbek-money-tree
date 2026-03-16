@@ -243,7 +243,7 @@ const Home = () => {
               className="bg-card rounded-3xl p-4 shadow-card flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform mb-2">
               <div className="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-lg">{tx.icon}</div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold truncate">{tx.description}</p>
+                <p className="text-sm font-bold truncate">{txDesc(tx, t)}</p>
                 <p className="text-xs text-muted-foreground">{tx.date}</p>
               </div>
               <p className={`font-black text-sm ${tx.type === 'income' ? 'text-success' : tx.type === 'savings' ? 'text-savings' : 'text-destructive'}`}>
