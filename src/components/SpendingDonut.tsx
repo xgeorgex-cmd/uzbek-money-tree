@@ -37,7 +37,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
       .sort((a, b) => b.amount - a.amount);
 
     return { categories: cats, totalExpense: total };
-  }, [transactions]);
+  }, [transactions, t]);
 
   let cumulativePercent = 0;
 
