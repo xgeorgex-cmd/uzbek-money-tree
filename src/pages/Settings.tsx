@@ -104,8 +104,8 @@ const Settings = () => {
                       className={`bg-secondary rounded-2xl p-4 flex items-center gap-3 ${!a.unlocked ? 'opacity-50 grayscale' : ''}`}>
                       <span className="text-2xl">{a.unlocked ? a.emoji : '❓'}</span>
                       <div className="flex-1">
-                        <p className="font-bold text-sm">{a.unlocked ? a.name : '???'}</p>
-                        <p className="text-xs text-muted-foreground">{a.unlocked ? a.unlockedMessage : a.description}</p>
+                        <p className="font-bold text-sm">{a.unlocked ? t(a.nameKey as any) : '???'}</p>
+                        <p className="text-xs text-muted-foreground">{a.unlocked ? t(a.unlockedMessageKey as any) : t(a.descriptionKey as any)}</p>
                       </div>
                       {a.unlocked && <span className="text-success text-lg">✅</span>}
                     </motion.div>

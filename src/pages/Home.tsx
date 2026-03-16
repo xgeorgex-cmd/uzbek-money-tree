@@ -337,7 +337,7 @@ const Home = () => {
                   <h3 className="text-lg font-black mb-2">
                     {quizAnswer === quizQuestions[quizQIndex].correctIndex ? t('quizCorrect') : t('quizWrong')}
                   </h3>
-                  <p className="text-muted-foreground text-sm mb-6">{quizQuestions[quizQIndex].explanation}</p>
+                  <p className="text-muted-foreground text-sm mb-6">{t(quizQuestions[quizQIndex].explanationKey as any)}</p>
                   <motion.button whileTap={{ scale: 0.97 }} onClick={handleQuizNext}
                     className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button">
                     {t('quizNext')}
