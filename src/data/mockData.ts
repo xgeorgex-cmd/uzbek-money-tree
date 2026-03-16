@@ -7,6 +7,8 @@ export interface Transaction {
   source: string;
   date: string; // DD.MM
   icon: string;
+  descKey?: string;
+  sourceKey?: string;
 }
 
 export interface Goal {
@@ -18,7 +20,16 @@ export interface Goal {
   emoji: string;
   createdAt: string;
   deadline?: string;
+  nameKey?: string;
+  reasonKey?: string;
 }
+
+// Helper to resolve translated text for transactions and goals
+type TFunc = (key: any) => string;
+export const txDesc = (tx: Transaction, t: TFunc) => tx.descKey ? t(tx.descKey) : tx.description;
+export const txSource = (tx: Transaction, t: TFunc) => tx.sourceKey ? t(tx.sourceKey) : tx.source;
+export const goalName = (g: Goal, t: TFunc) => g.nameKey ? t(g.nameKey) : g.name;
+export const goalReason = (g: Goal, t: TFunc) => g.reasonKey ? t(g.reasonKey) : g.reason;
 
 export interface Avatar {
   id: string;
