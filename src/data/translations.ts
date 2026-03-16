@@ -324,6 +324,8 @@ type TranslationKeys = {
   quizQ5: string; quizQ5a: string; quizQ5b: string; quizQ5c: string; quizQ5d: string; quizQ5exp: string;
   // Goal defaults
   goalBike: string; goalBikeReason: string; goalHeadphones: string; goalHeadphonesReason: string;
+  // Dynamic transaction descriptions
+  txClosePiggy: string; txToPiggy: string; txFromPiggy: string; txQuizReward: string; txQuest: string;
   //
   testsTitle: string;
   testsSettingsDesc: string;
