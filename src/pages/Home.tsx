@@ -317,12 +317,12 @@ const Home = () => {
               {quizStep === 'question' && (
                 <div>
                   <p className="text-xs text-muted-foreground font-bold mb-2">{quizQIndex + 1} / {quizQuestions.length}</p>
-                  <h3 className="text-lg font-black mb-4">{quizQuestions[quizQIndex].question}</h3>
+                  <h3 className="text-lg font-black mb-4">{t(quizQuestions[quizQIndex].questionKey as any)}</h3>
                   <div className="space-y-2">
-                    {quizQuestions[quizQIndex].options.map((opt, i) => (
+                    {quizQuestions[quizQIndex].optionKeys.map((optKey, i) => (
                       <motion.button key={i} whileTap={{ scale: 0.97 }} onClick={() => handleQuizAnswer(i)}
                         className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl text-left text-sm">
-                        {opt}
+                        {t(optKey as any)}
                       </motion.button>
                     ))}
                   </div>
