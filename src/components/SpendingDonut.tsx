@@ -32,7 +32,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
         key,
         amount,
         percent: total > 0 ? amount / total : 0,
-        ...expenseCategories[key] || { label: key, emoji: '📦', color: '#B8B8B8' },
+        ...cats[key] || { label: key, emoji: '📦', color: '#B8B8B8' },
       }))
       .sort((a, b) => b.amount - a.amount);
 
