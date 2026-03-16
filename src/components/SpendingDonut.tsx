@@ -2,6 +2,9 @@ import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Transaction, expenseCategories } from '@/data/mockData';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+interface SpendingDonutProps {
+  transactions: Transaction[];
   currencySuffix: string;
   title: string;
 }
@@ -12,6 +15,7 @@ const RADIUS = (DONUT_SIZE - STROKE_WIDTH) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutProps) => {
+  const { t } = useLanguage();
   const { categories, totalExpense } = useMemo(() => {
     const expenseTxs = transactions.filter(tx => tx.type === 'expense' || tx.type === 'cash');
     const total = expenseTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
