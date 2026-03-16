@@ -116,7 +116,7 @@ const Goals = () => {
   const handleContribute = (goalId: string) => {
     const amount = manualAmount ? parseInt(manualAmount.replace(/\D/g, '')) : 0;
     if (amount > 0) {
-      const goalName = goals.find(g => g.id === goalId)?.name || '';
+      const gn = goals.find(g => g.id === goalId); const gnText = gn ? gName(gn, t) : '';
       contributeToGoal(goalId, amount);
       setManualAmount('');
       setActiveGoalId(null);
