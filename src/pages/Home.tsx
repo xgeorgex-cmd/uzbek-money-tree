@@ -192,7 +192,7 @@ const Home = () => {
                   }`}
                 >
                   {story.image && (
-                    <img src={story.image} alt={story.title} className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={story.image} alt={t(story.titleKey as any)} className="absolute inset-0 w-full h-full object-cover" />
                   )}
                   <div className="relative z-10 w-full bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-5">
                     <span className="text-[10px] font-bold text-white leading-tight line-clamp-2">{story.title}</span>
