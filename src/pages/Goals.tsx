@@ -328,7 +328,7 @@ const Goals = () => {
                   <button onClick={() => setShowWithdraw(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">
-                  {selectedGoal.name} — {formatSum(selectedGoal.currentAmount)} {t('currencySuffix')}
+                  {gName(selectedGoal, t)} — {formatSum(selectedGoal.currentAmount)} {t('currencySuffix')}
                 </p>
                 <input value={withdrawAmount} onChange={e => setWithdrawAmount(e.target.value.replace(/\D/g, ''))}
                   placeholder="0" inputMode="numeric"
