@@ -259,8 +259,8 @@ export const getTranslatedGoals = (t: TFunc): Goal[] => [
 ];
 
 export const mockGoals: Goal[] = [
-  { id: '1', name: 'Велосипед', targetAmount: 500000, currentAmount: 180000, reason: 'Кататься с друзьями по парку!', emoji: '🚲', createdAt: '2025-01-15', deadline: '2026-06-01' },
-  { id: '2', name: 'Наушники', targetAmount: 150000, currentAmount: 90000, reason: 'Слушать музыку на прогулке', emoji: '🎧', createdAt: '2025-02-01', deadline: '2026-04-01' },
+  { id: '1', name: 'Велосипед', targetAmount: 500000, currentAmount: 180000, reason: 'Кататься с друзьями по парку!', emoji: '🚲', createdAt: '2025-01-15', deadline: '2026-06-01', nameKey: 'goalBike', reasonKey: 'goalBikeReason' },
+  { id: '2', name: 'Наушники', targetAmount: 150000, currentAmount: 90000, reason: 'Слушать музыку на прогулке', emoji: '🎧', createdAt: '2025-02-01', deadline: '2026-04-01', nameKey: 'goalHeadphones', reasonKey: 'goalHeadphonesReason' },
 ];
 
 export const getTranslatedCategories = (t: TFunc): Record<string, { label: string; emoji: string; color: string }> => ({
