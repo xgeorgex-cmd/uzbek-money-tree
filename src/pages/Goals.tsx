@@ -120,7 +120,7 @@ const Goals = () => {
       contributeToGoal(goalId, amount);
       setManualAmount('');
       setActiveGoalId(null);
-      showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), goalName);
+      showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), gnText);
     }
   };
 
