@@ -1500,6 +1500,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizQ4: 'What does "live within your means" mean?', quizQ4a: 'Don\'t spend at all', quizQ4b: 'Don\'t spend more than you earn', quizQ4c: 'Spend everything at once', quizQ4d: 'Borrow money', quizQ4exp: 'Correct! It means spending no more than you have. An important rule for everyone!',
     quizQ5: 'What is deposit interest?', quizQ5a: 'A bank fine', quizQ5b: 'Money the bank pays you for storing', quizQ5c: 'Transfer fee', quizQ5d: 'Card price', quizQ5exp: 'Right! The bank pays you interest for storing your money. Your money grows!',
     goalBike: 'Bicycle', goalBikeReason: 'Ride with friends in the park!', goalHeadphones: 'Headphones', goalHeadphonesReason: 'Listen to music while walking',
+    txClosePiggy: 'Piggy bank closed', txToPiggy: 'To piggy bank', txFromPiggy: 'From piggy bank', txQuizReward: 'Quiz reward 🧠', txQuest: 'Quiz',
     testsTitle: 'Tests',
     testsSettingsDesc: 'Test your financial literacy knowledge',
     testsDesc: 'Tests developed by the Central Bank, Ministry of Education, and other institutions of Uzbekistan to improve financial literacy among youth.',
