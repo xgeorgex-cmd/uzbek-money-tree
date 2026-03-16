@@ -146,7 +146,7 @@ const incomeTemplateKeys = [
   { descKey: 'txFromGrandma', sourceKey: 'contactGrandma', icon: '🎁' },
   { descKey: 'txFromGrandpa', sourceKey: 'contactGrandpa', icon: '🎁' },
   { descKey: 'txGoodGrades', sourceKey: 'contactMom', icon: '⭐' },
-];
+] as const;
 
 const expenseTemplateKeys = [
   { descKey: 'txIceCream', sourceKey: 'txSourceShop', icon: '🍦', category: 'food' },
@@ -159,7 +159,49 @@ const expenseTemplateKeys = [
   { descKey: 'txSnacks', sourceKey: 'txSourceShop', icon: '🍿', category: 'food' },
   { descKey: 'txDrinks', sourceKey: 'txSourceShop', icon: '🥤', category: 'food' },
   { descKey: 'txGiftFriend', sourceKey: 'txSourceShop', icon: '🎁', category: 'other' },
-];
+] as const;
+
+const transactionDescriptionKeys = [
+  ...incomeTemplateKeys.map((item) => item.descKey),
+  ...expenseTemplateKeys.map((item) => item.descKey),
+  'txToBike',
+  'txCashWithdraw',
+] as const;
+
+const transactionSourceKeys = [
+  ...incomeTemplateKeys.map((item) => item.sourceKey),
+  ...expenseTemplateKeys.map((item) => item.sourceKey),
+  'txPiggyBank',
+  'txATM',
+] as const;
+
+const buildTranslationReverseMap = (keys: readonly string[]) => {
+  const map: Record<string, string> = {};
+
+  keys.forEach((key) => {
+    map[key] = key;
+  });
+
+  Object.values(translations).forEach((dictionary) => {
+    keys.forEach((key) => {
+      const value = dictionary[key as keyof typeof dictionary];
+      if (typeof value === 'string') {
+        map[value] = key;
+      }
+    });
+  });
+
+  return map;
+};
+
+const transactionDescriptionMap = buildTranslationReverseMap(transactionDescriptionKeys);
+const transactionSourceMap = buildTranslationReverseMap(transactionSourceKeys);
+
+export const migrateTransaction = (tx: Transaction): Transaction => ({
+  ...tx,
+  descKey: tx.descKey || transactionDescriptionMap[tx.description],
+  sourceKey: tx.sourceKey || transactionSourceMap[tx.source],
+});
 
 // Deterministic transaction generation (no Math.random so it's stable per render)
 const generateTransactions = (t: TFunc): Transaction[] => {

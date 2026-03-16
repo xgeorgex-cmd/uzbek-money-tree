@@ -48,6 +48,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const parsed = JSON.parse(saved);
         return {
           ...parsed,
+          transactions: Array.isArray(parsed.transactions)
+            ? parsed.transactions.map((tx: Transaction) => migrateTransaction(tx))
+            : mockTransactions,
           viewedStories: parsed.viewedStories || [],
           likedStories: parsed.likedStories || [],
           dislikedStories: parsed.dislikedStories || [],
