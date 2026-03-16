@@ -17,7 +17,7 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutProps) => {
   const { t } = useLanguage();
   const { categories, totalExpense } = useMemo(() => {
-    const cats = getTranslatedCategories(t);
+    const catDefs = getTranslatedCategories(t);
     const expenseTxs = transactions.filter(tx => tx.type === 'expense' || tx.type === 'cash');
     const total = expenseTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
     
@@ -32,7 +32,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
         key,
         amount,
         percent: total > 0 ? amount / total : 0,
-        ...cats[key] || { label: key, emoji: '📦', color: '#B8B8B8' },
+        ...catDefs[key] || { label: key, emoji: '📦', color: '#B8B8B8' },
       }))
       .sort((a, b) => b.amount - a.amount);
 
