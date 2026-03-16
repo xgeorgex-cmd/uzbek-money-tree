@@ -150,7 +150,7 @@ const Home = () => {
               {avatarDisplay}
             </motion.button>
             <div className="flex-1">
-              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')}, {userName || 'Друг'}!</p>
+              <p className="text-primary-foreground/60 text-xs font-bold">{t('homeGreeting')}, {userName || t('defaultUserName')}!</p>
             </div>
           </div>
 
@@ -464,18 +464,18 @@ const Home = () => {
                       {/* Contact list */}
                       <div className="space-y-2 max-h-48 overflow-y-auto">
                         {[
-                          { name: 'Папа', emoji: '👨', phone: '+998 90 ••• •• 12' },
-                          { name: 'Мама', emoji: '👩', phone: '+998 91 ••• •• 34' },
-                          { name: 'Бабушка', emoji: '👵', phone: '+998 90 ••• •• 56' },
-                          { name: 'Дедушка', emoji: '👴', phone: '+998 93 ••• •• 78' },
-                          { name: 'Брат', emoji: '👦', phone: '+998 94 ••• •• 90' },
-                          { name: 'Сестра', emoji: '👧', phone: '+998 95 ••• •• 11' },
-                          { name: 'Азиз', emoji: '👦', phone: '+998 97 ••• •• 22' },
-                          { name: 'Малика', emoji: '👧', phone: '+998 90 ••• •• 33' },
-                          { name: 'Жасур', emoji: '👦', phone: '+998 91 ••• •• 44' },
-                          { name: 'Нилуфар', emoji: '👧', phone: '+998 93 ••• •• 55' },
-                          { name: 'Бро 😎', emoji: '🤙', phone: '+998 94 ••• •• 66' },
-                          { name: 'Кеша', emoji: '🎮', phone: '+998 95 ••• •• 77' },
+                          { name: t('contactDad'), emoji: '👨', phone: '+998 90 ••• •• 12' },
+                          { name: t('contactMom'), emoji: '👩', phone: '+998 91 ••• •• 34' },
+                          { name: t('contactGrandma'), emoji: '👵', phone: '+998 90 ••• •• 56' },
+                          { name: t('contactGrandpa'), emoji: '👴', phone: '+998 93 ••• •• 78' },
+                          { name: t('contactBrother'), emoji: '👦', phone: '+998 94 ••• •• 90' },
+                          { name: t('contactSister'), emoji: '👧', phone: '+998 95 ••• •• 11' },
+                          { name: 'Aziz', emoji: '👦', phone: '+998 97 ••• •• 22' },
+                          { name: 'Malika', emoji: '👧', phone: '+998 90 ••• •• 33' },
+                          { name: 'Jasur', emoji: '👦', phone: '+998 91 ••• •• 44' },
+                          { name: 'Nilufar', emoji: '👧', phone: '+998 93 ••• •• 55' },
+                          { name: 'Bro 😎', emoji: '🤙', phone: '+998 94 ••• •• 66' },
+                          { name: 'Kesha', emoji: '🎮', phone: '+998 95 ••• •• 77' },
                         ].filter(c => !contactSearch || c.name.toLowerCase().includes(contactSearch.toLowerCase()))
                          .map(contact => (
                           <motion.button key={contact.name} whileTap={{ scale: 0.97 }}

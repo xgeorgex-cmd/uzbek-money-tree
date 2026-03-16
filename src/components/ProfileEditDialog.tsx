@@ -34,7 +34,7 @@ const ProfileEditDialog = ({ open, onClose }: ProfileEditDialogProps) => {
   const handleSave = () => {
     updateAvatar(photo ? 'custom' : selectedAvatar, photo);
     // Update name via completeOnboarding (reuses existing logic to persist name)
-    completeOnboarding(name || 'Друг', photo ? 'custom' : selectedAvatar, photo);
+    completeOnboarding(name || t('defaultUserName'), photo ? 'custom' : selectedAvatar, photo);
     toast.success('✅');
     onClose();
   };

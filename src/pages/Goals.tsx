@@ -10,21 +10,21 @@ import { goalEmojis } from '@/data/mockData';
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 // Tree-style progress
-const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount }: { progress: number; emoji: string; currentAmount: number; targetAmount: number }) => {
+const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { progress: number; emoji: string; currentAmount: number; targetAmount: number; t: (key: any) => string }) => {
   const pct = Math.min(Math.round(progress * 100), 100);
   const milestones = [
-    { at: 0, icon: '🌱', label: 'Старт' },
+    { at: 0, icon: '🌱', label: t('goalsMilestoneStart') },
     { at: 25, icon: '🌿', label: '25%' },
     { at: 50, icon: '🌳', label: '50%' },
     { at: 75, icon: '🌸', label: '75%' },
-    { at: 100, icon: '🏆', label: 'Цель!' },
+    { at: 100, icon: '🏆', label: t('goalsMilestoneGoal') },
   ];
 
   return (
     <div className="my-3">
       <div className="flex justify-between items-baseline mb-1.5">
         <span className="text-[11px] font-bold text-muted-foreground">{formatSum(currentAmount)}</span>
-        <span className="text-[11px] font-bold text-muted-foreground">из {formatSum(targetAmount)}</span>
+        <span className="text-[11px] font-bold text-muted-foreground">{t('goalsAmountOf')} {formatSum(targetAmount)}</span>
       </div>
       <div className="relative h-8 bg-secondary rounded-full overflow-hidden">
         <motion.div
@@ -235,7 +235,7 @@ const Goals = () => {
           </div>
 
           {/* Progress */}
-          <JourneyProgress progress={progress} emoji={selectedGoal.emoji} currentAmount={selectedGoal.currentAmount} targetAmount={selectedGoal.targetAmount} />
+          <JourneyProgress progress={progress} emoji={selectedGoal.emoji} currentAmount={selectedGoal.currentAmount} targetAmount={selectedGoal.targetAmount} t={t} />
 
           {isCompleted && (
             <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-success font-bold text-sm mt-2 text-center mb-4">
@@ -253,7 +253,7 @@ const Goals = () => {
               </div>
               <div>
                 <p className="font-bold text-sm">{t('goalsTopUp')}</p>
-                <p className="text-[11px] text-muted-foreground">с карты</p>
+                <p className="text-[11px] text-muted-foreground">{t('goalsFromCard')}</p>
               </div>
             </motion.button>
 
@@ -265,7 +265,7 @@ const Goals = () => {
               </div>
               <div>
                 <p className="font-bold text-sm">{t('goalsWithdraw')}</p>
-                <p className="text-[11px] text-muted-foreground">на карту</p>
+                <p className="text-[11px] text-muted-foreground">{t('goalsToCard')}</p>
               </div>
             </motion.button>
 

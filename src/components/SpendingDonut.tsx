@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Transaction, expenseCategories } from '@/data/mockData';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SpendingDonutProps {
   transactions: Transaction[];
@@ -14,6 +15,7 @@ const RADIUS = (DONUT_SIZE - STROKE_WIDTH) / 2;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutProps) => {
+  const { t } = useLanguage();
   const { categories, totalExpense } = useMemo(() => {
     const expenseTxs = transactions.filter(tx => tx.type === 'expense' || tx.type === 'cash');
     const total = expenseTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
@@ -71,7 +73,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
             })}
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="text-xs text-muted-foreground font-semibold">Всего</p>
+            <p className="text-xs text-muted-foreground font-semibold">{t('donutTotal')}</p>
             <p className="text-sm font-black">{(totalExpense / 1000).toFixed(0)}k</p>
           </div>
         </div>
@@ -107,7 +109,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold truncate">{cat.label}</p>
               <p className="text-xs text-muted-foreground">
-                {transactions.filter(tx => tx.category === cat.key).length} операций
+                {transactions.filter(tx => tx.category === cat.key).length} {t('donutOperations')}
               </p>
             </div>
             <p className="text-sm font-black">

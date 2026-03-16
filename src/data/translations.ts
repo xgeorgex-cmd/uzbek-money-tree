@@ -259,6 +259,23 @@ type TranslationKeys = {
   quizDone: string;
   profileEditNamePlaceholder: string;
   profileEditSave: string;
+  // Dynamic UI text
+  defaultUserName: string;
+  onboardNamePlaceholder: string;
+  goalsMilestoneStart: string;
+  goalsMilestoneGoal: string;
+  goalsAmountOf: string;
+  goalsFromCard: string;
+  goalsToCard: string;
+  donutTotal: string;
+  donutOperations: string;
+  notifDescription: string;
+  contactDad: string;
+  contactMom: string;
+  contactGrandma: string;
+  contactGrandpa: string;
+  contactBrother: string;
+  contactSister: string;
   // Tests
   testsTitle: string;
   testsSettingsDesc: string;
@@ -555,6 +572,22 @@ export const translations: Record<Language, TranslationKeys> = {
     quizDone: 'Вернуться',
     profileEditNamePlaceholder: 'Как тебя зовут?',
     profileEditSave: 'Сохранить',
+    defaultUserName: 'Друг',
+    onboardNamePlaceholder: 'Как тебя зовут?',
+    goalsMilestoneStart: 'Старт',
+    goalsMilestoneGoal: 'Цель!',
+    goalsAmountOf: 'из',
+    goalsFromCard: 'с карты',
+    goalsToCard: 'на карту',
+    donutTotal: 'Всего',
+    donutOperations: 'операций',
+    notifDescription: 'Описание',
+    contactDad: 'Папа',
+    contactMom: 'Мама',
+    contactGrandma: 'Бабушка',
+    contactGrandpa: 'Дедушка',
+    contactBrother: 'Брат',
+    contactSister: 'Сестра',
     testsTitle: 'Тесты',
     testsSettingsDesc: 'Проверь свои знания по финансовой грамотности',
     testsDesc: 'Тесты разработаны Центральным банком, Министерством образования и другими институтами Узбекистана для повышения финансовой грамотности молодёжи.',
@@ -973,6 +1006,22 @@ export const translations: Record<Language, TranslationKeys> = {
     quizDone: 'Qaytish',
     profileEditNamePlaceholder: 'Ismingni yoz',
     profileEditSave: 'Saqlash',
+    defaultUserName: 'Do\'st',
+    onboardNamePlaceholder: 'Ismingni yoz',
+    goalsMilestoneStart: 'Boshlash',
+    goalsMilestoneGoal: 'Maqsad!',
+    goalsAmountOf: 'dan',
+    goalsFromCard: 'kartadan',
+    goalsToCard: 'kartaga',
+    donutTotal: 'Jami',
+    donutOperations: 'operatsiya',
+    notifDescription: 'Tavsif',
+    contactDad: 'Dada',
+    contactMom: 'Ona',
+    contactGrandma: 'Buvi',
+    contactGrandpa: 'Bobo',
+    contactBrother: 'Aka',
+    contactSister: 'Opa',
     testsTitle: 'Testlar',
     testsSettingsDesc: 'Moliyaviy savodxonligingizni tekshiring',
     testsDesc: "Testlar O'zbekiston Markaziy banki, Ta'lim vazirligi va boshqa tashkilotlar tomonidan yoshlar moliyaviy savodxonligini oshirish uchun ishlab chiqilgan.",
@@ -1266,6 +1315,22 @@ export const translations: Record<Language, TranslationKeys> = {
     quizDone: 'Go back',
     profileEditNamePlaceholder: 'What\'s your name?',
     profileEditSave: 'Save',
+    defaultUserName: 'Friend',
+    onboardNamePlaceholder: 'What\'s your name?',
+    goalsMilestoneStart: 'Start',
+    goalsMilestoneGoal: 'Goal!',
+    goalsAmountOf: 'of',
+    goalsFromCard: 'from card',
+    goalsToCard: 'to card',
+    donutTotal: 'Total',
+    donutOperations: 'operations',
+    notifDescription: 'Description',
+    contactDad: 'Dad',
+    contactMom: 'Mom',
+    contactGrandma: 'Grandma',
+    contactGrandpa: 'Grandpa',
+    contactBrother: 'Brother',
+    contactSister: 'Sister',
     testsTitle: 'Tests',
     testsSettingsDesc: 'Test your financial literacy knowledge',
     testsDesc: 'Tests developed by the Central Bank, Ministry of Education, and other institutions of Uzbekistan to improve financial literacy among youth.',
