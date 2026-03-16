@@ -71,7 +71,7 @@ const OperationNotification = ({ open, title, emoji, amount, type, description, 
                   )}
                   {description && (
                     <div className="bg-secondary rounded-2xl p-4">
-                      <p className="text-xs text-muted-foreground">Описание</p>
+                      <p className="text-xs text-muted-foreground">{t('notifDescription')}</p>
                       <p className="font-semibold text-sm">{description}</p>
                     </div>
                   )}

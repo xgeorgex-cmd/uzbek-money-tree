@@ -82,7 +82,7 @@ const Onboarding = () => {
             </div>
 
             <input value={name} onChange={(e) => setName(e.target.value.slice(0, 20))}
-              placeholder="Как тебя зовут?"
+              placeholder={t('onboardNamePlaceholder')}
               className="w-full bg-secondary text-foreground text-center text-lg font-bold p-5 rounded-3xl mb-6 outline-none focus:ring-2 focus:ring-primary" />
 
             <motion.button whileTap={{ scale: 0.97 }} onClick={() => setStep(1)}

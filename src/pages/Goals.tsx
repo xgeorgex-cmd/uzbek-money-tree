@@ -265,7 +265,7 @@ const Goals = () => {
               </div>
               <div>
                 <p className="font-bold text-sm">{t('goalsWithdraw')}</p>
-                <p className="text-[11px] text-muted-foreground">на карту</p>
+                <p className="text-[11px] text-muted-foreground">{t('goalsToCard')}</p>
               </div>
             </motion.button>
 

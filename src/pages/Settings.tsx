@@ -56,7 +56,7 @@ const Settings = () => {
             {customPhoto ? <img src={customPhoto} alt="avatar" className="w-full h-full object-cover rounded-2xl" /> : (avatar?.emoji || '🦊')}
           </div>
           <div>
-            <h2 className="font-black text-lg">{userName || 'Друг'}</h2>
+            <h2 className="font-black text-lg">{userName || t('defaultUserName')}</h2>
             <p className="text-sm text-muted-foreground font-semibold">{customPhoto ? '' : avatar?.name}</p>
           </div>
         </motion.button>

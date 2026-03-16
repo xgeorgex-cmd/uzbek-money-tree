@@ -105,7 +105,7 @@ const SpendingDonut = ({ transactions, currencySuffix, title }: SpendingDonutPro
             <div className="flex-1 min-w-0">
               <p className="text-sm font-bold truncate">{cat.label}</p>
               <p className="text-xs text-muted-foreground">
-                {transactions.filter(tx => tx.category === cat.key).length} операций
+                {transactions.filter(tx => tx.category === cat.key).length} {t('donutOperations')}
               </p>
             </div>
             <p className="text-sm font-black">
