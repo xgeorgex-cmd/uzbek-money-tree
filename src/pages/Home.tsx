@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { avatars, mockStories, quizQuestions } from '@/data/mockData';
+import { avatars, mockStories, quizQuestions, txDesc, txSource, goalName } from '@/data/mockData';
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown, BookUser, Search } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
@@ -216,7 +216,7 @@ const Home = () => {
                 <span className="text-2xl">{closestGoal.emoji}</span>
                 <div>
                   <p className="text-xs text-muted-foreground font-semibold">{t('homeClosestGoal')}</p>
-                  <p className="text-sm font-bold">{closestGoal.name}</p>
+                  <p className="text-sm font-bold">{goalName(closestGoal, t)}</p>
                 </div>
               </div>
             </div>
@@ -243,7 +243,7 @@ const Home = () => {
               className="bg-card rounded-3xl p-4 shadow-card flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform mb-2">
               <div className="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-lg">{tx.icon}</div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold truncate">{tx.description}</p>
+                <p className="text-sm font-bold truncate">{txDesc(tx, t)}</p>
                 <p className="text-xs text-muted-foreground">{tx.date}</p>
               </div>
               <p className={`font-black text-sm ${tx.type === 'income' ? 'text-success' : tx.type === 'savings' ? 'text-savings' : 'text-destructive'}`}>
@@ -440,7 +440,7 @@ const Home = () => {
                           className={`w-full bg-secondary rounded-2xl p-3 flex items-center gap-3 text-left ${transferGoalId === g.id ? 'ring-2 ring-primary' : ''}`}>
                           <span className="text-xl">{g.emoji}</span>
                           <div className="flex-1">
-                            <p className="text-sm font-bold">{g.name}</p>
+                            <p className="text-sm font-bold">{goalName(g, t)}</p>
                             <p className="text-xs text-muted-foreground">{formatSum(g.currentAmount)} / {formatSum(g.targetAmount)}</p>
                           </div>
                         </button>

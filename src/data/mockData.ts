@@ -7,6 +7,8 @@ export interface Transaction {
   source: string;
   date: string; // DD.MM
   icon: string;
+  descKey?: string;
+  sourceKey?: string;
 }
 
 export interface Goal {
@@ -18,7 +20,16 @@ export interface Goal {
   emoji: string;
   createdAt: string;
   deadline?: string;
+  nameKey?: string;
+  reasonKey?: string;
 }
+
+// Helper to resolve translated text for transactions and goals
+type TFunc = (key: any) => string;
+export const txDesc = (tx: Transaction, t: TFunc) => tx.descKey ? t(tx.descKey) : tx.description;
+export const txSource = (tx: Transaction, t: TFunc) => tx.sourceKey ? t(tx.sourceKey) : tx.source;
+export const goalName = (g: Goal, t: TFunc) => g.nameKey ? t(g.nameKey) : g.name;
+export const goalReason = (g: Goal, t: TFunc) => g.reasonKey ? t(g.reasonKey) : g.reason;
 
 export interface Avatar {
   id: string;
@@ -123,8 +134,8 @@ export const achievements: Achievement[] = [
   { id: 'quiz_master', emoji: '🧠', nameKey: 'achQuizName', descriptionKey: 'achQuizDesc', condition: 'quiz_perfect', unlockedMessageKey: 'achQuizMsg' },
 ];
 
-// Translation helper type
-type TFunc = (key: any) => string;
+
+
 
 // Income templates with translation keys
 const incomeTemplateKeys = [
@@ -175,6 +186,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
         category: 'transfer',
         description: t(template.descKey),
         source: t(template.sourceKey),
+        descKey: template.descKey,
+        sourceKey: template.sourceKey,
         icon: template.icon,
         date: `${day}.${m}`,
       });
@@ -192,6 +205,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
         category: template.category,
         description: t(template.descKey),
         source: t(template.sourceKey),
+        descKey: template.descKey,
+        sourceKey: template.sourceKey,
         icon: template.icon,
         date: `${day}.${m}`,
       });
@@ -204,6 +219,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
       category: 'savings',
       description: t('txToBike'),
       source: t('txPiggyBank'),
+      descKey: 'txToBike',
+      sourceKey: 'txPiggyBank',
       date: `15.${m}`,
       icon: '🚲',
     });
@@ -215,6 +232,8 @@ const generateTransactions = (t: TFunc): Transaction[] => {
       category: 'cash',
       description: t('txCashWithdraw'),
       source: t('txATM'),
+      descKey: 'txCashWithdraw',
+      sourceKey: 'txATM',
       date: `20.${m}`,
       icon: '🏧',
     });
@@ -240,8 +259,8 @@ export const getTranslatedGoals = (t: TFunc): Goal[] => [
 ];
 
 export const mockGoals: Goal[] = [
-  { id: '1', name: 'Велосипед', targetAmount: 500000, currentAmount: 180000, reason: 'Кататься с друзьями по парку!', emoji: '🚲', createdAt: '2025-01-15', deadline: '2026-06-01' },
-  { id: '2', name: 'Наушники', targetAmount: 150000, currentAmount: 90000, reason: 'Слушать музыку на прогулке', emoji: '🎧', createdAt: '2025-02-01', deadline: '2026-04-01' },
+  { id: '1', name: 'Велосипед', targetAmount: 500000, currentAmount: 180000, reason: 'Кататься с друзьями по парку!', emoji: '🚲', createdAt: '2025-01-15', deadline: '2026-06-01', nameKey: 'goalBike', reasonKey: 'goalBikeReason' },
+  { id: '2', name: 'Наушники', targetAmount: 150000, currentAmount: 90000, reason: 'Слушать музыку на прогулке', emoji: '🎧', createdAt: '2025-02-01', deadline: '2026-04-01', nameKey: 'goalHeadphones', reasonKey: 'goalHeadphonesReason' },
 ];
 
 export const getTranslatedCategories = (t: TFunc): Record<string, { label: string; emoji: string; color: string }> => ({

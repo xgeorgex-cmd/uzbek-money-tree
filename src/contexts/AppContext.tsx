@@ -135,7 +135,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: returnAmount, type: 'income',
       description: `Закрытие копилки «${goal.name}»`,
+      descKey: 'txClosePiggy',
       source: 'Копилка',
+      sourceKey: 'txPiggyBank',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: goal.emoji,
     };
@@ -151,7 +153,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: -amount, type: 'savings',
       description: `На ${state.goals.find(g => g.id === goalId)?.name || 'копилку'}`,
+      descKey: 'txToPiggy',
       source: 'Копилка',
+      sourceKey: 'txPiggyBank',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: state.goals.find(g => g.id === goalId)?.emoji || '🔐',
     };
@@ -167,7 +171,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: amount, type: 'income',
       description: `Из копилки «${goal.name}»`,
+      descKey: 'txFromPiggy',
       source: 'Копилка',
+      sourceKey: 'txPiggyBank',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: goal.emoji,
     };
@@ -209,7 +215,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newTx: Transaction = {
       id: Date.now().toString(), amount: amount, type: 'income',
       description: 'Награда за квест 🧠',
+      descKey: 'txQuizReward',
       source: 'Квест',
+      sourceKey: 'txQuest',
       date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
       icon: '🏆',
     };

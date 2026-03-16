@@ -324,6 +324,8 @@ type TranslationKeys = {
   quizQ5: string; quizQ5a: string; quizQ5b: string; quizQ5c: string; quizQ5d: string; quizQ5exp: string;
   // Goal defaults
   goalBike: string; goalBikeReason: string; goalHeadphones: string; goalHeadphonesReason: string;
+  // Dynamic transaction descriptions
+  txClosePiggy: string; txToPiggy: string; txFromPiggy: string; txQuizReward: string; txQuest: string;
   //
   testsTitle: string;
   testsSettingsDesc: string;
@@ -675,6 +677,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizQ4: 'Что значит "жить по средствам"?', quizQ4a: 'Не тратить вообще', quizQ4b: 'Тратить не больше, чем получаешь', quizQ4c: 'Тратить всё сразу', quizQ4d: 'Брать в долг', quizQ4exp: 'Правильно! Это значит тратить не больше, чем у тебя есть. Важное правило для всех!',
     quizQ5: 'Что такое проценты по вкладу?', quizQ5a: 'Штраф банка', quizQ5b: 'Деньги, которые банк платит тебе за хранение', quizQ5c: 'Комиссия за перевод', quizQ5d: 'Цена карты', quizQ5exp: 'Верно! Банк платит тебе проценты за то, что ты хранишь деньги у него. Твои деньги растут!',
     goalBike: 'Велосипед', goalBikeReason: 'Кататься с друзьями по парку!', goalHeadphones: 'Наушники', goalHeadphonesReason: 'Слушать музыку на прогулке',
+    txClosePiggy: 'Закрытие копилки', txToPiggy: 'В копилку', txFromPiggy: 'Из копилки', txQuizReward: 'Награда за квест 🧠', txQuest: 'Квест',
     testsTitle: 'Тесты',
     testsSettingsDesc: 'Проверь свои знания по финансовой грамотности',
     testsDesc: 'Тесты разработаны Центральным банком, Министерством образования и другими институтами Узбекистана для повышения финансовой грамотности молодёжи.',
@@ -1148,6 +1151,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizQ4: '"Imkoniyatiga qarab yashash" nima degani?', quizQ4a: 'Umuman sarflamaslik', quizQ4b: 'Oladigan puldan ko\'p sarflamaslik', quizQ4c: 'Hammasini sarflash', quizQ4d: 'Qarz olish', quizQ4exp: 'To\'g\'ri! Bu o\'zingda boridan ko\'p sarflamaslik degani. Hamma uchun muhim qoida!',
     quizQ5: 'Omonat foizi nima?', quizQ5a: 'Bank jarima', quizQ5b: 'Bank senga saqlash uchun to\'laydigan pul', quizQ5c: 'O\'tkazma komissiyasi', quizQ5d: 'Karta narxi', quizQ5exp: 'To\'g\'ri! Bank senga pul saqlash uchun foiz to\'laydi. Puling o\'sadi!',
     goalBike: 'Velosiped', goalBikeReason: 'Do\'stlar bilan parkda uchish!', goalHeadphones: 'Quloqchin', goalHeadphonesReason: 'Sayr paytida musiqa tinglash',
+    txClosePiggy: 'To\'plagichni yopish', txToPiggy: 'To\'plagichga', txFromPiggy: 'To\'plagichdan', txQuizReward: 'Viktorina mukofoti 🧠', txQuest: 'Viktorina',
     testsTitle: 'Testlar',
     testsSettingsDesc: 'Moliyaviy savodxonligingizni tekshiring',
     testsDesc: "Testlar O'zbekiston Markaziy banki, Ta'lim vazirligi va boshqa tashkilotlar tomonidan yoshlar moliyaviy savodxonligini oshirish uchun ishlab chiqilgan.",
@@ -1496,6 +1500,7 @@ export const translations: Record<Language, TranslationKeys> = {
     quizQ4: 'What does "live within your means" mean?', quizQ4a: 'Don\'t spend at all', quizQ4b: 'Don\'t spend more than you earn', quizQ4c: 'Spend everything at once', quizQ4d: 'Borrow money', quizQ4exp: 'Correct! It means spending no more than you have. An important rule for everyone!',
     quizQ5: 'What is deposit interest?', quizQ5a: 'A bank fine', quizQ5b: 'Money the bank pays you for storing', quizQ5c: 'Transfer fee', quizQ5d: 'Card price', quizQ5exp: 'Right! The bank pays you interest for storing your money. Your money grows!',
     goalBike: 'Bicycle', goalBikeReason: 'Ride with friends in the park!', goalHeadphones: 'Headphones', goalHeadphonesReason: 'Listen to music while walking',
+    txClosePiggy: 'Piggy bank closed', txToPiggy: 'To piggy bank', txFromPiggy: 'From piggy bank', txQuizReward: 'Quiz reward 🧠', txQuest: 'Quiz',
     testsTitle: 'Tests',
     testsSettingsDesc: 'Test your financial literacy knowledge',
     testsDesc: 'Tests developed by the Central Bank, Ministry of Education, and other institutions of Uzbekistan to improve financial literacy among youth.',

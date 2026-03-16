@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import BottomNav from '@/components/BottomNav';
-import { getTranslatedCategories, Transaction } from '@/data/mockData';
+import { getTranslatedCategories, Transaction, txDesc, txSource } from '@/data/mockData';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { X, Sparkles, Receipt, ChevronDown, RotateCcw } from 'lucide-react';
 
@@ -229,7 +229,7 @@ const History = () => {
                   className="bg-card rounded-3xl p-4 shadow-card flex items-center gap-3 cursor-pointer active:scale-[0.98] transition-transform">
                   <div className="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-lg">{tx.icon}</div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold truncate">{tx.description}</p>
+                    <p className="text-sm font-bold truncate">{txDesc(tx, t)}</p>
                     <p className="text-xs text-muted-foreground">{tx.date}</p>
                   </div>
                   <span className={`text-sm font-black px-3 py-1.5 rounded-xl ${typeColor(tx.type)}`}>
@@ -268,7 +268,7 @@ const History = () => {
                 </div>
                 <div className="bg-secondary rounded-2xl p-3 flex justify-between">
                   <span className="text-sm text-muted-foreground">{t('historyTxSource')}</span>
-                  <span className="text-sm font-bold">{selectedTx.source}</span>
+                  <span className="text-sm font-bold">{txSource(selectedTx, t)}</span>
                 </div>
                 <div className="bg-secondary rounded-2xl p-3 flex justify-between">
                   <span className="text-sm text-muted-foreground">{t('historyTxAmount')}</span>

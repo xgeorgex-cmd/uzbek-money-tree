@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
-import { goalEmojis } from '@/data/mockData';
+import { goalEmojis, goalName as gName, goalReason as gReason } from '@/data/mockData';
 
 const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
@@ -107,7 +107,7 @@ const Goals = () => {
   const handleStartEdit = (goalId: string) => {
     const goal = goals.find(g => g.id === goalId);
     if (goal) {
-      setNewGoal({ name: goal.name, targetAmount: goal.targetAmount.toString(), reason: goal.reason, emoji: goal.emoji, deadline: goal.deadline || '' });
+      setNewGoal({ name: gName(goal, t), targetAmount: goal.targetAmount.toString(), reason: gReason(goal, t), emoji: goal.emoji, deadline: goal.deadline || '' });
       setEditGoalId(goalId);
       setShowCreate(true);
     }
@@ -116,22 +116,22 @@ const Goals = () => {
   const handleContribute = (goalId: string) => {
     const amount = manualAmount ? parseInt(manualAmount.replace(/\D/g, '')) : 0;
     if (amount > 0) {
-      const goalName = goals.find(g => g.id === goalId)?.name || '';
+      const gn = goals.find(g => g.id === goalId); const gnText = gn ? gName(gn, t) : '';
       contributeToGoal(goalId, amount);
       setManualAmount('');
       setActiveGoalId(null);
-      showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), goalName);
+      showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), gnText);
     }
   };
 
   const handleWithdraw = (goalId: string) => {
     const amount = parseInt(withdrawAmount.replace(/\D/g, ''));
     if (amount > 0) {
-      const goalName = goals.find(g => g.id === goalId)?.name || '';
+      const gn = goals.find(g => g.id === goalId); const gnText = gn ? gName(gn, t) : '';
       withdrawFromGoal(goalId, amount);
       setWithdrawAmount('');
       setShowWithdraw(null);
-      showNotification(t('goalsWithdrawSuccess'), '💰', amount, t('goalsWithdraw'), goalName);
+      showNotification(t('goalsWithdrawSuccess'), '💰', amount, t('goalsWithdraw'), gnText);
     }
   };
 
@@ -159,7 +159,7 @@ const Goals = () => {
     setShowCreate(false);
     setEditGoalId(null);
     setSelectedGoalId(null);
-    showNotification(t('goalsClosedSuccess'), '💸', goal?.currentAmount || undefined, undefined, goal?.name);
+    showNotification(t('goalsClosedSuccess'), '💸', goal?.currentAmount || undefined, undefined, goal ? gName(goal, t) : undefined);
   };
 
   const calcAmountNum = parseInt(calcAmount.replace(/\D/g, '')) || 0;
@@ -206,7 +206,7 @@ const Goals = () => {
               className="p-2 rounded-2xl bg-secondary">
               <ArrowLeft size={20} />
             </motion.button>
-            <h1 className="text-lg font-black flex-1 text-center">{selectedGoal.emoji} {selectedGoal.name}</h1>
+            <h1 className="text-lg font-black flex-1 text-center">{selectedGoal.emoji} {gName(selectedGoal, t)}</h1>
             <motion.button whileTap={{ scale: 0.9 }} onClick={() => handleStartEdit(selectedGoal.id)}
               className="p-2 rounded-2xl bg-secondary">
               <Edit2 size={16} />
@@ -216,7 +216,7 @@ const Goals = () => {
           {/* Account info card — reference style */}
           <div className="mb-6">
             <p className="text-sm text-muted-foreground mb-1">
-              {selectedGoal.reason || selectedGoal.name}
+              {gReason(selectedGoal, t) || gName(selectedGoal, t)}
             </p>
             <div className="flex items-end justify-between">
               <div>
@@ -301,7 +301,7 @@ const Goals = () => {
                   <h2 className="text-xl font-black">{t('goalsTopUp')}</h2>
                   <button onClick={() => setActiveGoalId(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
                 </div>
-                <p className="text-muted-foreground text-sm mb-2">{selectedGoal.name}</p>
+                <p className="text-muted-foreground text-sm mb-2">{gName(selectedGoal, t)}</p>
                 <p className="text-xs text-muted-foreground mb-4">{t('homeCardBalance')}: {formatSum(balance)} {t('currencySuffix')}</p>
                 <input value={manualAmount} onChange={e => setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10))}
                   placeholder="0" inputMode="numeric"
@@ -328,7 +328,7 @@ const Goals = () => {
                   <button onClick={() => setShowWithdraw(null)} className="p-2 rounded-2xl bg-secondary"><X size={16} /></button>
                 </div>
                 <p className="text-muted-foreground text-sm mb-4">
-                  {selectedGoal.name} — {formatSum(selectedGoal.currentAmount)} {t('currencySuffix')}
+                  {gName(selectedGoal, t)} — {formatSum(selectedGoal.currentAmount)} {t('currencySuffix')}
                 </p>
                 <input value={withdrawAmount} onChange={e => setWithdrawAmount(e.target.value.replace(/\D/g, ''))}
                   placeholder="0" inputMode="numeric"
@@ -477,7 +477,7 @@ const Goals = () => {
                 className="bg-card rounded-3xl p-4 shadow-card w-full text-left flex items-center gap-4">
                 <div className="text-3xl">{goal.emoji}</div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-sm truncate">{goal.name}</h3>
+                  <h3 className="font-bold text-sm truncate">{gName(goal, t)}</h3>
                   <p className="text-xs text-muted-foreground">
                     {formatSum(goal.currentAmount)} / {formatSum(goal.targetAmount)} {t('currencySuffix')}
                   </p>
