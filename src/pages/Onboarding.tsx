@@ -23,7 +23,7 @@ const Onboarding = () => {
   ];
 
   const handleFinish = () => {
-    completeOnboarding(name || 'Друг', customPhoto ? 'custom' : selectedAvatar, customPhoto);
+    completeOnboarding(name || t('defaultUserName'), customPhoto ? 'custom' : selectedAvatar, customPhoto);
     navigate('/home');
   };
 
