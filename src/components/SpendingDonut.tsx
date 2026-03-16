@@ -1,9 +1,7 @@
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Transaction, expenseCategories } from '@/data/mockData';
-
-interface SpendingDonutProps {
-  transactions: Transaction[];
+import { useLanguage } from '@/contexts/LanguageContext';
   currencySuffix: string;
   title: string;
 }
