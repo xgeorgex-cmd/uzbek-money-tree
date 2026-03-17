@@ -14,8 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<LoginStep>('input');
   const [mode, setMode] = useState<LoginMode>('phone');
-  const [phone, setPhone] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
+  const [phone, setPhone] = useState('+998 ');
+  const [cardNumber, setCardNumber] = useState('9860 ');
   const [code, setCode] = useState('');
 
   const inputValue = mode === 'phone' ? phone : cardNumber;
