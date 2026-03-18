@@ -64,7 +64,7 @@ const Tests = () => {
     },
     {
       id: 'savings',
-      emoji: '🐷',
+      emoji: '🔐',
       icon: PiggyBank,
       color: 'from-green-500 to-emerald-400',
       title: t('testTopicSavings'),
