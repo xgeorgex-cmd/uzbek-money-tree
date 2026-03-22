@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal } from 'lucide-react';
+import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal, Camera, Image } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
 import { goalEmojis, goalName as gName, goalReason as gReason } from '@/data/mockData';
