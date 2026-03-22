@@ -489,6 +489,83 @@ const Goals = () => {
           amount={notif.amount} type={notif.type} description={notif.description}
           onDetails onClose={() => setNotif(n => ({ ...n, open: false }))}
         />
+
+        {/* Create/Edit goal modal (also in detail view) */}
+        <AnimatePresence>
+          {showCreate && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-foreground/40 z-[60] flex items-end" onClick={() => { setShowCreate(false); setEditGoalId(null); }}>
+              <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                onClick={e => e.stopPropagation()} className="bg-card w-full rounded-t-3xl p-6 pb-10 max-h-[85vh] overflow-y-auto">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-xl font-black">{editGoalId ? t('goalsEdit') : t('goalsCreate')}</h2>
+                  <button onClick={() => { setShowCreate(false); setEditGoalId(null); }} className="p-2 rounded-2xl bg-secondary"><X size={18} /></button>
+                </div>
+                <div className="flex gap-2 flex-wrap mb-3">
+                  {goalEmojis.map(e => (
+                    <button key={e} onClick={() => setNewGoal(g => ({ ...g, emoji: e, photo: '' }))}
+                      className={`w-11 h-11 rounded-2xl text-xl flex items-center justify-center ${newGoal.emoji === e && !newGoal.photo ? 'bg-primary/15 ring-2 ring-primary' : 'bg-secondary'}`}>
+                      {e}
+                    </button>
+                  ))}
+                </div>
+                <input ref={goalPhotoRef} type="file" accept="image/*" className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onload = (ev) => {
+                        setNewGoal(g => ({ ...g, photo: ev.target?.result as string }));
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                />
+                <div className="flex items-center gap-2 mb-5">
+                  {newGoal.photo ? (
+                    <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-primary">
+                      <img src={newGoal.photo} alt="" className="w-full h-full object-cover" />
+                      <button onClick={() => setNewGoal(g => ({ ...g, photo: '' }))}
+                        className="absolute top-0 right-0 bg-destructive text-destructive-foreground rounded-bl-lg p-0.5">
+                        <X size={12} />
+                      </button>
+                    </div>
+                  ) : (
+                    <motion.button whileTap={{ scale: 0.95 }}
+                      onClick={() => goalPhotoRef.current?.click()}
+                      className="flex items-center gap-2 bg-secondary px-4 py-2.5 rounded-2xl text-sm font-bold text-muted-foreground">
+                      <Camera size={16} />
+                      {t('goalsOrUploadPhoto')}
+                    </motion.button>
+                  )}
+                </div>
+                <label className="text-sm font-bold text-muted-foreground mb-1 block">{t('goalsName')}</label>
+                <input value={newGoal.name} onChange={e => setNewGoal(g => ({ ...g, name: e.target.value.slice(0, 30) }))}
+                  placeholder={t('goalsNamePlaceholder')}
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary" />
+                <label className="text-sm font-bold text-muted-foreground mb-1 block">{t('goalsAmount')}</label>
+                <input value={newGoal.targetAmount} onChange={e => setNewGoal(g => ({ ...g, targetAmount: e.target.value.replace(/\D/g, '').slice(0, 10) }))}
+                  placeholder={t('goalsAmountPlaceholder')} inputMode="numeric"
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary" />
+                <label className="text-sm font-bold text-muted-foreground mb-1 block">{t('goalsReason')}</label>
+                <input value={newGoal.reason} onChange={e => setNewGoal(g => ({ ...g, reason: e.target.value.slice(0, 60) }))}
+                  placeholder={t('goalsReasonPlaceholder')}
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary" />
+                <label className="text-sm font-bold text-muted-foreground mb-1 flex items-center gap-2">
+                  <Calendar size={14} /> {t('goalsDeadline')}
+                </label>
+                <input type="date" value={newGoal.deadline} onChange={e => setNewGoal(g => ({ ...g, deadline: e.target.value }))}
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-6 outline-none focus:ring-2 focus:ring-primary" />
+                <motion.button whileTap={{ scale: 0.97 }} onClick={handleCreate}
+                  className="w-full gradient-primary text-primary-foreground font-bold text-lg py-5 rounded-3xl shadow-button">
+                  {editGoalId ? t('goalsUpdate') : t('goalsSave')}
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <BottomNav />
       </div>
     );
