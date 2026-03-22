@@ -20,6 +20,7 @@ export interface Goal {
   currentAmount: number;
   reason: string;
   emoji: string;
+  photo?: string;
   createdAt: string;
   deadline?: string;
   nameKey?: string;

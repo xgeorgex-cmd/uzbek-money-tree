@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal } from 'lucide-react';
+import { Plus, X, Edit2, Calculator, Sparkles, Heart, Calendar, ArrowDownCircle, Wallet, Trash2, ArrowLeft, ChevronRight, Info, MoreHorizontal, Camera, Image } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
 import { goalEmojis, goalName as gName, goalReason as gReason } from '@/data/mockData';
@@ -59,13 +59,14 @@ const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { 
 
 const Goals = () => {
   const { t } = useLanguage();
-  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal, deleteGoal } = useApp();
+  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal, deleteGoal, contributeToGoalFromParent } = useApp();
   const [showCreate, setShowCreate] = useState(false);
   const [editGoalId, setEditGoalId] = useState<string | null>(null);
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
   const [activeGoalId, setActiveGoalId] = useState<string | null>(null);
   const [manualAmount, setManualAmount] = useState('');
-  const [newGoal, setNewGoal] = useState({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' });
+  const [newGoal, setNewGoal] = useState({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' });
+  const goalPhotoRef = useRef<HTMLInputElement>(null);
   const [showCalc, setShowCalc] = useState(false);
   const [calcAmount, setCalcAmount] = useState('');
   const [calcFreq, setCalcFreq] = useState<'daily' | 'weekly' | 'biweekly' | 'monthly'>('daily');
@@ -93,8 +94,8 @@ const Goals = () => {
   const handleCreate = () => {
     const amount = parseInt(newGoal.targetAmount.replace(/\D/g, ''));
     if (!newGoal.name || !amount) return;
-    addGoal({ name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined });
-    setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' });
+    addGoal({ name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined, photo: newGoal.photo || undefined });
+    setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' });
     setShowCreate(false);
     showNotification(
       editGoalId ? t('goalsUpdate') : t('goalsSave'),
@@ -107,7 +108,7 @@ const Goals = () => {
   const handleStartEdit = (goalId: string) => {
     const goal = goals.find(g => g.id === goalId);
     if (goal) {
-      setNewGoal({ name: gName(goal, t), targetAmount: goal.targetAmount.toString(), reason: gReason(goal, t), emoji: goal.emoji, deadline: goal.deadline || '' });
+      setNewGoal({ name: gName(goal, t), targetAmount: goal.targetAmount.toString(), reason: gReason(goal, t), emoji: goal.emoji, deadline: goal.deadline || '', photo: goal.photo || '' });
       setEditGoalId(goalId);
       setShowCreate(true);
     }
@@ -147,8 +148,17 @@ const Goals = () => {
   };
 
   const handleSendParentRequest = () => {
+    const goalId = showAskParents;
+    const amount = parseInt(askParentAmount.replace(/\D/g, '')) || 0;
     setShowAskParents(null);
     showNotification(t('requestMoneySent'), '💌', undefined, t('goalsAskParentsSend'));
+    // Simulate parent contributing after 3 seconds
+    if (goalId && amount > 0) {
+      setTimeout(() => {
+        contributeToGoalFromParent(goalId, amount);
+        showNotification(t('goalsParentContributed'), '🎉', amount, t('goalsAskParents'));
+      }, 3000);
+    }
   };
 
   const handleCloseGoal = () => {
@@ -442,7 +452,7 @@ const Goals = () => {
             <p className="font-bold text-sm text-left">{t('goalsCalcButton')}</p>
           </motion.button>
           <motion.button whileTap={{ scale: 0.97 }}
-            onClick={() => { setEditGoalId(null); setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' }); setShowCreate(true); }}
+            onClick={() => { setEditGoalId(null); setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' }); setShowCreate(true); }}
             className="bg-card rounded-3xl p-5 shadow-card flex flex-col items-start gap-3">
             <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center shadow-button">
               <Plus size={20} className="text-primary-foreground" />
@@ -475,7 +485,9 @@ const Goals = () => {
                 transition={{ delay: i * 0.1 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedGoalId(goal.id)}
                 className="bg-card rounded-3xl p-4 shadow-card w-full text-left flex items-center gap-4">
-                <div className="text-3xl">{goal.emoji}</div>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-3xl overflow-hidden shrink-0">
+                  {goal.photo ? <img src={goal.photo} alt="" className="w-full h-full object-cover" /> : goal.emoji}
+                </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-sm truncate">{gName(goal, t)}</h3>
                   <p className="text-xs text-muted-foreground">
@@ -558,13 +570,44 @@ const Goals = () => {
                 <h2 className="text-xl font-black">{editGoalId ? t('goalsEdit') : t('goalsCreate')}</h2>
                 <button onClick={() => { setShowCreate(false); setEditGoalId(null); }} className="p-2 rounded-2xl bg-secondary"><X size={18} /></button>
               </div>
-              <div className="flex gap-2 flex-wrap mb-5">
+              <div className="flex gap-2 flex-wrap mb-3">
                 {goalEmojis.map(e => (
-                  <button key={e} onClick={() => setNewGoal(g => ({ ...g, emoji: e }))}
-                    className={`w-11 h-11 rounded-2xl text-xl flex items-center justify-center ${newGoal.emoji === e ? 'bg-primary/15 ring-2 ring-primary' : 'bg-secondary'}`}>
+                  <button key={e} onClick={() => setNewGoal(g => ({ ...g, emoji: e, photo: '' }))}
+                    className={`w-11 h-11 rounded-2xl text-xl flex items-center justify-center ${newGoal.emoji === e && !newGoal.photo ? 'bg-primary/15 ring-2 ring-primary' : 'bg-secondary'}`}>
                     {e}
                   </button>
                 ))}
+              </div>
+              {/* Photo upload option */}
+              <input ref={goalPhotoRef} type="file" accept="image/*" className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                      setNewGoal(g => ({ ...g, photo: ev.target?.result as string }));
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+              />
+              <div className="flex items-center gap-2 mb-5">
+                {newGoal.photo ? (
+                  <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-primary">
+                    <img src={newGoal.photo} alt="" className="w-full h-full object-cover" />
+                    <button onClick={() => setNewGoal(g => ({ ...g, photo: '' }))}
+                      className="absolute top-0 right-0 bg-destructive text-destructive-foreground rounded-bl-lg p-0.5">
+                      <X size={12} />
+                    </button>
+                  </div>
+                ) : (
+                  <motion.button whileTap={{ scale: 0.95 }}
+                    onClick={() => goalPhotoRef.current?.click()}
+                    className="flex items-center gap-2 bg-secondary px-4 py-2.5 rounded-2xl text-sm font-bold text-muted-foreground">
+                    <Camera size={16} />
+                    {t('goalsOrUploadPhoto')}
+                  </motion.button>
+                )}
               </div>
               <label className="text-sm font-bold text-muted-foreground mb-1 block">{t('goalsName')}</label>
               <input value={newGoal.name} onChange={e => setNewGoal(g => ({ ...g, name: e.target.value.slice(0, 30) }))}

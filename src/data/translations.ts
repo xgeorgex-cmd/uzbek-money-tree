@@ -376,6 +376,14 @@ type TranslationKeys = {
   testDigitalQ3: string; testDigitalQ3a: string; testDigitalQ3b: string; testDigitalQ3c: string; testDigitalQ3d: string; testDigitalQ3exp: string;
   testDigitalQ4: string; testDigitalQ4a: string; testDigitalQ4b: string; testDigitalQ4c: string; testDigitalQ4d: string; testDigitalQ4exp: string;
   testDigitalQ5: string; testDigitalQ5a: string; testDigitalQ5b: string; testDigitalQ5c: string; testDigitalQ5d: string; testDigitalQ5exp: string;
+  // Goal photo
+  goalsOrUploadPhoto: string;
+  goalsPhotoFromCamera: string;
+  goalsPhotoFromGallery: string;
+  // Transfer contact only
+  transferContactOnly: string;
+  // Parent contribution
+  goalsParentContributed: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -852,6 +860,11 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ5c: 'Лучше не стоит — данные могут перехватить',
     testDigitalQ5d: 'Только если есть пароль у Wi-Fi',
     testDigitalQ5exp: 'Открытый Wi-Fi опасен для финансовых операций — злоумышленники могут перехватить данные.',
+    goalsOrUploadPhoto: 'или загрузи фото 📷',
+    goalsPhotoFromCamera: 'Сфотографировать',
+    goalsPhotoFromGallery: 'Из галереи',
+    transferContactOnly: 'Переводить деньги можно только контактам из твоей книги',
+    goalsParentContributed: 'Родители пополнили копилку!',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
@@ -1201,6 +1214,11 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ3: 'Internetda notanish odam shaxsiy ma\'lumot so\'rasa nima qilish kerak?', testDigitalQ3a: 'Rad etish va ota-onaga aytish', testDigitalQ3b: 'Ma\'lumot berish', testDigitalQ3c: 'Yolg\'on ma\'lumot berish', testDigitalQ3d: 'Do\'stlardan so\'rash', testDigitalQ3exp: 'Hech qachon notanishlarga shaxsiy ma\'lumot bermang.',
     testDigitalQ4: 'Parollarni qanchalik tez-tez almashtirish kerak?', testDigitalQ4a: 'Hech qachon', testDigitalQ4b: 'Muntazam, bir necha oyda bir', testDigitalQ4c: 'Har kuni', testDigitalQ4d: 'Faqat unutganda', testDigitalQ4exp: 'Parollarni xavfsizlik uchun muntazam almashtirib turish kerak.',
     testDigitalQ5: 'Kafedalgi bepul Wi-Fi orqali bank operatsiyalari qilish mumkinmi?', testDigitalQ5a: 'Ha, qulay', testDigitalQ5b: 'Ha, tez bo\'lsa', testDigitalQ5c: 'Yo\'q — ma\'lumotlarni ushlash mumkin', testDigitalQ5d: 'Wi-Fi paroli bo\'lsa mumkin', testDigitalQ5exp: 'Ochiq Wi-Fi moliyaviy operatsiyalar uchun xavfli.',
+    goalsOrUploadPhoto: 'yoki rasm yuklang 📷',
+    goalsPhotoFromCamera: 'Suratga olish',
+    goalsPhotoFromGallery: 'Galereyadan',
+    transferContactOnly: 'Pul faqat kontaktlar ro\'yxatingizdagilarga o\'tkaziladi',
+    goalsParentContributed: 'Ota-ona cho\'chqa qutisini to\'ldirdi!',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
@@ -1550,5 +1568,10 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ3: 'What if a stranger asks for personal info online?', testDigitalQ3a: 'Refuse and tell parents', testDigitalQ3b: 'Share if they are polite', testDigitalQ3c: 'Give fake info', testDigitalQ3d: 'Ask friends', testDigitalQ3exp: 'Never share personal data with strangers online. Tell your parents.',
     testDigitalQ4: 'How often should you change passwords?', testDigitalQ4a: 'Never', testDigitalQ4b: 'Regularly, every few months', testDigitalQ4c: 'Every day', testDigitalQ4d: 'Only if forgotten', testDigitalQ4exp: 'Passwords should be changed regularly for security.',
     testDigitalQ5: 'Can you use free cafe Wi-Fi for banking?', testDigitalQ5a: 'Yes, it is convenient', testDigitalQ5b: 'Yes, if quick', testDigitalQ5c: 'Better not — data can be intercepted', testDigitalQ5d: 'Only if Wi-Fi has a password', testDigitalQ5exp: 'Open Wi-Fi is dangerous for financial operations — attackers can intercept data.',
+    goalsOrUploadPhoto: 'or upload a photo 📷',
+    goalsPhotoFromCamera: 'Take a photo',
+    goalsPhotoFromGallery: 'From gallery',
+    transferContactOnly: 'You can only send money to your contacts',
+    goalsParentContributed: 'Parents topped up the piggy bank!',
   },
 };
