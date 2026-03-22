@@ -79,7 +79,6 @@ const Goals = () => {
   const [closeGoalId, setCloseGoalId] = useState<string | null>(null);
   const [showCelebration, setShowCelebration] = useState<string | null>(null);
   const [celebratedGoals, setCelebratedGoals] = useState<Set<string>>(new Set());
-  const [closeGoalId, setCloseGoalId] = useState<string | null>(null);
 
   const [notif, setNotif] = useState<{ open: boolean; title: string; emoji: string; amount?: number; type?: string; description?: string }>({
     open: false, title: '', emoji: '', amount: undefined, type: '', description: ''
