@@ -382,8 +382,14 @@ type TranslationKeys = {
   goalsPhotoFromGallery: string;
   // Transfer contact only
   transferContactOnly: string;
+  transferExceedsBalance: string;
   // Parent contribution
   goalsParentContributed: string;
+  parentTopUpReceived: string;
+  // Goal celebration
+  goalCelebrationTitle: string;
+  goalCelebrationDesc: string;
+  goalCelebrationBtn: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
