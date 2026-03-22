@@ -690,7 +690,39 @@ const Goals = () => {
         )}
       </AnimatePresence>
 
-      <OperationNotification
+      {/* Goal celebration modal (list view) */}
+      <AnimatePresence>
+        {showCelebration && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[80] bg-foreground/60 flex items-center justify-center p-6">
+            <motion.div initial={{ scale: 0.5, rotate: -10 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0.5 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+              className="bg-card rounded-3xl p-8 w-full max-w-sm text-center shadow-card relative overflow-hidden">
+              {[...Array(20)].map((_, i) => (
+                <motion.div key={i} className="absolute text-2xl"
+                  initial={{ top: '50%', left: '50%', opacity: 1, scale: 0 }}
+                  animate={{
+                    top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%`,
+                    opacity: [1, 1, 0], scale: [0, 1.5, 0.8], rotate: Math.random() * 360,
+                  }}
+                  transition={{ duration: 2, delay: i * 0.05, ease: 'easeOut' }}
+                >
+                  {['🎉', '🎊', '⭐', '✨', '🌟', '💫', '🏆', '🎯'][i % 8]}
+                </motion.div>
+              ))}
+              <motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 10, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }} className="text-7xl mb-4">🏆</motion.div>
+              <h2 className="text-2xl font-black mb-3">{t('goalCelebrationTitle')}</h2>
+              <p className="text-muted-foreground text-sm mb-6">{t('goalCelebrationDesc')}</p>
+              <motion.button whileTap={{ scale: 0.95 }} onClick={() => setShowCelebration(null)}
+                className="w-full gradient-primary text-primary-foreground font-bold text-lg py-5 rounded-3xl shadow-button">
+                {t('goalCelebrationBtn')}
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
         open={notif.open} title={notif.title} emoji={notif.emoji}
         amount={notif.amount} type={notif.type} description={notif.description}
         onDetails onClose={() => setNotif(n => ({ ...n, open: false }))}
