@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 
 const Settings = () => {
   const { t, language, setLanguage } = useLanguage();
-  const { userName, avatarId, customPhoto, logout, theme, setTheme, goals, transactions } = useApp();
+  const { userName, avatarId, customPhoto, logout, theme, setTheme, goals, transactions, quizScore } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const [showTutorial, setShowTutorial] = useState(false);
@@ -39,7 +39,7 @@ const Settings = () => {
     if (a.condition === 'login_streak_7') unlocked = false; // mock
     if (a.condition === 'app_customized') unlocked = theme !== 'calm';
     if (a.condition === 'first_goal_created') unlocked = goals.length > 0;
-    if (a.condition === 'quiz_perfect') unlocked = false; // mock
+    if (a.condition === 'quiz_perfect') unlocked = quizScore === 5;
     return { ...a, unlocked };
   });
   const earnedCount = unlockedAchievements.filter(a => a.unlocked).length;

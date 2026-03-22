@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useApp } from '@/contexts/AppContext';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { avatars, mockStories, quizQuestions, txDesc, txSource, goalName } from 
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown, BookUser, Search } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
+import AnimatedBalance from '@/components/AnimatedBalance';
 import SpendingDonut from '@/components/SpendingDonut';
 import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { toast } from 'sonner';
@@ -52,6 +53,40 @@ const Home = () => {
   const [notif, setNotif] = useState<{ open: boolean; title: string; emoji: string; amount?: number; type?: string; description?: string }>({
     open: false, title: '', emoji: ''
   });
+  const [pullY, setPullY] = useState(0);
+  const [isPulling, setIsPulling] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const touchStartY = useRef(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (scrollContainerRef.current && scrollContainerRef.current.scrollTop === 0) {
+      touchStartY.current = e.touches[0].clientY;
+      setIsPulling(true);
+    }
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isPulling) return;
+    const diff = e.touches[0].clientY - touchStartY.current;
+    if (diff > 0) {
+      setPullY(Math.min(diff * 0.4, 80));
+    }
+  }, [isPulling]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (pullY > 50) {
+      setIsRefreshing(true);
+      setTimeout(() => {
+        setIsRefreshing(false);
+        setPullY(0);
+        setIsPulling(false);
+      }, 1000);
+    } else {
+      setPullY(0);
+      setIsPulling(false);
+    }
+  }, [pullY]);
 
   const currentStory = mockStories.find(s => s.id === activeStory);
 
@@ -127,11 +162,14 @@ const Home = () => {
     if (amount > balance) return;
     if (transferTo === 'self' && transferGoalId) {
       transferMoney(amount, '', transferGoalId);
+      const goalObj = goals.find(g => g.id === transferGoalId);
+      setTransferStep('success');
+      showNotif(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), goalObj ? goalName(goalObj, t) : '');
     } else if (transferTo === 'other' && transferRecipient) {
       transferMoney(amount, transferRecipient);
+      setTransferStep('success');
+      showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
     }
-    setTransferStep('success');
-    showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
   };
 
   const handleRequestMoney = () => {
@@ -152,7 +190,28 @@ const Home = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-28">
+    <div className="min-h-screen bg-background pb-28" ref={scrollContainerRef}
+      onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      {/* Pull to refresh indicator */}
+      <AnimatePresence>
+        {(pullY > 10 || isRefreshing) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, height: isRefreshing ? 50 : pullY }}
+            exit={{ opacity: 0, height: 0 }}
+            className="flex items-center justify-center overflow-hidden"
+          >
+            <motion.span
+              animate={isRefreshing ? { rotate: 360 } : { rotate: pullY * 3 }}
+              transition={isRefreshing ? { repeat: Infinity, duration: 0.8, ease: 'linear' } : { duration: 0 }}
+              className="text-2xl"
+            >
+              🔄
+            </motion.span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header with themed gradient */}
       <div className="relative overflow-hidden px-6 pt-10 pb-5 rounded-b-[2rem]" style={{ background: 'var(--gradient-hero)' }}>
         <div className="absolute top-2 right-8 w-16 h-16 rounded-full bg-primary-foreground/5 blur-xl" />
@@ -170,9 +229,9 @@ const Home = () => {
           <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} onClick={() => setShowCardDetail(true)}
             className="flex items-center justify-between cursor-pointer active:scale-[0.98] transition-transform">
             <div>
-              <motion.p className="text-primary-foreground text-3xl font-black" initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 300 }}>
-                {formatSum(balance)} <span className="text-sm font-bold">{t('currencySuffix')}</span>
-              </motion.p>
+              <p className="text-primary-foreground text-3xl font-black">
+                <AnimatedBalance value={balance} /> <span className="text-sm font-bold">{t('currencySuffix')}</span>
+              </p>
             </div>
             <div className="flex items-center gap-1.5 bg-primary-foreground/10 rounded-xl px-2.5 py-1.5">
               <div className="w-5 h-3.5 rounded-sm bg-gradient-to-r from-blue-400 to-blue-600" />

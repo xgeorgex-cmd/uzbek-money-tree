@@ -232,7 +232,14 @@ const Goals = () => {
               className="p-2 rounded-2xl bg-secondary">
               <ArrowLeft size={20} />
             </motion.button>
-            <h1 className="text-lg font-black flex-1 text-center">{selectedGoal.emoji} {gName(selectedGoal, t)}</h1>
+            <h1 className="text-lg font-black flex-1 text-center flex items-center justify-center gap-2">
+              {selectedGoal.photo ? (
+                <img src={selectedGoal.photo} alt="" className="w-8 h-8 rounded-xl object-cover" />
+              ) : (
+                <span>{selectedGoal.emoji}</span>
+              )}
+              {gName(selectedGoal, t)}
+            </h1>
             <motion.button whileTap={{ scale: 0.9 }} onClick={() => handleStartEdit(selectedGoal.id)}
               className="p-2 rounded-2xl bg-secondary">
               <Edit2 size={16} />
@@ -331,9 +338,12 @@ const Goals = () => {
                 <p className="text-xs text-muted-foreground mb-4">{t('homeCardBalance')}: {formatSum(balance)} {t('currencySuffix')}</p>
                 <input value={manualAmount} onChange={e => setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10))}
                   placeholder="0" inputMode="numeric"
-                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-2 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+                {Number(manualAmount) > balance && Number(manualAmount) > 0 && (
+                  <p className="text-xs text-destructive font-bold text-center mb-2">{t('transferExceedsBalance')}</p>
+                )}
                 <motion.button whileTap={{ scale: 0.97 }} onClick={() => handleContribute(activeGoalId)}
-                  disabled={!manualAmount || Number(manualAmount) <= 0}
+                  disabled={!manualAmount || Number(manualAmount) <= 0 || Number(manualAmount) > balance}
                   className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button disabled:opacity-40">
                   {t('goalsConfirm')}
                 </motion.button>
