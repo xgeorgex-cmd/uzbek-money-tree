@@ -27,6 +27,7 @@ interface AppContextType extends AppState {
   completeOnboarding: (name: string, avatarId: string, customPhoto?: string | null) => void;
   updateAvatar: (avatarId: string, customPhoto?: string | null) => void;
   addGoal: (goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => void;
+  updateGoal: (goalId: string, updates: Partial<Pick<Goal, 'name' | 'targetAmount' | 'reason' | 'emoji' | 'deadline' | 'photo'>>) => void;
   deleteGoal: (goalId: string) => void;
   contributeToGoal: (goalId: string, amount: number) => void;
   contributeToGoalFromParent: (goalId: string, amount: number) => void;
