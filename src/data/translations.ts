@@ -1214,6 +1214,11 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ3: 'Internetda notanish odam shaxsiy ma\'lumot so\'rasa nima qilish kerak?', testDigitalQ3a: 'Rad etish va ota-onaga aytish', testDigitalQ3b: 'Ma\'lumot berish', testDigitalQ3c: 'Yolg\'on ma\'lumot berish', testDigitalQ3d: 'Do\'stlardan so\'rash', testDigitalQ3exp: 'Hech qachon notanishlarga shaxsiy ma\'lumot bermang.',
     testDigitalQ4: 'Parollarni qanchalik tez-tez almashtirish kerak?', testDigitalQ4a: 'Hech qachon', testDigitalQ4b: 'Muntazam, bir necha oyda bir', testDigitalQ4c: 'Har kuni', testDigitalQ4d: 'Faqat unutganda', testDigitalQ4exp: 'Parollarni xavfsizlik uchun muntazam almashtirib turish kerak.',
     testDigitalQ5: 'Kafedalgi bepul Wi-Fi orqali bank operatsiyalari qilish mumkinmi?', testDigitalQ5a: 'Ha, qulay', testDigitalQ5b: 'Ha, tez bo\'lsa', testDigitalQ5c: 'Yo\'q — ma\'lumotlarni ushlash mumkin', testDigitalQ5d: 'Wi-Fi paroli bo\'lsa mumkin', testDigitalQ5exp: 'Ochiq Wi-Fi moliyaviy operatsiyalar uchun xavfli.',
+    goalsOrUploadPhoto: 'yoki rasm yuklang 📷',
+    goalsPhotoFromCamera: 'Suratga olish',
+    goalsPhotoFromGallery: 'Galereyadan',
+    transferContactOnly: 'Pul faqat kontaktlar ro\'yxatingizdagilarga o\'tkaziladi',
+    goalsParentContributed: 'Ota-ona cho\'chqa qutisini to\'ldirdi!',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
