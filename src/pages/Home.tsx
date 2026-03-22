@@ -456,7 +456,11 @@ const Home = () => {
               </div>
               <div className="space-y-3">
                 <motion.button whileTap={{ scale: 0.97 }}
-                  onClick={() => { setShowCardDetail(false); setShowTransfer(true); setTransferStep('form'); }}
+                  onClick={() => {
+                    setShowCardDetail(false); setShowTransfer(true); setTransferStep('form');
+                    const available = goals.filter(g => g.currentAmount < g.targetAmount);
+                    if (available.length > 0) setTransferGoalId(available[0].id);
+                  }}
                   className="w-full bg-secondary rounded-3xl p-5 flex items-center gap-3 font-bold text-sm">
                   <Send size={18} className="text-primary" /> {t('homeTransferMoney')}
                 </motion.button>
