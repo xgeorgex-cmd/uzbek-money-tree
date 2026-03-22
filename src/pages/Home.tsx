@@ -15,7 +15,7 @@ const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 const Home = () => {
   const { t } = useLanguage();
-  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory, cardNumber } = useApp();
+  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory, cardNumber, transferMoney, topUpFromParent } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const lastTxs = transactions.slice(0, 3);
