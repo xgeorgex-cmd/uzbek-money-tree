@@ -1534,6 +1534,7 @@ export const translations: Record<Language, TranslationKeys> = {
     txStationery: 'Stationery', txTransport: 'Transport', txSnacks: 'Snacks', txDrinks: 'Drinks', txGiftFriend: 'Gift for friend',
     txToBike: 'For bicycle', txPiggyBank: 'Piggy bank', txCashWithdraw: 'Cash withdrawal', txATM: 'ATM',
     txSourceShop: 'Shop', txSourceSchool: 'School', txSourceBazaar: 'Bazaar', txSourceCafe: 'Cafe', txSourceMetro: 'Metro',
+    txTransferTo: 'Transfer → {name}', txParentTopUp: 'Top-up from parents', txTransfer: 'Transfer', txParents: 'Parents',
     quizQ1: 'What\'s the best thing to do with pocket money?', quizQ1a: 'Spend it all at once', quizQ1b: 'Spend some, save some', quizQ1c: 'Hide it under the pillow', quizQ1d: 'Give it to a friend', quizQ1exp: 'Correct! It\'s best to spend some on needs and save some for a big dream.',
     quizQ2: 'What is a "piggy bank" at the bank?', quizQ2a: 'A glass jar', quizQ2b: 'A special savings account', quizQ2c: 'Where money is printed', quizQ2d: 'A toy', quizQ2exp: 'Right! A piggy bank at the bank is a special account where money is stored and grows with interest.',
     quizQ3: 'Why set a financial goal?', quizQ3a: 'It\'s not needed', quizQ3b: 'To make parents happy', quizQ3c: 'To know how much and why to save', quizQ3d: 'To show off', quizQ3exp: 'Exactly! A goal helps understand how much to save and motivates you.',
