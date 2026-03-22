@@ -29,6 +29,7 @@ interface AppContextType extends AppState {
   addGoal: (goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => void;
   deleteGoal: (goalId: string) => void;
   contributeToGoal: (goalId: string, amount: number) => void;
+  contributeToGoalFromParent: (goalId: string, amount: number) => void;
   withdrawFromGoal: (goalId: string, amount: number) => void;
   markStoryViewed: (storyId: string) => void;
   likeStory: (storyId: string) => void;
