@@ -516,7 +516,6 @@ const Home = () => {
                   {transferTo === 'other' && !transferRecipient && (
                     <p className="text-xs text-destructive font-bold text-center mt-2">{t('transferContactOnly')}</p>
                   )}
-                  </motion.button>
                 </>
               ) : (
                 <div className="text-center py-8">
