@@ -108,7 +108,7 @@ const Goals = () => {
   const handleStartEdit = (goalId: string) => {
     const goal = goals.find(g => g.id === goalId);
     if (goal) {
-      setNewGoal({ name: gName(goal, t), targetAmount: goal.targetAmount.toString(), reason: gReason(goal, t), emoji: goal.emoji, deadline: goal.deadline || '' });
+      setNewGoal({ name: gName(goal, t), targetAmount: goal.targetAmount.toString(), reason: gReason(goal, t), emoji: goal.emoji, deadline: goal.deadline || '', photo: goal.photo || '' });
       setEditGoalId(goalId);
       setShowCreate(true);
     }
