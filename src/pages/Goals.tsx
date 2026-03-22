@@ -161,11 +161,18 @@ const Goals = () => {
     const amount = parseInt(askParentAmount.replace(/\D/g, '')) || 0;
     setShowAskParents(null);
     showNotification(t('requestMoneySent'), '💌', undefined, t('goalsAskParentsSend'));
-    // Simulate parent contributing after 3 seconds
     if (goalId && amount > 0) {
       setTimeout(() => {
         contributeToGoalFromParent(goalId, amount);
         showNotification(t('goalsParentContributed'), '🎉', amount, t('goalsAskParents'));
+        // Check if goal completed after parent contribution
+        const goal = goals.find(g => g.id === goalId);
+        if (goal && (goal.currentAmount + amount >= goal.targetAmount) && !celebratedGoals.has(goalId)) {
+          setTimeout(() => {
+            setShowCelebration(goalId);
+            setCelebratedGoals(prev => new Set([...prev, goalId]));
+          }, 1500);
+        }
       }, 3000);
     }
   };
