@@ -59,7 +59,7 @@ const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { 
 
 const Goals = () => {
   const { t } = useLanguage();
-  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal, deleteGoal, contributeToGoalFromParent } = useApp();
+  const { goals, balance, addGoal, updateGoal, contributeToGoal, withdrawFromGoal, deleteGoal, contributeToGoalFromParent } = useApp();
   const [showCreate, setShowCreate] = useState(false);
   const [editGoalId, setEditGoalId] = useState<string | null>(null);
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
