@@ -127,11 +127,14 @@ const Home = () => {
     if (amount > balance) return;
     if (transferTo === 'self' && transferGoalId) {
       transferMoney(amount, '', transferGoalId);
+      const goalObj = goals.find(g => g.id === transferGoalId);
+      setTransferStep('success');
+      showNotif(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), goalObj ? goalName(goalObj, t) : '');
     } else if (transferTo === 'other' && transferRecipient) {
       transferMoney(amount, transferRecipient);
+      setTransferStep('success');
+      showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
     }
-    setTransferStep('success');
-    showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
   };
 
   const handleRequestMoney = () => {

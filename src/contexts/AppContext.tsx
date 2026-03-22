@@ -256,6 +256,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
     const newTx: Transaction = {
       id: Date.now().toString(), amount: -amount, type: 'expense',
+      category: 'transfers',
       description: `Перевод → ${recipient}`,
       descKey: 'txTransferTo',
       source: recipient,

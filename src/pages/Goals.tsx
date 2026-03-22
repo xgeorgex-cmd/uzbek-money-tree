@@ -331,9 +331,12 @@ const Goals = () => {
                 <p className="text-xs text-muted-foreground mb-4">{t('homeCardBalance')}: {formatSum(balance)} {t('currencySuffix')}</p>
                 <input value={manualAmount} onChange={e => setManualAmount(e.target.value.replace(/\D/g, '').slice(0, 10))}
                   placeholder="0" inputMode="numeric"
-                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+                  className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-2 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
+                {Number(manualAmount) > balance && Number(manualAmount) > 0 && (
+                  <p className="text-xs text-destructive font-bold text-center mb-2">{t('transferExceedsBalance')}</p>
+                )}
                 <motion.button whileTap={{ scale: 0.97 }} onClick={() => handleContribute(activeGoalId)}
-                  disabled={!manualAmount || Number(manualAmount) <= 0}
+                  disabled={!manualAmount || Number(manualAmount) <= 0 || Number(manualAmount) > balance}
                   className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl shadow-button disabled:opacity-40">
                   {t('goalsConfirm')}
                 </motion.button>
