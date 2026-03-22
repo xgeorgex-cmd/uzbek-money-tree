@@ -494,7 +494,11 @@ const Home = () => {
                     <p className="text-primary-foreground font-black text-lg">•••• {last4} · {formatSum(balance)} {t('currencySuffix')}</p>
                   </div>
                   <div className="flex gap-2 mb-4 bg-secondary rounded-3xl p-1">
-                    <button onClick={() => setTransferTo('self')}
+                    <button onClick={() => {
+                      setTransferTo('self');
+                      const available = goals.filter(g => g.currentAmount < g.targetAmount);
+                      if (available.length > 0 && !transferGoalId) setTransferGoalId(available[0].id);
+                    }}
                       className={`flex-1 py-3 rounded-2xl text-sm font-bold ${transferTo === 'self' ? 'gradient-primary text-primary-foreground' : 'text-muted-foreground'}`}>
                       {t('transferToSelf')}
                     </button>
