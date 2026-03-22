@@ -134,7 +134,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     save({ ...state, goals: [...state.goals, newGoal] });
   }, [state]);
 
-  const deleteGoal = useCallback((goalId: string) => {
+  const updateGoal = useCallback((goalId: string, updates: Partial<Pick<Goal, 'name' | 'targetAmount' | 'reason' | 'emoji' | 'deadline' | 'photo'>>) => {
+    const newGoals = state.goals.map(g => g.id === goalId ? { ...g, ...updates } : g);
+    save({ ...state, goals: newGoals });
+  }, [state]);
+
     const goal = state.goals.find(g => g.id === goalId);
     if (!goal) return;
     const returnAmount = goal.currentAmount;
