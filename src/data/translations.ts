@@ -316,6 +316,10 @@ type TranslationKeys = {
   txToBike: string; txPiggyBank: string; txCashWithdraw: string; txATM: string;
   txSourceShop: string; txSourceSchool: string; txSourceBazaar: string; txSourceCafe: string;
   txSourceMetro: string;
+  txTransferTo: string;
+  txParentTopUp: string;
+  txTransfer: string;
+  txParents: string;
   // Quiz
   quizQ1: string; quizQ1a: string; quizQ1b: string; quizQ1c: string; quizQ1d: string; quizQ1exp: string;
   quizQ2: string; quizQ2a: string; quizQ2b: string; quizQ2c: string; quizQ2d: string; quizQ2exp: string;
