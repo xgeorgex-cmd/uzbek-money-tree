@@ -135,7 +135,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [state]);
 
   const updateGoal = useCallback((goalId: string, updates: Partial<Pick<Goal, 'name' | 'targetAmount' | 'reason' | 'emoji' | 'deadline' | 'photo'>>) => {
-    const newGoals = state.goals.map(g => g.id === goalId ? { ...g, ...updates } : g);
+    const newGoals = state.goals.map(g => {
+      if (g.id !== goalId) return g;
+
+      return {
+        ...g,
+        ...updates,
+        ...(updates.name !== undefined ? { nameKey: undefined } : {}),
+        ...(updates.reason !== undefined ? { reasonKey: undefined } : {}),
+      };
+    });
+
     save({ ...state, goals: newGoals });
   }, [state]);
 
