@@ -1174,6 +1174,7 @@ export const translations: Record<Language, TranslationKeys> = {
     txStationery: 'Ish qurollari', txTransport: 'Transport', txSnacks: 'Gazaklar', txDrinks: 'Ichimliklar', txGiftFriend: 'Do\'stga sovg\'a',
     txToBike: 'Velosipedga', txPiggyBank: 'To\'plagich', txCashWithdraw: 'Naqd pul yechish', txATM: 'Bankomat',
     txSourceShop: 'Do\'kon', txSourceSchool: 'Maktab', txSourceBazaar: 'Bozor', txSourceCafe: 'Kafe', txSourceMetro: 'Metro',
+    txTransferTo: 'Pul o\'tkazish → {name}', txParentTopUp: 'Ota-onadan to\'ldirish', txTransfer: 'O\'tkazma', txParents: 'Ota-ona',
     quizQ1: 'Cho\'ntak puli bilan nima qilish yaxshi?', quizQ1a: 'Hammasini sarflash', quizQ1b: 'Bir qismini sarflab, bir qismini yig\'ish', quizQ1c: 'Yostiq ostiga yashirish', quizQ1d: 'Do\'stga berish', quizQ1exp: 'To\'g\'ri! Bir qismini zaruriy narsalarga sarflab, bir qismini to\'plagichga qo\'yish yaxshi.',
     quizQ2: 'Bankdagi "to\'plagich" nima?', quizQ2a: 'Shisha banka', quizQ2b: 'Jamg\'arish uchun maxsus hisob', quizQ2c: 'Pul bosiladigan joy', quizQ2d: 'O\'yinchoq', quizQ2exp: 'To\'g\'ri! Bankdagi to\'plagich — bu pul nafaqat saqlanadigan, balki foizlar tufayli o\'sadigan maxsus hisob.',
     quizQ3: 'Nima uchun moliyaviy maqsad qo\'yish kerak?', quizQ3a: 'Kerak emas', quizQ3b: 'Ota-ona rozi bo\'lishi uchun', quizQ3c: 'Qancha va nima uchun yig\'ishni bilish uchun', quizQ3d: 'Maqtanish uchun', quizQ3exp: 'To\'g\'ri! Maqsad qancha yig\'ish kerakligini tushunishga yordam beradi.',
