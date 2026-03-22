@@ -248,7 +248,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     save({ ...state, balance: state.balance + amount, transactions: [newTx, ...state.transactions] });
   }, [state]);
 
-  return (
   const transferMoney = useCallback((amount: number, recipient: string, toGoalId?: string) => {
     if (amount <= 0 || amount > state.balance) return;
     if (toGoalId) {
