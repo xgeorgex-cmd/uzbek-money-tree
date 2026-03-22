@@ -65,7 +65,8 @@ const Goals = () => {
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
   const [activeGoalId, setActiveGoalId] = useState<string | null>(null);
   const [manualAmount, setManualAmount] = useState('');
-  const [newGoal, setNewGoal] = useState({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' });
+  const [newGoal, setNewGoal] = useState({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' });
+  const goalPhotoRef = useRef<HTMLInputElement>(null);
   const [showCalc, setShowCalc] = useState(false);
   const [calcAmount, setCalcAmount] = useState('');
   const [calcFreq, setCalcFreq] = useState<'daily' | 'weekly' | 'biweekly' | 'monthly'>('daily');
