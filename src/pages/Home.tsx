@@ -122,13 +122,26 @@ const Home = () => {
   };
 
   const handleTransfer = () => {
+    const amount = Number(transferAmount);
+    if (amount <= 0) return;
+    if (amount > balance) return;
+    if (transferTo === 'self' && transferGoalId) {
+      transferMoney(amount, '', transferGoalId);
+    } else if (transferTo === 'other' && transferRecipient) {
+      transferMoney(amount, transferRecipient);
+    }
     setTransferStep('success');
-    showNotif(t('transferSuccess'), '✅', transferAmount ? -Number(transferAmount) : undefined, t('homeTransferMoney'));
+    showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
   };
 
   const handleRequestMoney = () => {
     setRequestSent(true);
     showNotif(t('requestMoneySent'), '💌');
+    // Simulate parent top-up after 3 seconds
+    setTimeout(() => {
+      topUpFromParent(50000);
+      showNotif(t('parentTopUpReceived'), '🎉', 50000, t('homeAskParentTopUp'));
+    }, 3000);
     setTimeout(() => { setRequestSent(false); setShowRequestMoney(false); }, 2000);
   };
 
