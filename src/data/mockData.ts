@@ -29,7 +29,15 @@ export interface Goal {
 
 // Helper to resolve translated text for transactions and goals
 type TFunc = (key: any) => string;
-export const txDesc = (tx: Transaction, t: TFunc) => tx.descKey ? t(tx.descKey) : tx.description;
+export const txDesc = (tx: Transaction, t: TFunc) => {
+  if (!tx.descKey) return tx.description;
+  const translated = t(tx.descKey);
+  // Replace {name} placeholder with source (recipient name)
+  if (translated.includes('{name}')) {
+    return translated.replace('{name}', tx.source || '');
+  }
+  return translated;
+};
 export const txSource = (tx: Transaction, t: TFunc) => tx.sourceKey ? t(tx.sourceKey) : tx.source;
 export const goalName = (g: Goal, t: TFunc) => g.nameKey ? t(g.nameKey) : g.name;
 export const goalReason = (g: Goal, t: TFunc) => g.reasonKey ? t(g.reasonKey) : g.reason;
