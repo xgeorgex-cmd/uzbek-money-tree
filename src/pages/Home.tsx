@@ -7,6 +7,7 @@ import { avatars, mockStories, quizQuestions, txDesc, txSource, goalName } from 
 import { ChevronRight, Sparkles, X, Send, CreditCard, Settings as SettingsIcon, Shield, RefreshCw, AlertTriangle, Camera, Check, ThumbsUp, ThumbsDown, BookUser, Search } from 'lucide-react';
 import BottomNav from '@/components/BottomNav';
 import OperationNotification from '@/components/OperationNotification';
+import AnimatedBalance from '@/components/AnimatedBalance';
 import SpendingDonut from '@/components/SpendingDonut';
 import ProfileEditDialog from '@/components/ProfileEditDialog';
 import { toast } from 'sonner';
