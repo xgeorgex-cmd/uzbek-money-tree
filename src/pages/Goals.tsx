@@ -723,6 +723,7 @@ const Goals = () => {
         )}
       </AnimatePresence>
 
+      <OperationNotification
         open={notif.open} title={notif.title} emoji={notif.emoji}
         amount={notif.amount} type={notif.type} description={notif.description}
         onDetails onClose={() => setNotif(n => ({ ...n, open: false }))}
