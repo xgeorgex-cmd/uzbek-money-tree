@@ -860,6 +860,11 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ5c: 'Лучше не стоит — данные могут перехватить',
     testDigitalQ5d: 'Только если есть пароль у Wi-Fi',
     testDigitalQ5exp: 'Открытый Wi-Fi опасен для финансовых операций — злоумышленники могут перехватить данные.',
+    goalsOrUploadPhoto: 'или загрузи фото 📷',
+    goalsPhotoFromCamera: 'Сфотографировать',
+    goalsPhotoFromGallery: 'Из галереи',
+    transferContactOnly: 'Переводить деньги можно только контактам из твоей книги',
+    goalsParentContributed: 'Родители пополнили копилку!',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
