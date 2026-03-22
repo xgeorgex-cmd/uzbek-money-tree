@@ -166,6 +166,24 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     save({ ...state, balance: state.balance - amount, goals: newGoals, transactions: [newTx, ...state.transactions] });
   }, [state]);
 
+  const contributeToGoalFromParent = useCallback((goalId: string, amount: number) => {
+    if (amount <= 0) return;
+    const newGoals = state.goals.map(g =>
+      g.id === goalId ? { ...g, currentAmount: Math.min(g.currentAmount + amount, g.targetAmount) } : g
+    );
+    const goal = state.goals.find(g => g.id === goalId);
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: amount, type: 'income',
+      description: `Родители пополнили копилку`,
+      descKey: 'goalsParentContributed',
+      source: 'Копилка',
+      sourceKey: 'txPiggyBank',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: goal?.emoji || '💌',
+    };
+    save({ ...state, goals: newGoals, transactions: [newTx, ...state.transactions] });
+  }, [state]);
+
   const withdrawFromGoal = useCallback((goalId: string, amount: number) => {
     const goal = state.goals.find(g => g.id === goalId);
     if (!goal || amount <= 0 || amount > goal.currentAmount) return;
