@@ -27,6 +27,7 @@ interface AppContextType extends AppState {
   completeOnboarding: (name: string, avatarId: string, customPhoto?: string | null) => void;
   updateAvatar: (avatarId: string, customPhoto?: string | null) => void;
   addGoal: (goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => void;
+  updateGoal: (goalId: string, updates: Partial<Pick<Goal, 'name' | 'targetAmount' | 'reason' | 'emoji' | 'deadline' | 'photo'>>) => void;
   deleteGoal: (goalId: string) => void;
   contributeToGoal: (goalId: string, amount: number) => void;
   contributeToGoalFromParent: (goalId: string, amount: number) => void;
@@ -131,6 +132,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const addGoal = useCallback((goal: Omit<Goal, 'id' | 'currentAmount' | 'createdAt'>) => {
     const newGoal: Goal = { ...goal, id: Date.now().toString(), currentAmount: 0, createdAt: new Date().toISOString().split('T')[0] };
     save({ ...state, goals: [...state.goals, newGoal] });
+  }, [state]);
+
+  const updateGoal = useCallback((goalId: string, updates: Partial<Pick<Goal, 'name' | 'targetAmount' | 'reason' | 'emoji' | 'deadline' | 'photo'>>) => {
+    const newGoals = state.goals.map(g => g.id === goalId ? { ...g, ...updates } : g);
+    save({ ...state, goals: newGoals });
   }, [state]);
 
   const deleteGoal = useCallback((goalId: string) => {
@@ -283,7 +289,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AppContext.Provider value={{
-      ...state, login, logout, completeOnboarding, updateAvatar, addGoal, deleteGoal,
+      ...state, login, logout, completeOnboarding, updateAvatar, addGoal, updateGoal, deleteGoal,
       contributeToGoal, contributeToGoalFromParent, withdrawFromGoal, transferMoney, topUpFromParent,
       markStoryViewed, likeStory, dislikeStory,
       setTheme, setQuizScore, addQuizReward

@@ -59,7 +59,7 @@ const JourneyProgress = ({ progress, emoji, currentAmount, targetAmount, t }: { 
 
 const Goals = () => {
   const { t } = useLanguage();
-  const { goals, balance, addGoal, contributeToGoal, withdrawFromGoal, deleteGoal, contributeToGoalFromParent } = useApp();
+  const { goals, balance, addGoal, updateGoal, contributeToGoal, withdrawFromGoal, deleteGoal, contributeToGoalFromParent } = useApp();
   const [showCreate, setShowCreate] = useState(false);
   const [editGoalId, setEditGoalId] = useState<string | null>(null);
   const [selectedGoalId, setSelectedGoalId] = useState<string | null>(null);
@@ -96,7 +96,11 @@ const Goals = () => {
   const handleCreate = () => {
     const amount = parseInt(newGoal.targetAmount.replace(/\D/g, ''));
     if (!newGoal.name || !amount) return;
-    addGoal({ name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined, photo: newGoal.photo || undefined });
+    if (editGoalId) {
+      updateGoal(editGoalId, { name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined, photo: newGoal.photo || undefined });
+    } else {
+      addGoal({ name: newGoal.name, targetAmount: amount, reason: newGoal.reason, emoji: newGoal.emoji, deadline: newGoal.deadline || undefined, photo: newGoal.photo || undefined });
+    }
     setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' });
     setShowCreate(false);
     showNotification(
