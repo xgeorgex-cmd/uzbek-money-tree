@@ -249,9 +249,43 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [state]);
 
   return (
+  const transferMoney = useCallback((amount: number, recipient: string, toGoalId?: string) => {
+    if (amount <= 0 || amount > state.balance) return;
+    if (toGoalId) {
+      contributeToGoal(toGoalId, amount);
+      return;
+    }
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: -amount, type: 'expense',
+      description: `Перевод → ${recipient}`,
+      descKey: 'txTransferTo',
+      source: recipient,
+      sourceKey: 'txTransfer',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: '💸',
+    };
+    save({ ...state, balance: state.balance - amount, transactions: [newTx, ...state.transactions] });
+  }, [state, contributeToGoal]);
+
+  const topUpFromParent = useCallback((amount: number) => {
+    if (amount <= 0) return;
+    const newTx: Transaction = {
+      id: Date.now().toString(), amount: amount, type: 'income',
+      description: 'Пополнение от родителей',
+      descKey: 'txParentTopUp',
+      source: 'Родители',
+      sourceKey: 'txParents',
+      date: `${new Date().getDate().toString().padStart(2, '0')}.${(new Date().getMonth() + 1).toString().padStart(2, '0')}`,
+      icon: '💌',
+    };
+    save({ ...state, balance: state.balance + amount, transactions: [newTx, ...state.transactions] });
+  }, [state]);
+
+  return (
     <AppContext.Provider value={{
       ...state, login, logout, completeOnboarding, updateAvatar, addGoal, deleteGoal,
-      contributeToGoal, contributeToGoalFromParent, withdrawFromGoal, markStoryViewed, likeStory, dislikeStory,
+      contributeToGoal, contributeToGoalFromParent, withdrawFromGoal, transferMoney, topUpFromParent,
+      markStoryViewed, likeStory, dislikeStory,
       setTheme, setQuizScore, addQuizReward
     }}>
       {children}
