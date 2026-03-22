@@ -1229,7 +1229,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Suratga olish',
     goalsPhotoFromGallery: 'Galereyadan',
     transferContactOnly: 'Pul faqat kontaktlar ro\'yxatingizdagilarga o\'tkaziladi',
+    transferExceedsBalance: 'Summa karta balansidan oshib ketdi',
     goalsParentContributed: 'Ota-ona cho\'chqa qutisini to\'ldirdi!',
+    parentTopUpReceived: 'Ota-ona kartani to\'ldirdi! 🎉',
+    goalCelebrationTitle: 'Maqsadga erishildi! 🎉',
+    goalCelebrationDesc: 'Tabriklaymiz! Siz butun summani yig\'dingiz! Zo\'r! 🏆',
+    goalCelebrationBtn: 'Yashsha! 🎊',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
