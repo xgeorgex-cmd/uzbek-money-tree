@@ -382,8 +382,14 @@ type TranslationKeys = {
   goalsPhotoFromGallery: string;
   // Transfer contact only
   transferContactOnly: string;
+  transferExceedsBalance: string;
   // Parent contribution
   goalsParentContributed: string;
+  parentTopUpReceived: string;
+  // Goal celebration
+  goalCelebrationTitle: string;
+  goalCelebrationDesc: string;
+  goalCelebrationBtn: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -864,7 +870,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Сфотографировать',
     goalsPhotoFromGallery: 'Из галереи',
     transferContactOnly: 'Переводить деньги можно только контактам из твоей книги',
+    transferExceedsBalance: 'Сумма превышает баланс карты',
     goalsParentContributed: 'Родители пополнили копилку!',
+    parentTopUpReceived: 'Родители пополнили карту! 🎉',
+    goalCelebrationTitle: 'Цель достигнута! 🎉',
+    goalCelebrationDesc: 'Поздравляем! Ты накопил всю сумму! Так держать! 🏆',
+    goalCelebrationBtn: 'Ура! 🎊',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
@@ -1218,7 +1229,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Suratga olish',
     goalsPhotoFromGallery: 'Galereyadan',
     transferContactOnly: 'Pul faqat kontaktlar ro\'yxatingizdagilarga o\'tkaziladi',
+    transferExceedsBalance: 'Summa karta balansidan oshib ketdi',
     goalsParentContributed: 'Ota-ona cho\'chqa qutisini to\'ldirdi!',
+    parentTopUpReceived: 'Ota-ona kartani to\'ldirdi! 🎉',
+    goalCelebrationTitle: 'Maqsadga erishildi! 🎉',
+    goalCelebrationDesc: 'Tabriklaymiz! Siz butun summani yig\'dingiz! Zo\'r! 🏆',
+    goalCelebrationBtn: 'Yashsha! 🎊',
   },
   en: {
     welcomeTitle: 'Hello! 👋',
@@ -1572,6 +1588,11 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Take a photo',
     goalsPhotoFromGallery: 'From gallery',
     transferContactOnly: 'You can only send money to your contacts',
+    transferExceedsBalance: 'Amount exceeds card balance',
     goalsParentContributed: 'Parents topped up the piggy bank!',
+    parentTopUpReceived: 'Parents topped up your card! 🎉',
+    goalCelebrationTitle: 'Goal achieved! 🎉',
+    goalCelebrationDesc: 'Congratulations! You saved the full amount! Keep it up! 🏆',
+    goalCelebrationBtn: 'Yay! 🎊',
   },
 };

@@ -15,7 +15,7 @@ const formatSum = (amount: number) => amount.toLocaleString('ru-RU');
 
 const Home = () => {
   const { t } = useLanguage();
-  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory, cardNumber } = useApp();
+  const { userName, avatarId, customPhoto, balance, transactions, goals, viewedStories, markStoryViewed, updateAvatar, quizScore, lastQuizScore, setQuizScore, addQuizReward, likedStories, dislikedStories, likeStory, dislikeStory, cardNumber, transferMoney, topUpFromParent } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const lastTxs = transactions.slice(0, 3);
@@ -122,13 +122,26 @@ const Home = () => {
   };
 
   const handleTransfer = () => {
+    const amount = Number(transferAmount);
+    if (amount <= 0) return;
+    if (amount > balance) return;
+    if (transferTo === 'self' && transferGoalId) {
+      transferMoney(amount, '', transferGoalId);
+    } else if (transferTo === 'other' && transferRecipient) {
+      transferMoney(amount, transferRecipient);
+    }
     setTransferStep('success');
-    showNotif(t('transferSuccess'), '✅', transferAmount ? -Number(transferAmount) : undefined, t('homeTransferMoney'));
+    showNotif(t('transferSuccess'), '✅', -amount, t('homeTransferMoney'));
   };
 
   const handleRequestMoney = () => {
     setRequestSent(true);
     showNotif(t('requestMoneySent'), '💌');
+    // Simulate parent top-up after 3 seconds
+    setTimeout(() => {
+      topUpFromParent(50000);
+      showNotif(t('parentTopUpReceived'), '🎉', 50000, t('homeAskParentTopUp'));
+    }, 3000);
     setTimeout(() => { setRequestSent(false); setShowRequestMoney(false); }, 2000);
   };
 
@@ -453,53 +466,67 @@ const Home = () => {
                         <Shield size={16} className="text-primary shrink-0 mt-0.5" />
                         <p className="text-xs font-semibold text-foreground/80">{t('transferContactHint')}</p>
                       </div>
-                      <p className="text-sm font-bold text-muted-foreground mb-2">{t('transferSelectContact')}</p>
-                      {/* Search */}
-                      <div className="relative mb-3">
-                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                        <input value={contactSearch} onChange={e => setContactSearch(e.target.value)}
-                          placeholder="🔍"
-                          className="w-full bg-secondary text-foreground font-semibold pl-10 pr-4 py-3 rounded-2xl outline-none focus:ring-2 focus:ring-primary text-sm" />
-                      </div>
-                      {/* Contact list */}
-                      <div className="space-y-2 max-h-48 overflow-y-auto">
-                        {[
-                          { name: t('contactDad'), emoji: '👨', phone: '+998 90 ••• •• 12' },
-                          { name: t('contactMom'), emoji: '👩', phone: '+998 91 ••• •• 34' },
-                          { name: t('contactGrandma'), emoji: '👵', phone: '+998 90 ••• •• 56' },
-                          { name: t('contactGrandpa'), emoji: '👴', phone: '+998 93 ••• •• 78' },
-                          { name: t('contactBrother'), emoji: '👦', phone: '+998 94 ••• •• 90' },
-                          { name: t('contactSister'), emoji: '👧', phone: '+998 95 ••• •• 11' },
-                          { name: 'Aziz', emoji: '👦', phone: '+998 97 ••• •• 22' },
-                          { name: 'Malika', emoji: '👧', phone: '+998 90 ••• •• 33' },
-                          { name: 'Jasur', emoji: '👦', phone: '+998 91 ••• •• 44' },
-                          { name: 'Nilufar', emoji: '👧', phone: '+998 93 ••• •• 55' },
-                          { name: 'Bro 😎', emoji: '🤙', phone: '+998 94 ••• •• 66' },
-                          { name: 'Kesha', emoji: '🎮', phone: '+998 95 ••• •• 77' },
-                        ].filter(c => !contactSearch || c.name.toLowerCase().includes(contactSearch.toLowerCase()))
-                         .map(contact => (
-                          <motion.button key={contact.name} whileTap={{ scale: 0.97 }}
-                            onClick={() => setTransferRecipient(contact.name)}
-                            className={`w-full rounded-2xl p-3.5 flex items-center gap-3 text-left transition-all ${
-                              transferRecipient === contact.name 
-                                ? 'bg-primary/15 ring-2 ring-primary' 
-                                : 'bg-secondary'
-                            }`}>
-                            <div className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-xl">
-                              {contact.emoji}
-                            </div>
-                            <div className="flex-1">
-                              <p className="text-sm font-bold">{contact.name}</p>
-                              <p className="text-xs text-muted-foreground">{contact.phone}</p>
-                            </div>
-                            {transferRecipient === contact.name && (
-                              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
-                                <Check size={18} className="text-primary" />
-                              </motion.div>
-                            )}
-                          </motion.button>
-                        ))}
-                      </div>
+
+                      {transferRecipient ? (
+                        /* Show selected contact */
+                        <div className="bg-primary/10 rounded-2xl p-4 flex items-center gap-3 mb-2">
+                          <div className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-xl">
+                            {[
+                              { name: t('contactDad'), emoji: '👨' }, { name: t('contactMom'), emoji: '👩' },
+                              { name: t('contactGrandma'), emoji: '👵' }, { name: t('contactGrandpa'), emoji: '👴' },
+                              { name: t('contactBrother'), emoji: '👦' }, { name: t('contactSister'), emoji: '👧' },
+                              { name: 'Aziz', emoji: '👦' }, { name: 'Malika', emoji: '👧' },
+                              { name: 'Jasur', emoji: '👦' }, { name: 'Nilufar', emoji: '👧' },
+                              { name: 'Bro 😎', emoji: '🤙' }, { name: 'Kesha', emoji: '🎮' },
+                            ].find(c => c.name === transferRecipient)?.emoji || '👤'}
+                          </div>
+                          <p className="text-sm font-bold flex-1">{transferRecipient}</p>
+                          <button onClick={() => setTransferRecipient('')} className="p-1.5 rounded-full bg-secondary">
+                            <X size={14} />
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <p className="text-sm font-bold text-muted-foreground mb-2">{t('transferSelectContact')}</p>
+                          {/* Search */}
+                          <div className="relative mb-3">
+                            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                            <input value={contactSearch} onChange={e => setContactSearch(e.target.value)}
+                              placeholder="🔍"
+                              className="w-full bg-secondary text-foreground font-semibold pl-10 pr-4 py-3 rounded-2xl outline-none focus:ring-2 focus:ring-primary text-sm" />
+                          </div>
+                          {/* Contact list */}
+                          <div className="space-y-2 max-h-48 overflow-y-auto">
+                            {[
+                              { name: t('contactDad'), emoji: '👨', phone: '+998 90 ••• •• 12' },
+                              { name: t('contactMom'), emoji: '👩', phone: '+998 91 ••• •• 34' },
+                              { name: t('contactGrandma'), emoji: '👵', phone: '+998 90 ••• •• 56' },
+                              { name: t('contactGrandpa'), emoji: '👴', phone: '+998 93 ••• •• 78' },
+                              { name: t('contactBrother'), emoji: '👦', phone: '+998 94 ••• •• 90' },
+                              { name: t('contactSister'), emoji: '👧', phone: '+998 95 ••• •• 11' },
+                              { name: 'Aziz', emoji: '👦', phone: '+998 97 ••• •• 22' },
+                              { name: 'Malika', emoji: '👧', phone: '+998 90 ••• •• 33' },
+                              { name: 'Jasur', emoji: '👦', phone: '+998 91 ••• •• 44' },
+                              { name: 'Nilufar', emoji: '👧', phone: '+998 93 ••• •• 55' },
+                              { name: 'Bro 😎', emoji: '🤙', phone: '+998 94 ••• •• 66' },
+                              { name: 'Kesha', emoji: '🎮', phone: '+998 95 ••• •• 77' },
+                            ].filter(c => !contactSearch || c.name.toLowerCase().includes(contactSearch.toLowerCase()))
+                             .map(contact => (
+                              <motion.button key={contact.name} whileTap={{ scale: 0.97 }}
+                                onClick={() => setTransferRecipient(contact.name)}
+                                className="w-full rounded-2xl p-3.5 flex items-center gap-3 text-left bg-secondary">
+                                <div className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-xl">
+                                  {contact.emoji}
+                                </div>
+                                <div className="flex-1">
+                                  <p className="text-sm font-bold">{contact.name}</p>
+                                  <p className="text-xs text-muted-foreground">{contact.phone}</p>
+                                </div>
+                              </motion.button>
+                            ))}
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
 
@@ -508,8 +535,12 @@ const Home = () => {
                     placeholder="0" inputMode="numeric"
                     className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
 
+                  {Number(transferAmount) > balance && Number(transferAmount) > 0 && (
+                    <p className="text-xs text-destructive font-bold text-center mb-2">{t('transferExceedsBalance')}</p>
+                  )}
+
                   <motion.button whileTap={{ scale: 0.97 }} onClick={handleTransfer}
-                    disabled={!transferAmount || Number(transferAmount) <= 0 || (transferTo === 'other' && !transferRecipient)}
+                    disabled={!transferAmount || Number(transferAmount) <= 0 || Number(transferAmount) > balance || (transferTo === 'other' && !transferRecipient)}
                     className="w-full gradient-primary text-primary-foreground font-bold text-lg py-5 rounded-3xl shadow-button disabled:opacity-40">
                     {t('transferSend')}
                   </motion.button>
