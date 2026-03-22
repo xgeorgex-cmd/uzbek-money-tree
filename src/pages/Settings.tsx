@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 
 const Settings = () => {
   const { t, language, setLanguage } = useLanguage();
-  const { userName, avatarId, customPhoto, logout, theme, setTheme, goals, transactions } = useApp();
+  const { userName, avatarId, customPhoto, logout, theme, setTheme, goals, transactions, quizScore } = useApp();
   const navigate = useNavigate();
   const avatar = avatars.find(a => a.id === avatarId);
   const [showTutorial, setShowTutorial] = useState(false);
