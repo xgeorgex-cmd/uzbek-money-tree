@@ -1588,6 +1588,11 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Take a photo',
     goalsPhotoFromGallery: 'From gallery',
     transferContactOnly: 'You can only send money to your contacts',
+    transferExceedsBalance: 'Amount exceeds card balance',
     goalsParentContributed: 'Parents topped up the piggy bank!',
+    parentTopUpReceived: 'Parents topped up your card! 🎉',
+    goalCelebrationTitle: 'Goal achieved! 🎉',
+    goalCelebrationDesc: 'Congratulations! You saved the full amount! Keep it up! 🏆',
+    goalCelebrationBtn: 'Yay! 🎊',
   },
 };
