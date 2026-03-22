@@ -485,7 +485,9 @@ const Goals = () => {
                 transition={{ delay: i * 0.1 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedGoalId(goal.id)}
                 className="bg-card rounded-3xl p-4 shadow-card w-full text-left flex items-center gap-4">
-                <div className="text-3xl">{goal.emoji}</div>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-3xl overflow-hidden shrink-0">
+                  {goal.photo ? <img src={goal.photo} alt="" className="w-full h-full object-cover" /> : goal.emoji}
+                </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-sm truncate">{gName(goal, t)}</h3>
                   <p className="text-xs text-muted-foreground">
