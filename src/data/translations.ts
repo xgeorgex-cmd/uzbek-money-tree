@@ -1568,5 +1568,10 @@ export const translations: Record<Language, TranslationKeys> = {
     testDigitalQ3: 'What if a stranger asks for personal info online?', testDigitalQ3a: 'Refuse and tell parents', testDigitalQ3b: 'Share if they are polite', testDigitalQ3c: 'Give fake info', testDigitalQ3d: 'Ask friends', testDigitalQ3exp: 'Never share personal data with strangers online. Tell your parents.',
     testDigitalQ4: 'How often should you change passwords?', testDigitalQ4a: 'Never', testDigitalQ4b: 'Regularly, every few months', testDigitalQ4c: 'Every day', testDigitalQ4d: 'Only if forgotten', testDigitalQ4exp: 'Passwords should be changed regularly for security.',
     testDigitalQ5: 'Can you use free cafe Wi-Fi for banking?', testDigitalQ5a: 'Yes, it is convenient', testDigitalQ5b: 'Yes, if quick', testDigitalQ5c: 'Better not — data can be intercepted', testDigitalQ5d: 'Only if Wi-Fi has a password', testDigitalQ5exp: 'Open Wi-Fi is dangerous for financial operations — attackers can intercept data.',
+    goalsOrUploadPhoto: 'or upload a photo 📷',
+    goalsPhotoFromCamera: 'Take a photo',
+    goalsPhotoFromGallery: 'From gallery',
+    transferContactOnly: 'You can only send money to your contacts',
+    goalsParentContributed: 'Parents topped up the piggy bank!',
   },
 };

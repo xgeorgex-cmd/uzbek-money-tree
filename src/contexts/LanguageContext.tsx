@@ -13,7 +13,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLang] = useState<Language>(() => {
     const saved = localStorage.getItem('app-language');
     if (saved && ['ru', 'uz', 'en'].includes(saved)) return saved as Language;
-    return 'ru';
+    return 'uz';
   });
 
   const setLanguage = useCallback((lang: Language) => {
