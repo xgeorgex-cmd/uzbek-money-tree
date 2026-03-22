@@ -232,7 +232,14 @@ const Goals = () => {
               className="p-2 rounded-2xl bg-secondary">
               <ArrowLeft size={20} />
             </motion.button>
-            <h1 className="text-lg font-black flex-1 text-center">{selectedGoal.emoji} {gName(selectedGoal, t)}</h1>
+            <h1 className="text-lg font-black flex-1 text-center flex items-center justify-center gap-2">
+              {selectedGoal.photo ? (
+                <img src={selectedGoal.photo} alt="" className="w-8 h-8 rounded-xl object-cover" />
+              ) : (
+                <span>{selectedGoal.emoji}</span>
+              )}
+              {gName(selectedGoal, t)}
+            </h1>
             <motion.button whileTap={{ scale: 0.9 }} onClick={() => handleStartEdit(selectedGoal.id)}
               className="p-2 rounded-2xl bg-secondary">
               <Edit2 size={16} />
