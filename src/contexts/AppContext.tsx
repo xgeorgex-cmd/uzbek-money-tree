@@ -289,7 +289,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AppContext.Provider value={{
-      ...state, login, logout, completeOnboarding, updateAvatar, addGoal, deleteGoal,
+      ...state, login, logout, completeOnboarding, updateAvatar, addGoal, updateGoal, deleteGoal,
       contributeToGoal, contributeToGoalFromParent, withdrawFromGoal, transferMoney, topUpFromParent,
       markStoryViewed, likeStory, dislikeStory,
       setTheme, setQuizScore, addQuizReward
