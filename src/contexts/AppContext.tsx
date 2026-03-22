@@ -139,6 +139,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     save({ ...state, goals: newGoals });
   }, [state]);
 
+  const deleteGoal = useCallback((goalId: string) => {
     const goal = state.goals.find(g => g.id === goalId);
     if (!goal) return;
     const returnAmount = goal.currentAmount;
