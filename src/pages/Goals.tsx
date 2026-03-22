@@ -443,7 +443,7 @@ const Goals = () => {
             <p className="font-bold text-sm text-left">{t('goalsCalcButton')}</p>
           </motion.button>
           <motion.button whileTap={{ scale: 0.97 }}
-            onClick={() => { setEditGoalId(null); setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '' }); setShowCreate(true); }}
+            onClick={() => { setEditGoalId(null); setNewGoal({ name: '', targetAmount: '', reason: '', emoji: '🎯', deadline: '', photo: '' }); setShowCreate(true); }}
             className="bg-card rounded-3xl p-5 shadow-card flex flex-col items-start gap-3">
             <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center shadow-button">
               <Plus size={20} className="text-primary-foreground" />
