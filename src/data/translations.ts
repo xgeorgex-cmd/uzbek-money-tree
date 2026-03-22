@@ -376,6 +376,14 @@ type TranslationKeys = {
   testDigitalQ3: string; testDigitalQ3a: string; testDigitalQ3b: string; testDigitalQ3c: string; testDigitalQ3d: string; testDigitalQ3exp: string;
   testDigitalQ4: string; testDigitalQ4a: string; testDigitalQ4b: string; testDigitalQ4c: string; testDigitalQ4d: string; testDigitalQ4exp: string;
   testDigitalQ5: string; testDigitalQ5a: string; testDigitalQ5b: string; testDigitalQ5c: string; testDigitalQ5d: string; testDigitalQ5exp: string;
+  // Goal photo
+  goalsOrUploadPhoto: string;
+  goalsPhotoFromCamera: string;
+  goalsPhotoFromGallery: string;
+  // Transfer contact only
+  transferContactOnly: string;
+  // Parent contribution
+  goalsParentContributed: string;
 };
 
 export const translations: Record<Language, TranslationKeys> = {
