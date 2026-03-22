@@ -870,7 +870,12 @@ export const translations: Record<Language, TranslationKeys> = {
     goalsPhotoFromCamera: 'Сфотографировать',
     goalsPhotoFromGallery: 'Из галереи',
     transferContactOnly: 'Переводить деньги можно только контактам из твоей книги',
+    transferExceedsBalance: 'Сумма превышает баланс карты',
     goalsParentContributed: 'Родители пополнили копилку!',
+    parentTopUpReceived: 'Родители пополнили карту! 🎉',
+    goalCelebrationTitle: 'Цель достигнута! 🎉',
+    goalCelebrationDesc: 'Поздравляем! Ты накопил всю сумму! Так держать! 🏆',
+    goalCelebrationBtn: 'Ура! 🎊',
   },
   uz: {
     welcomeTitle: 'Salom! 👋',
