@@ -31,6 +31,8 @@ interface AppContextType extends AppState {
   contributeToGoal: (goalId: string, amount: number) => void;
   contributeToGoalFromParent: (goalId: string, amount: number) => void;
   withdrawFromGoal: (goalId: string, amount: number) => void;
+  transferMoney: (amount: number, recipient: string, toGoalId?: string) => void;
+  topUpFromParent: (amount: number) => void;
   markStoryViewed: (storyId: string) => void;
   likeStory: (storyId: string) => void;
   dislikeStory: (storyId: string) => void;
