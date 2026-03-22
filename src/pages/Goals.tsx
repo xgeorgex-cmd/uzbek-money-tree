@@ -124,6 +124,13 @@ const Goals = () => {
       setManualAmount('');
       setActiveGoalId(null);
       showNotification(t('goalsConfirm'), '✅', -amount, t('goalsTopUp'), gnText);
+      // Check if goal will be completed
+      if (gn && (gn.currentAmount + amount >= gn.targetAmount) && !celebratedGoals.has(goalId)) {
+        setTimeout(() => {
+          setShowCelebration(goalId);
+          setCelebratedGoals(prev => new Set([...prev, goalId]));
+        }, 1500);
+      }
     }
   };
 
