@@ -316,6 +316,10 @@ type TranslationKeys = {
   txToBike: string; txPiggyBank: string; txCashWithdraw: string; txATM: string;
   txSourceShop: string; txSourceSchool: string; txSourceBazaar: string; txSourceCafe: string;
   txSourceMetro: string;
+  txTransferTo: string;
+  txParentTopUp: string;
+  txTransfer: string;
+  txParents: string;
   // Quiz
   quizQ1: string; quizQ1a: string; quizQ1b: string; quizQ1c: string; quizQ1d: string; quizQ1exp: string;
   quizQ2: string; quizQ2a: string; quizQ2b: string; quizQ2c: string; quizQ2d: string; quizQ2exp: string;
@@ -685,6 +689,7 @@ export const translations: Record<Language, TranslationKeys> = {
     txStationery: 'Канцтовары', txTransport: 'Транспорт', txSnacks: 'Снеки', txDrinks: 'Напитки', txGiftFriend: 'Подарок другу',
     txToBike: 'На велосипед', txPiggyBank: 'Копилка', txCashWithdraw: 'Снятие наличных', txATM: 'Банкомат',
     txSourceShop: 'Магазин', txSourceSchool: 'Школа', txSourceBazaar: 'Базар', txSourceCafe: 'Кафе', txSourceMetro: 'Метро',
+    txTransferTo: 'Перевод → {name}', txParentTopUp: 'Пополнение от родителей', txTransfer: 'Перевод', txParents: 'Родители',
     quizQ1: 'Что лучше делать с карманными деньгами?', quizQ1a: 'Потратить всё сразу', quizQ1b: 'Часть потратить, часть отложить', quizQ1c: 'Спрятать под подушку', quizQ1d: 'Отдать другу', quizQ1exp: 'Правильно! Лучше часть потратить на нужное, а часть отложить в копилку для большой мечты.',
     quizQ2: 'Что такое "копилка" в банке?', quizQ2a: 'Стеклянная банка', quizQ2b: 'Специальный счёт для накоплений', quizQ2c: 'Место где печатают деньги', quizQ2d: 'Игрушка', quizQ2exp: 'Верно! Копилка в банке — это специальный счёт, где деньги не только хранятся, но и растут благодаря процентам.',
     quizQ3: 'Зачем ставить финансовую цель?', quizQ3a: 'Это не нужно', quizQ3b: 'Чтобы родители были довольны', quizQ3c: 'Чтобы знать сколько и зачем копить', quizQ3d: 'Чтобы похвастаться', quizQ3exp: 'Точно! Цель помогает понять, сколько нужно откладывать и мотивирует копить.',
@@ -1169,6 +1174,7 @@ export const translations: Record<Language, TranslationKeys> = {
     txStationery: 'Ish qurollari', txTransport: 'Transport', txSnacks: 'Gazaklar', txDrinks: 'Ichimliklar', txGiftFriend: 'Do\'stga sovg\'a',
     txToBike: 'Velosipedga', txPiggyBank: 'To\'plagich', txCashWithdraw: 'Naqd pul yechish', txATM: 'Bankomat',
     txSourceShop: 'Do\'kon', txSourceSchool: 'Maktab', txSourceBazaar: 'Bozor', txSourceCafe: 'Kafe', txSourceMetro: 'Metro',
+    txTransferTo: 'Pul o\'tkazish → {name}', txParentTopUp: 'Ota-onadan to\'ldirish', txTransfer: 'O\'tkazma', txParents: 'Ota-ona',
     quizQ1: 'Cho\'ntak puli bilan nima qilish yaxshi?', quizQ1a: 'Hammasini sarflash', quizQ1b: 'Bir qismini sarflab, bir qismini yig\'ish', quizQ1c: 'Yostiq ostiga yashirish', quizQ1d: 'Do\'stga berish', quizQ1exp: 'To\'g\'ri! Bir qismini zaruriy narsalarga sarflab, bir qismini to\'plagichga qo\'yish yaxshi.',
     quizQ2: 'Bankdagi "to\'plagich" nima?', quizQ2a: 'Shisha banka', quizQ2b: 'Jamg\'arish uchun maxsus hisob', quizQ2c: 'Pul bosiladigan joy', quizQ2d: 'O\'yinchoq', quizQ2exp: 'To\'g\'ri! Bankdagi to\'plagich — bu pul nafaqat saqlanadigan, balki foizlar tufayli o\'sadigan maxsus hisob.',
     quizQ3: 'Nima uchun moliyaviy maqsad qo\'yish kerak?', quizQ3a: 'Kerak emas', quizQ3b: 'Ota-ona rozi bo\'lishi uchun', quizQ3c: 'Qancha va nima uchun yig\'ishni bilish uchun', quizQ3d: 'Maqtanish uchun', quizQ3exp: 'To\'g\'ri! Maqsad qancha yig\'ish kerakligini tushunishga yordam beradi.',
@@ -1528,6 +1534,7 @@ export const translations: Record<Language, TranslationKeys> = {
     txStationery: 'Stationery', txTransport: 'Transport', txSnacks: 'Snacks', txDrinks: 'Drinks', txGiftFriend: 'Gift for friend',
     txToBike: 'For bicycle', txPiggyBank: 'Piggy bank', txCashWithdraw: 'Cash withdrawal', txATM: 'ATM',
     txSourceShop: 'Shop', txSourceSchool: 'School', txSourceBazaar: 'Bazaar', txSourceCafe: 'Cafe', txSourceMetro: 'Metro',
+    txTransferTo: 'Transfer → {name}', txParentTopUp: 'Top-up from parents', txTransfer: 'Transfer', txParents: 'Parents',
     quizQ1: 'What\'s the best thing to do with pocket money?', quizQ1a: 'Spend it all at once', quizQ1b: 'Spend some, save some', quizQ1c: 'Hide it under the pillow', quizQ1d: 'Give it to a friend', quizQ1exp: 'Correct! It\'s best to spend some on needs and save some for a big dream.',
     quizQ2: 'What is a "piggy bank" at the bank?', quizQ2a: 'A glass jar', quizQ2b: 'A special savings account', quizQ2c: 'Where money is printed', quizQ2d: 'A toy', quizQ2exp: 'Right! A piggy bank at the bank is a special account where money is stored and grows with interest.',
     quizQ3: 'Why set a financial goal?', quizQ3a: 'It\'s not needed', quizQ3b: 'To make parents happy', quizQ3c: 'To know how much and why to save', quizQ3d: 'To show off', quizQ3exp: 'Exactly! A goal helps understand how much to save and motivates you.',
