@@ -148,8 +148,17 @@ const Goals = () => {
   };
 
   const handleSendParentRequest = () => {
+    const goalId = showAskParents;
+    const amount = parseInt(askParentAmount.replace(/\D/g, '')) || 0;
     setShowAskParents(null);
     showNotification(t('requestMoneySent'), '💌', undefined, t('goalsAskParentsSend'));
+    // Simulate parent contributing after 3 seconds
+    if (goalId && amount > 0) {
+      setTimeout(() => {
+        contributeToGoalFromParent(goalId, amount);
+        showNotification(t('goalsParentContributed'), '🎉', amount, t('goalsAskParents'));
+      }, 3000);
+    }
   };
 
   const handleCloseGoal = () => {
