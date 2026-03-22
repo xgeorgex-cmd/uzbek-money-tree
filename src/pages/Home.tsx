@@ -535,8 +535,12 @@ const Home = () => {
                     placeholder="0" inputMode="numeric"
                     className="w-full bg-secondary text-foreground font-bold p-4 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-primary text-center text-xl" />
 
+                  {Number(transferAmount) > balance && Number(transferAmount) > 0 && (
+                    <p className="text-xs text-destructive font-bold text-center mb-2">{t('transferExceedsBalance')}</p>
+                  )}
+
                   <motion.button whileTap={{ scale: 0.97 }} onClick={handleTransfer}
-                    disabled={!transferAmount || Number(transferAmount) <= 0 || (transferTo === 'other' && !transferRecipient)}
+                    disabled={!transferAmount || Number(transferAmount) <= 0 || Number(transferAmount) > balance || (transferTo === 'other' && !transferRecipient)}
                     className="w-full gradient-primary text-primary-foreground font-bold text-lg py-5 rounded-3xl shadow-button disabled:opacity-40">
                     {t('transferSend')}
                   </motion.button>
