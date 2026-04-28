@@ -9,6 +9,7 @@ const langOptions: { key: Language; label: string; flag: string }[] = [
   { key: 'uz', label: "O'zbekcha", flag: '🇺🇿' },
   { key: 'ru', label: 'Русский', flag: '🇷🇺' },
   { key: 'en', label: 'English', flag: '🇬🇧' },
+  { key: 'hi', label: 'हिन्दी', flag: '🇮🇳' },
 ];
 
 const Welcome = () => {
