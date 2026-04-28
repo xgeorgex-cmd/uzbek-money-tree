@@ -12,7 +12,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLang] = useState<Language>(() => {
     const saved = localStorage.getItem('app-language');
-    if (saved && ['ru', 'uz', 'en'].includes(saved)) return saved as Language;
+    if (saved && ['ru', 'uz', 'en', 'hi'].includes(saved)) return saved as Language;
     return 'uz';
   });
 
