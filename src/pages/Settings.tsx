@@ -23,6 +23,7 @@ const Settings = () => {
     { code: 'ru', label: 'Русский', flag: '🇷🇺' },
     { code: 'uz', label: "O'zbekcha", flag: '🇺🇿' },
     { code: 'en', label: 'English', flag: '🇬🇧' },
+    { code: 'hi', label: 'हिन्दी', flag: '🇮🇳' },
   ];
 
   const handleLogout = () => { logout(); navigate('/'); };
