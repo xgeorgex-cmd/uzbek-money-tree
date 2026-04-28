@@ -149,10 +149,10 @@ const Settings = () => {
             <Globe size={18} className="text-primary" />
             <h3 className="font-bold">{t('settingsLanguage')}</h3>
           </div>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 gap-2">
             {languages.map(lang => (
               <motion.button key={lang.code} whileTap={{ scale: 0.95 }} onClick={() => setLanguage(lang.code)}
-                className={`flex-1 py-3 rounded-2xl font-bold text-sm transition-all ${
+                className={`py-3 rounded-2xl font-bold text-sm transition-all ${
                   language === lang.code ? 'gradient-primary text-primary-foreground shadow-button' : 'bg-secondary text-foreground'
                 }`}>
                 {lang.flag} {lang.label}
