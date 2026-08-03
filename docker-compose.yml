@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    image: humo-pay-kids:latest
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Dev-режим с hot reload (docker compose --profile dev up)
+  dev:
+    profiles: ["dev"]
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 8080"
+    ports:
+      - "5173:8080"
